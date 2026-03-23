@@ -32,17 +32,7 @@ alias icat='kitten icat'
 
 alias cfg='git --git-dir=$HOME/.cfg --work-tree=$HOME'
 
-alias m='micro'
-alias msr='micro ~/.bashrc'
-alias mmk='sudo micro /etc/portage/make.conf'
-alias msp='micro ~/.bash_profile'
-alias mwm='micro ~/.config/sway/config'
-alias mal='micro ~/.config/fuzzel/fuzzel.ini'
-alias mbarc='micro ~/.config/waybar/config.jsonc'
-alias mbars='micro ~/.config/waybar/style.css'
-alias mff='micro ~/.config/fastfetch/config.jsonc'
-alias mte='micro ~/.config/kitty/kitty.conf'
-
+# control panel (or what could be)
 alias ctl='sudo systemctl'
 alias scr='brightnessctl set'
 alias ppd='powerprofilesctl'
@@ -59,12 +49,13 @@ alias volix='pactl set-source-mute @DEFAULT_SOURCE@ toggle && pactl get-source-m
 alias nnn='nnn -adEHi'
 alias n='nnn'
 
+# gentoo's portage
 alias makeme="sudo make && sudo make modules_install && sudo make install"
 
-alias etune='sudo emerge-webrsync && sudo -v && sudo emaint all --check --fix --allrepos'
+alias etune='sudo emerge-webrsync && sudo -v && sudo emaint all --allrepos'
 alias esync='sudo emerge --sync'
-alias eup='sudo emerge --deep --newuse --update'
-alias esyup='emsync && sudo -v && emup'
+alias eup='sudo emerge --ask --deep --newuse --update --with-bdeps=y'
+alias esyup='esync && sudo -v && eup'
 
 alias elook='emerge --search'
 alias efind='emerge --searchdesc'
@@ -74,8 +65,22 @@ alias e-='sudo emerge --ask --deep --unmerge --verbose'
 alias eclean='sudo emerge --deep --depclean --verbose'
 
 alias es='sudo eselect'
-alias repols='eselect repository list -i'
-alias pkgls='cat /var/lib/portage/world'
+alias lsrepo='eselect repository list -i'
+alias lspkg='cat /var/lib/portage/world'
+
+# editor
+alias m='micro'
+alias msr='micro ~/.bashrc'
+alias mmk='sudo micro /etc/portage/make.conf'
+alias msp='micro ~/.bash_profile'
+alias mwm='micro ~/.config/sway/config'
+alias mal='micro ~/.config/fuzzel/fuzzel.ini'
+alias mbarc='micro ~/.config/waybar/config.jsonc'
+alias mbars='micro ~/.config/waybar/style.css'
+alias mff='micro ~/.config/fastfetch/config.jsonc'
+alias mte='micro ~/.config/kitty/kitty.conf'
+
+alias fmtsh='shfmt -w -s -i 2 -ci -sr'
 
 # moods and flavours
 alias zidle='scr 5% && ppd1 && swaylock'
