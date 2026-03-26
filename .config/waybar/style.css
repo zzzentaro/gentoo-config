@@ -1,0 +1,77 @@
+@define-color base            #232136;
+@define-color surface         #2a273f;
+@define-color overlay         #393552;
+
+@define-color muted           #6e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ea9a97;
+@define-color pine            #3e8fb0;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+
+@define-color highlightLow    #2a283e;
+@define-color highlightMed    #44415a;
+@define-color highlightHigh   #56526e;
+
+* {
+background: transparent;
+background-color: transparent;
+    font-family: GoMono Nerd Font;
+    font-size: 16px;
+    border: none;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+button,
+#tray,
+#clock,
+#pulseaudio,
+#backlight,
+#battery,
+#idle_inhibitor,
+#power-profiles-daemon {
+  background-color: @base;
+    color: @text;
+  border: 2px solid @muted;
+  border-radius: 2px;
+  padding: 0 14px 0 8px;
+}
+#tray {
+	padding: 0 8px;
+	margin-right: 12px;
+}
+#battery {
+	padding: 0 8px 0 8px;
+}
+#power-profiles-daemon {
+font-size: 20px;
+	padding: 0 8px 0 4px;
+}
+
+#workspaces button {
+	margin-right: 8px;
+	padding: 0 6px 0 2px;
+}
+#workspaces button.focused, #workspaces button.active {
+  color: @love;
+border: 2px solid @love;
+}
+
+#workspaces button.urgent {
+    background-color: @love;
+    color: @base;
+}
+#workspaces button:hover {
+    background-color: @love;
+    color: @base;
+      border: 2px solid @love;
+}
+
+.modules-right > widget > * {
+	margin-left: 4px;
+}
