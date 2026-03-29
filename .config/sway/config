@@ -32,7 +32,7 @@ set $down j
 set $up k
 set $right l
 
-set $term kitty
+set $term alacritty
 set $menu fuzzel
 
 set $ps1 Print
