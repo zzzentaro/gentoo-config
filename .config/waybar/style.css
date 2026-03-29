@@ -28,18 +28,21 @@ background-color: transparent;
 }
 
 button,
-#tray,
 #clock,
+#tray,
 #pulseaudio,
 #backlight,
 #battery,
 #idle_inhibitor,
 #power-profiles-daemon {
   background-color: @base;
-    color: @text;
+  color: @text;
   border: 2px solid @muted;
   border-radius: 2px;
-  padding: 0 14px 0 8px;
+  padding: 0 16px 0 8px;
+}
+#clock {
+	padding: 0 8px;
 }
 #tray {
 	padding: 0 8px;
@@ -55,7 +58,7 @@ font-size: 20px;
 
 #workspaces button {
 	margin-right: 8px;
-	padding: 0 6px 0 2px;
+	padding: 0 10px 0 6px;
 }
 #workspaces button.focused, #workspaces button.active {
   color: @love;

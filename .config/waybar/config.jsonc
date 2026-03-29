@@ -2,7 +2,7 @@
   "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
-  "height": 24,
+  "height": 36,
   "margin-bottom": 4,
   "modules-left": [
     "sway/workspaces",
@@ -25,7 +25,7 @@
     }
   },
   "sway/window": {
-    "max-length": 48
+    "max-length": 64
   },
   "modules-center": [
     "clock"
