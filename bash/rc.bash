@@ -22,7 +22,7 @@ alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias ls='eza --group-directories-first --no-permissions --octal-permissions --icons=auto'
+alias ls='eza --group-directories-first --no-permissions --octal-permissions --icons=auto --git'
 alias l='ls -Ahl'
 
 alias mkdir='mkdir -p'
