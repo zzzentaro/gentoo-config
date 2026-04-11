@@ -12,7 +12,7 @@ ln -sf "$here"/bash/logout.bash "$HOME"/.bash_logout
 # --- --- --- --- --- --- --- --- ---
 # > .config
 # --- --- --- --- --- --- --- --- ---
-for item in sway waybar alacritty fastfetch oh-my-posh fuzzel; do
+for item in sway waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
     rm -rf "$HOME/.config/$item"
     ln -sf "$here/$item" "$HOME/.config/$item"
 done
