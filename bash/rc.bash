@@ -133,11 +133,11 @@ alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudo $EDITOR /var/lib/portage/world_sets"
 
 # editor
+alias er="$EDITOR"
+alias ser="sudo $EDITOR"
 alias n='nano'
 alias v='vim'
-alias mmk='sudo $EDITOR /etc/portage/make.conf'
 
-alias er="sudo $EDITOR"
 qe() {
   local item="$1"
   local target
