@@ -25,3 +25,12 @@ ln -sf "$here"/vesktop/settings/quickCss.css "$HOME"/.config/vesktop/settings/qu
 # --- --- --- --- --- --- --- --- ---
 mkdir -p "$HOME"/Pictures/Wallpaper
 ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers/lemuen-panels.png
+
+# --- --- --- --- --- --- --- --- ---
+# > portage. have you mooed today?
+# --- --- --- --- --- -- --- --- ---
+command -v emerge > /dev/null || exit
+for item in make.conf repos.conf; do
+    sudo rm -rf /etc/portage/"$item"
+    sudo ln -sf "$here/portage/$item" /etc/portage/"$item"
+done
