@@ -13,8 +13,8 @@ ln -sf "$here"/bash/logout.bash "$HOME"/.bash_logout
 # > .config
 # --- --- --- --- --- --- --- --- ---
 for item in sway waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
-    rm -rf "$HOME/.config/$item"
-    ln -sf "$here/$item" "$HOME/.config/$item"
+	rm -rf "$HOME/.config/$item"
+	ln -sf "$here/$item" "$HOME/.config/$item"
 done
 mkdir -p "$HOME"/.config/vesktop/settings
 rm -f "$HOME"/.config/vesktop/settings/quickCss.css
@@ -31,6 +31,6 @@ ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers
 # --- --- --- --- --- -- --- --- ---
 command -v emerge > /dev/null || exit
 for item in make.conf repos.conf; do
-    sudo rm -rf /etc/portage/"$item"
-    sudo ln -sf "$here/portage/$item" /etc/portage/"$item"
+	sudo rm -rf /etc/portage/"$item"
+	sudo ln -sf "$here/portage/$item" /etc/portage/"$item"
 done
