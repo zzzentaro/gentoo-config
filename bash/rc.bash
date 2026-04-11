@@ -197,7 +197,7 @@ qe() {
 }
 
 # formatter
-alias fmtsh='shfmt -w -s -i 2 -ci -sr'
+alias fmtsh='shfmt -w -s -i 0 -ci -sr'
 
 # moods and flavours
 alias zidle='scr 5% && pps 1 && swaylock'
