@@ -12,7 +12,7 @@ ln -sf "$here"/bash/logout.bash "$HOME"/.bash_logout
 # --- --- --- --- --- --- --- --- ---
 # > .config
 # --- --- --- --- --- --- --- --- ---
-for item in alacritty fastfetch fuzzel; do
+for item in alacritty fastfetch fuzzel oh-my-posh; do
     rm -rf "$HOME/.config/$item"
     ln -sf "$here/$item" "$HOME/.config/$item"
 done
