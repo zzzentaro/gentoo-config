@@ -16,6 +16,9 @@ for item in sway alacritty fastfetch oh-my-posh fuzzel; do
     rm -rf "$HOME/.config/$item"
     ln -sf "$here/$item" "$HOME/.config/$item"
 done
+mkdir -p "$HOME"/.config/vesktop/settings
+rm -f "$HOME"/.config/vesktop/settings/quickCss.css
+ln -sf "$here"/vesktop/settings/quickCss.css "$HOME"/.config/vesktop/settings/quickCss.css
 
 # --- --- --- --- --- --- --- --- ---
 # > xdg-user-dir PICTURES
