@@ -1,0 +1,121 @@
+{
+  "reload_style_on_change": false,
+  "layer": "top",
+  "position": "top",
+  "height": 36,
+  "modules-left": [
+    "sway/workspaces",
+    "sway/window",
+    "sway/mode"
+  ],
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": []
+    },
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "",
+      "3": "",
+      "4": ""
+    }
+  },
+  "sway/window": {
+    "max-length": 64
+  },
+  "modules-center": [
+    "clock"
+  ],
+  "clock": {
+    "format": "{:%I:%M %p}",
+      "tooltip-format": "{:%A, %d %B %Y}",
+  "on-click": "sh power"
+  },
+  "modules-right": [
+    "tray",
+    "network",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "power-profiles-daemon"
+  ],
+     "tray": {
+    "show-passive-items": true,
+    "icon-size": 20,
+    "spacing": 8
+  },
+  "network": {
+            "format-wifi": "󰖩",
+            "tooltip-format-wifi": "{essid} ({signalStrength}%) 󰖩",
+            "format-ethernet":"",
+            "tooltip-format-ethernet": "{ifname} ",
+            "format-disconnected": "󰤮",
+            "tooltip-format-disconnected": "No connection",
+            "on-click": "alacritty -e nmtui"
+        },
+ 
+  "pulseaudio": {
+    "format": "{volume}%{icon}",
+    "format-bluetooth": "{volume}%{icon}",
+    "format-muted": "",
+    "format-icons": {
+      "default": [
+        "",
+        ""
+      ],
+      "headphone": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "hands-free": "",
+      "car": "",
+      "portable": ""
+    },
+    "scroll-step": 5,
+    "on-click": "pavucontrol"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{percent}%{icon}",
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ]
+  },
+  "battery": {
+    "states": {
+      "warning": 50,
+      "critical": 20
+    },
+    "format": "{capacity}%{icon}",
+    "format-charging": "{capacity}%󰂄",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ]
+  },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "{profile} | {driver}",
+    "tooltip": true,
+    "format-icons": {
+      "default": "󰜥",
+      "power-saver": "󰾆",
+      "balanced": "󰾅",
+      "performance": "󰓅"
+    }
+  }
+}

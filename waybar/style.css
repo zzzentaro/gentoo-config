@@ -1,0 +1,144 @@
+/* --- --- --- --- --- --- --- --- --- ---
+ * > rose pine
+ * --- --- --- --- --- --- --- --- --- --- */
+@define-color base            #232136;
+@define-color surface         #2a273f;
+@define-color overlay         #393552;
+
+@define-color muted           #7e6a86;
+@define-color subtle          #908caa;
+@define-color text            #e0def4;
+
+@define-color love            #eb6f92;
+@define-color gold            #f6c177;
+@define-color rose            #ea9a97;
+@define-color pine            #3e8fb0;
+@define-color foam            #9ccfd8;
+@define-color iris            #c4a7e7;
+
+@define-color highlightLow    #2a283e;
+@define-color highlightMed    #44415a;
+@define-color highlightHigh   #56526e;
+
+/* reset */
+* {
+	font-family: GoMono Nerd Font;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+/* --- --- --- --- --- --- --- --- ---
+ * > main styles
+ * --- --- --- --- --- --- --- --- --- */
+window#waybar {
+	background: @overlay;
+}
+button,
+#clock,
+#tray,
+#network,
+#pulseaudio,
+#backlight,
+#battery,
+#idle_inhibitor,
+#power-profiles-daemon {
+	background: @surface;
+	color: @text;
+	padding: 0 18px 0 10px;
+}
+#clock {
+	padding: 0 16px;
+}
+#battery {
+	padding: 0 8px;
+}
+#battery:not(.plugged) {
+	color: @iris;
+}
+#battery.plugged,
+#battery.full {
+	color: @love;
+}
+
+/* right */
+#workspaces button {
+	font-size: 20px;
+	margin-right: 8px;
+	padding: 0 14px 0 8px;
+}
+#workspaces button.focused, #workspaces button.active {
+	color: @love;
+}
+#workspaces button.urgent {
+	background: @love;
+	color: @base;
+}
+#workspaces button:hover {
+	background: @love;
+	color: @base;
+}
+#window {
+	margin-right: 8px;
+	color: @text;
+	letter-spacing: 0.05rem;
+}
+#mode {
+	margin: 8px 0 8px 0;
+	padding: 0 4px 0 4px;
+	background: @love;
+	color: @base;
+	font-weight: 700;
+	letter-spacing: -0.05rem;
+}
+
+/* middle */
+
+
+/* right */
+.modules-right > widget > * {
+	margin-left: 8px;
+	letter-spacing: 0.1rem;
+}
+#network {
+	padding: 0 17px 0 11px;
+	font-size: 24px;
+}
+#tray {
+	padding: 0 8px;
+	margin-right: 0px;
+}
+#power-profiles-daemon {
+	font-size: 26px;
+	padding: 0 12px 0 8px;
+}
+#power-profiles-daemon.performance {
+	color: @love; 
+}
+#power-profiles-daemon.balanced {
+	color: @gold;
+}
+#power-profiles-daemon.power-saver {
+	color: @text; 
+}
+
+/* --- --- --- --- --- --- --- --- ---
+ * > overlays
+ * --- --- --- --- --- --- --- --- --- */
+
+tooltip {
+	background: @overlay;
+	color: @text;
+	border: 2px solid @muted;
+}
+
+menu {
+	background: @overlay;
+	color: @text;
+	padding: 16px 0;
+	border: 2px solid @muted;
+}
+menu *:hover {
+	background: @love;
+}
