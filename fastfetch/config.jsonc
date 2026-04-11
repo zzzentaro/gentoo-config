@@ -1,0 +1,89 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "logo": {
+    "type": "chafa",
+    "source": "~/.config/fastfetch/signet-halo.png",
+    "width": 24,
+    "height": 12,
+    "padding": {
+      "top": 0,
+      "left": 0,
+      "right": 0
+    },
+    "color": {
+      "1": "red",
+      "2": "white"
+    }
+  },
+  "display": {
+    "separator": " ",
+    "color": {
+      "keys": "red",
+      "title": "red"
+    },
+    "key": {
+      "width": 3,
+      "type": "icon"
+    },
+    "bar": {
+      "width": 10,
+      "char": {
+        "elapsed": "■",
+        "total": "-"
+      }
+    },
+    "percent": {
+      "type": 9,
+      "color": {
+        "green": "blue",
+        "yellow": "light_yellow",
+        "red": "magenta"
+      }
+    }
+  },
+  "modules": [
+    {
+      "type": "os",
+      "format": "{2}",
+      "key": " ",
+      "outputColor": "bright_red"
+    },
+    {
+      "type": "kernel",
+      "format": "{2}"
+    },
+    {
+      "type": "",
+      "format": "{2}"
+    },
+    "packages",
+    "uptime",
+    "wm",
+    "terminal",
+    {
+      "type": "cpu",
+      "format": "{1}"
+    },
+    {
+      "type": "gpu",
+      "format": "{2}",
+      "hideType": "integrated"
+    },
+    {
+      "type": "memory",
+      "format": "{1} {3} {2}"
+    },
+    {
+      "type": "swap",
+      "format": "{1} {3} {2}"
+    },
+    {
+      "type": "disk",
+      "format": "{1} {3} {2}"
+    },
+    {
+      "type": "colors",
+      "symbol": "square"
+    }
+  ]
+}
