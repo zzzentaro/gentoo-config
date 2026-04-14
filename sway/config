@@ -91,7 +91,7 @@ bindsym $Mod+F fullscreen
 bindsym $Mod+Ctrl+F floating toggle
 bindsym $Mod+Shift+F focus mode_toggle
 
-bindsym $Mod+C exec nooget
+bindsym $Mod+C exec noogetctl
 
 set $term alacritty
 bindsym $Mod+Return exec $term
