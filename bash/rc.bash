@@ -15,7 +15,7 @@ alias lg='lazygit'
 # ---
 # for dir navigation n file management
 # ---
-alias e='yazi'
+alias er='yazi'
 alias cpwl='wl-copy'
 
 alias c='cd'
@@ -133,8 +133,8 @@ alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudo $EDITOR /var/lib/portage/world_sets"
 
 # editor
-alias er="$EDITOR"
-alias ser="sudo $EDITOR"
+alias e="$EDITOR"
+alias se="sudo $EDITOR"
 
 qe() {
 	local item="$1"
