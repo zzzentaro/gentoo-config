@@ -11,6 +11,7 @@ exec pipewire
 exec pipewire-pulse
 exec wireplumber
 
+exec wl-clip-persist  --clipboard regular
 exec brightnessctl    set 20%
 exec powerprofilesctl set power-saver
 
