@@ -99,7 +99,7 @@ bindsym $Mod+Return exec $term
 set $menu fuzzel
 bindsym $Mod+Space exec $menu
 
-set $explorer thunar
+set $explorer pcmanfm
 bindsym $Mod+E exec $explorer
 
 set $browser firefox-bin
