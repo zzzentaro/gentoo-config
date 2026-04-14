@@ -140,23 +140,20 @@ qe() {
 	local item="$1"
 	local target
 	case "$item" in
-		'r')
+		'rc')
 			target='.bashrc'
 			;;
-		'pro')
+		'init')
 			target='.bash_profile'
 			;;
-		'out')
+		'end')
 			target='.bash_logout'
 			;;
-		'er')
+		'e')
 			target='.vimrc'
 			;;
 		'wm')
 			target='.config/sway/config'
-			;;
-		'run')
-			target='.config/fuzzel/fuzzel.ini'
 			;;
 		'bar')
 			case "$2" in
@@ -167,6 +164,12 @@ qe() {
 					target='.config/waybar/config.jsonc'
 					;;
 			esac
+			;;
+		'run')
+			target='.config/fuzzel/fuzzel.ini'
+			;;
+		'not')
+			target='.config/mako/config'
 			;;
 		'f')
 			case "$2" in
@@ -181,10 +184,9 @@ qe() {
 		't')
 			target='.config/alacritty/alacritty.toml'
 			;;
-		'e')
+		'er')
 			target='.config/yazi/yazi.toml'
 			;;
-
 		*)
 			target='.bashrc'
 			;;
