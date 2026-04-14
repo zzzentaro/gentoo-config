@@ -1,0 +1,12 @@
+# backend
+media-video/ffmpeg
+app-arch/7zip
+app-misc/jq
+app-text/poppler
+media-gfx/ueberzugpp
+media-gfx/imagemagick
+
+media-video/pipewire
+
+# actual program
+media-gfx/gimp

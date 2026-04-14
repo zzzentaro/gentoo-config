@@ -1,0 +1,4 @@
+app-eselect/eselect-repository
+app-portage/eix
+app-portage/gentoolkit
+# gives equery, revdep-rebuild

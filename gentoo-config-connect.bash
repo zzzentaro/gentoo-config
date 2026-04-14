@@ -31,7 +31,7 @@ ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers
 # > portage. have you mooed today?
 # --- --- --- --- --- -- --- --- ---
 command -v emerge > /dev/null || exit
-for item in make.conf repos.conf; do
+for item in make.conf repos.conf sets; do
 	sudo rm -rf /etc/portage/"$item"
 	sudo ln -sf "$here/portage/$item" /etc/portage/"$item"
 done
