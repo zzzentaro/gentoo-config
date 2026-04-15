@@ -16,14 +16,14 @@ exec brightnessctl    set 20%
 exec powerprofilesctl set power-saver
 
 # --- --- --- --- --- --- --- ---
-# rose pine moon
+# > rose pine ^^
 # --- --- --- --- --- --- --- ---
-set $base   #232136
+set $base   #191724
 set $muted  #6e6a86
 set $subtle #908caa
 set $text   #e0def4
 set $love   #eb6f92
-set $rose   #ea9a97
+set $rose   #ebbcba
 set $iris   #c4a7e7
 
 # class                  border  bg     text    indicator child_border
