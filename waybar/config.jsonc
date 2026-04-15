@@ -31,9 +31,17 @@
   "sway/window": {
     "max-length": 64
   },
-  "modules-center": [
+    "modules-center": [
+    "sway/scratchpad",
     "clock"
   ],
+"sway/scratchpad": {
+	"format": "{icon} {count}",
+	"show-empty": true,
+	"format-icons": ["", ""],
+	"tooltip": true,
+	"tooltip-format": "{app}: {title}"
+},
   "clock": {
     "format": "{:%I:%M %p}",
       "tooltip-format": "{:%A, %d %B %Y}",
