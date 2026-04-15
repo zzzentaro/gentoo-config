@@ -79,7 +79,7 @@ button,
 }
 #workspaces button:hover {
 	background: @love;
-	color: @base;
+	color: @surface;
 }
 #window {
 	margin-right: 16px;
