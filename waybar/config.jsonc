@@ -37,7 +37,7 @@
   "clock": {
     "format": "{:%I:%M %p}",
       "tooltip-format": "{:%A, %d %B %Y}",
-  "on-click": "sh power"
+  "on-click": "bash noogetctl"
   },
   "modules-right": [
     "tray",
