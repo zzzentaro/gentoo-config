@@ -1,6 +1,10 @@
 #!/bin/env bash
 
+# --- --- --- --- --- --- --- --- ---
+# > establish connection
+# --- --- --- --- --- --- --- --- ---
 here="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
+sudo chown -R "$USER":root "$here"
 
 # --- --- --- --- --- --- --- --- ---
 # > home directory
