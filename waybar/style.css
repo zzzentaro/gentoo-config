@@ -56,11 +56,11 @@ button,
 #battery {
 	padding: 0 8px;
 }
-#battery:not(.plugged) {
+#battery:not(.plugged),
+#battery.full {
 	color: @iris;
 }
-#battery.plugged,
-#battery.full {
+#battery.plugged {
 	color: @love;
 }
 
