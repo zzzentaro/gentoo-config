@@ -1,5 +1,19 @@
-sys-process/cronie
+# --- --- --- --- --- --- --- --- ---
+# > gentoo larry moo
+# --- --- --- --- --- --- --- --- ---
+app-eselect/eselect-repository
+app-portage/gentoolkit
+app-portage/eix
+
+# - > internet (real) -
 net-misc/networkmanager
+
+# - > scheduler aengel -
+sys-process/cronie
+
+# - > ddr5-prices-are-insane-init -
 sys-block/zram-init
 
+# - > battery status aengel -
 sys-power/upower
+

@@ -1,4 +1,24 @@
+# --- --- --- --- --- --- --- --- ---
+# > basic human rights
+# --- --- --- --- --- --- --- --- ---
+
+# - > don't burn your eyes -
 app-misc/brightnessctl
+
+# - > don't burn your fans
 sys-power/power-profiles-daemon
+
+# -> don't lose your pictures
 x11-misc/xdg-user-dirs
 
+# - > do i need to explain this? -
+app-misc/fastfetch
+app-misc/figlet
+
+# - > how do you know i don't read the manual? -
+app-misc/tealdeer
+
+# - > ls but good -
+sys-apps/eza
+app-misc/yazi
+app-text/tree

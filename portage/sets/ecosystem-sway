@@ -1,0 +1,30 @@
+# --- --- --- --- --- --- --- --- ---
+# > wlroots' child
+# --- --- --- --- --- --- --- --- ---
+
+# - > it -
+gui-wm/sway
+
+# - > terminal -
+x11-terms/alacritty
+
+# - > wallpaper aengel -
+gui-apps/swaybg
+
+# - > bar -
+gui-apps/waybar
+
+# - > launcher -
+gui-apps/fuzzel
+
+# - > notification aengel -
+gui-apps/mako
+
+# - > clipboard -
+gui-apps/wl-clipboard
+gui-apps/wl-clip-persist
+
+# - > screenshot -
+gui-apps/grim
+gui-apps/slurp
+gui-apps/satty
