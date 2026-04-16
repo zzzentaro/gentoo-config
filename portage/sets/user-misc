@@ -1,0 +1,5 @@
+app-benchmarks/stress-ng
+app-benchmarks/geekbench-ml
+app-benchmarks/geekbench
+dev-libs/libaio
+
