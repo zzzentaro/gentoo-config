@@ -1,5 +1,5 @@
 # --- --- --- --- --- --- --- --- ---
-# > session init
+# > initialise session
 # --- --- --- --- --- --- --- --- ---
 bar {
 	swaybar_command waybar
@@ -12,7 +12,7 @@ exec pipewire-pulse
 exec wireplumber
 
 exec wl-clip-persist  --clipboard regular
-exec brightnessctl    set 20%
+exec brightnessctl    set 10%
 exec powerprofilesctl set power-saver
 
 # --- --- --- --- --- --- --- ---
@@ -96,6 +96,8 @@ bindsym $Mod+C exec noogetctl
 
 set $term alacritty
 bindsym $Mod+Return exec $term
+set $term_float $term -T "floatty"
+bindsym $Mod+Ctrl+Return exec $term_float
 
 set $menu fuzzel
 bindsym $Mod+Space exec $menu
@@ -103,7 +105,7 @@ bindsym $Mod+Space exec $menu
 set $explorer pcmanfm
 bindsym $Mod+E exec $explorer
 
-set $browser firefox-bin
+set $browser firefox
 bindsym $Mod+B exec $browser
 
 # -  > scratchpad -
@@ -114,11 +116,16 @@ bindsym $Mod+Minus scratchpad show
 # > window rules
 # --- --- --- --- --- --- --- --- ---
 for_window [title="floatty"] {
-    floating enable
-    move position 1238 550
-    sticky enable
+  floating enable
+  move position 1238 550
+  move container to workspace number 1
 }
-bindsym $Mod+Ctrl+Return exec alacritty -T "floatty"
+exec $term_float
+
+for_window [app_id="Waydroid"] {
+  fullscreen enable
+  move container to workspace number 10
+}
 
 # --- --- --- --- --- --- --- --- ---
 # > obvious configs
