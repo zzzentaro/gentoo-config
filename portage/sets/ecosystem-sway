@@ -4,6 +4,8 @@
 
 # - > it -
 gui-wm/sway
+# gui-apps/swayidle
+gui-apps/swaylock
 
 # - > terminal -
 x11-terms/alacritty
