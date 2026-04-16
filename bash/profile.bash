@@ -1,14 +1,16 @@
-[[ -f ~/.bashrc ]] && source ~/.bashrc
-
+# --- --- --- --- --- --- --- --- ---
+# > initialisation of every session
+# --- --- --- --- --- --- --- --- ---
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR='nvim'
-mkdir -p ~/.vim/{undo,swap,backup}
 
-brightnessctl set 20%
-powerprofilesctl set power-saver
+[[ -f ~/.bashrc ]] && source ~/.bashrc && clear
 
-clear
-figlet "welcome home $USER!!"
 if [[ -z ${WAYLAND_DISPLAY} ]] && [[ ${XDG_VTNR} -eq 1 ]]; then
 	dbus-run-session sway --unsupported-gpu
 fi
+
+export EDITOR='nano'
+command -v vim > /dev/null && export EDITOR='vim'
+command -v nvim > /dev/null && export EDITOR='nvim'
+
+mkdir -p ~/.vim/{undo,swap,backup}
