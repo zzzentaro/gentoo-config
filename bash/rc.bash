@@ -1,16 +1,15 @@
 [[ $- != *i* ]] && return
 
-EDITOR=${EDITOR:-nano}
-
 alias x='exec bash'
 alias xx='exit'
 alias hex='sudo'
 
-# ---
-# vcs stuff
-# ---
+# --- --- --- --- --- --- --- --- ---
+# > version control is important!
+# --- --- --- --- --- --- --- --- ---
 alias g='git'
 alias lg='lazygit'
+alias gc=gentoo-config
 
 # ---
 # for dir navigation n file management
