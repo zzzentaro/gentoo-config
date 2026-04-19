@@ -1,0 +1,13 @@
+# --- --- --- --- --- --- --- --- ---
+# > graphics processing unit
+# --- --- --- --- --- --- --- --- ---
+
+# - > discrete -
+x11-drivers/nvidia-drivers
+media-libs/nvidia-vaapi-driver
+# dev-util/nvidia-cuda-toolkit
+dev-util/clinfo
+
+# - > integrated -
+media-libs/libva-intel-driver
+media-libs/libva-intel-media-driver
