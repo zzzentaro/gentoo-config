@@ -92,7 +92,7 @@ bindsym $Mod+Shift+F fullscreen
 bindsym $Mod+F floating toggle
 bindsym $Mod+Ctrl+F focus mode_toggle
 
-bindsym $Mod+C exec noogetctl
+bindsym $Mod+C exec menu
 
 set $term alacritty
 bindsym $Mod+Return exec $term
@@ -122,6 +122,17 @@ for_window [title="floatty"] {
 }
 exec $term_float
 
+
+for_window [app_id="org.pulseaudio.pavucontrol"] {
+  floating enable
+  resize set 1200 700
+}
+for_window [class="steam"] {
+  move container to workspace number 8
+}
+for_window [app_id="vesktop"] {
+  move container to workspace number 9
+}
 for_window [app_id="Waydroid"] {
   fullscreen enable
   move container to workspace number 10
