@@ -15,6 +15,23 @@ ln -sf "$here"/bash/logout.bash "$HOME"/.bash_logout
 ln -sf "$here"/vim/rc.vim "$HOME"/.vimrc
 
 # --- --- --- --- --- --- --- --- ---
+# > .local scripts
+# --- --- --- --- --- --- --- --- ---
+mkdir -p "$HOME"/.local/lib
+for item in zsl; do
+	chmod -x "$here/lib/${item}.bash"
+	rm -f "$HOME/.local/lib/$item"
+	ln -sf "$here/lib/${item}.bash" "$HOME/.local/lib/$item"
+done
+
+mkdir -p "$HOME"/.local/bin
+for item in gentoo-config portage menu noogetctl; do
+	chmod +x "$here/bin/${item}.bash"
+	rm -f "$HOME/.local/bin/$item"
+	ln -sf "$here/bin/${item}.bash" "$HOME/.local/bin/$item"
+done
+
+# --- --- --- --- --- --- --- --- ---
 # > .config
 # --- --- --- --- --- --- --- --- ---
 for item in sway swaylock waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
@@ -34,7 +51,7 @@ ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers
 # --- --- --- --- --- --- --- --- ---
 # > portage. have you mooed today?
 # --- --- --- --- --- -- --- --- ---
-command -v emerge > /dev/null || exit
+command -v emerge >/dev/null || exit
 for item in make.conf repos.conf sets; do
 	sudo rm -rf /etc/portage/"$item"
 	sudo ln -sf "$here/portage/$item" /etc/portage/"$item"
