@@ -16,6 +16,7 @@ net-misc/chrony
 
 # - > kernel -
 sys-kernel/gentoo-kernel-bin
+sys-kernel/zen-sources
 sys-kernel/linux-firmware
 sys-firmware/intel-microcode
 sys-firmware/sof-firmware
