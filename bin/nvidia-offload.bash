@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+__NV_PRIME_RENDER_OFFLOAD=1
