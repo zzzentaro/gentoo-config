@@ -49,6 +49,14 @@ mkdir -p "$HOME"/Pictures/Wallpaper
 ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers/lemuen-panels.png
 
 # --- --- --- --- --- --- --- --- ---
+# > kernel config
+# --- --- --- --- --- --- --- --- ---
+for item in 6.19.12-zen; do
+	sudo rm -f "/usr/src/linux-${item}/.config"
+	sudo ln -sf "$here/linux-$item/config" /usr/src/linux-"$item"/.config
+done
+
+# --- --- --- --- --- --- --- --- ---
 # > portage. have you mooed today?
 # --- --- --- --- --- -- --- --- ---
 command -v emerge >/dev/null || exit
