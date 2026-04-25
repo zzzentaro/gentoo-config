@@ -10,5 +10,5 @@ command -v vim >/dev/null && export EDITOR='vim' && mkdir -p ~/.vim/{undo,swap,b
 command -v nvim >/dev/null && export EDITOR='nvim'
 
 if [[ -z ${WAYLAND_DISPLAY} ]] && [[ ${XDG_VTNR} -eq 1 ]]; then
-	dbus-run-session sway --unsupported-gpu
+	dbus-run-session start-hyprland
 fi
