@@ -4,45 +4,32 @@
   "position": "top",
   "height": 36,
   "modules-left": [
-    "sway/scratchpad",
-    "sway/workspaces",
-    "sway/window",
-    "sway/mode"
+    "hyprland/workspaces",
+    "hyprland/window",
+    "hyprland/submap"
   ],
-  "sway/scratchpad": {
-    "format": "{icon} {count}",
-    "show-empty": false,
-    "format-icons": [
-      "",
-      ""
-    ],
-    "tooltip": true,
-    "tooltip-format": "{app}"
-  },
-  "sway/workspaces": {
-    "disable-scroll": true,
+  "hyprland/workspaces": {
     "all-outputs": false,
     "persistent-workspaces": {
       "1": [],
       "2": [],
-      "3": []
+      "3": [],
+      "8": [],
+      "9": []
     },
     "format": "{icon}",
     "format-icons": {
       "1": "",
-      "2": "󰈹",
-      "3": "",
-      "4": "",
-      "5": "󰕮",
-      "6": "󰥠",
-      "7": "󰏘",
-      "8": "",
-      "9": "",
-      "10": ""
+      "2": "",
+      "3": "",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "8": "󰭻",
+      "9": "",
+      "10": ""
     }
-  },
-  "sway/window": {
-    "max-length": 64
   },
   "modules-center": [
     "clock"
@@ -50,7 +37,7 @@
   "clock": {
     "format": "{:%I:%M %p}",
     "tooltip-format": "{:%A, %d %B %Y}",
-    "on-click": "bash noogetctl"
+    "on-click": "bash menu"
   },
   "network": {
     "format-wifi": "󰖩",
