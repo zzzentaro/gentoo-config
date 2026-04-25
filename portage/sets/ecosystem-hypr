@@ -1,0 +1,40 @@
+# --- --- --- --- --- --- --- --- ---
+# > child of wlroots
+# --- --- --- --- --- --- --- --- ---
+
+# - > window manager -
+gui-wm/hyprland
+
+# - > wallpaper daemon -
+gui-apps/hyprpaper
+
+# - > lock screen -
+gui-apps/hyprlock
+
+# - > session backend -
+sys-apps/dbus
+sys-auth/polkit
+sys-auth/hyprpolkitagent
+sys-apps/xdg-desktop-portal-gtk
+gui-libs/xdg-desktop-portal-hyprland
+
+# - > terminal emulator -
+x11-terms/alacritty
+
+# - > status bar -
+gui-apps/waybar
+
+# - > application launcher -
+gui-apps/fuzzel
+
+# - > notification toast -
+gui-apps/mako
+
+# - > clipboard daemon -
+gui-apps/wl-clipboard
+gui-apps/wl-clip-persist
+
+# - > screenshot tools -
+gui-apps/grim
+gui-apps/slurp
+gui-apps/swappy
