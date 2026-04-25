@@ -15,7 +15,7 @@ ln -sf "$here"/bash/logout.bash "$HOME"/.bash_logout
 ln -sf "$here"/vim/rc.vim "$HOME"/.vimrc
 
 # --- --- --- --- --- --- --- --- ---
-# > .local scripts
+# > dotlocal shell
 # --- --- --- --- --- --- --- --- ---
 mkdir -p "$HOME"/.local/lib
 for item in zsl; do
@@ -32,9 +32,9 @@ for item in gentoo-config portage menu noogetctl; do
 done
 
 # --- --- --- --- --- --- --- --- ---
-# > .config
+# > dotconfig
 # --- --- --- --- --- --- --- --- ---
-for item in sway swaylock waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
+for item in hypr waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
 	rm -rf "$HOME/.config/$item"
 	ln -sf "$here/$item" "$HOME/.config/$item"
 done
@@ -47,14 +47,6 @@ ln -sf "$here"/vesktop/settings/quickCss.css "$HOME"/.config/vesktop/settings/qu
 # --- --- --- --- --- --- --- --- ---
 mkdir -p "$HOME"/Pictures/Wallpaper
 ln -sf "$here"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers/lemuen-panels.png
-
-# --- --- --- --- --- --- --- --- ---
-# > kernel config
-# --- --- --- --- --- --- --- --- ---
-for item in 6.19.12-zen; do
-	sudo rm -f "/usr/src/linux-${item}/.config"
-	sudo ln -sf "$here/linux-$item/config" /usr/src/linux-"$item"/.config
-done
 
 # --- --- --- --- --- --- --- --- ---
 # > portage. have you mooed today?
