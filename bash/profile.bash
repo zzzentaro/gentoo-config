@@ -3,7 +3,7 @@
 # --- --- --- --- --- --- --- --- ---
 export PATH="$HOME/.local/bin:$PATH"
 
-[[ -f ~/.bashrc ]] && source ~/.bashrc && clear
+[[ -f ~/.bashrc ]] && source ~/.bashrc
 
 export EDITOR='nano'
 command -v vim >/dev/null && export EDITOR='vim' && mkdir -p ~/.vim/{undo,swap,backup}
