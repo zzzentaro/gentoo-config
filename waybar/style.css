@@ -22,11 +22,11 @@
 
 /* - > reset - */
 * {
-	font-family: 'GoMono Nerd Font';
-	border: none;
-	border-radius: 0;
-	box-shadow: none;
-	text-shadow: none;
+    font-family: 'GoMono Nerd Font';
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
 }
 
 /* --- --- --- --- --- --- --- --- ---
@@ -45,54 +45,54 @@ button,
 #battery,
 #idle_inhibitor,
 #power-profiles-daemon {
-	background: @surface;
-	color: @text;
-	padding: 0 18px 0 10px;
-  border: 2px solid @overlay;
+    background: @surface;
+    color: @text;
+    padding: 0 18px 0 10px;
+    border: 2px solid @overlay;
 }
 #clock {
-	padding: 0 16px;
+    padding: 0 16px;
 }
 #battery {
-	padding: 0 8px;
+    padding: 0 8px;
 }
 #battery:not(.plugged),
 #battery.full {
-	color: @iris;
+    color: @iris;
 }
 #battery.plugged {
-	color: @love;
+    color: @love;
 }
 
 /* - > right - */
 #workspaces button {
-	font-size: 20px;
-	margin-right: 16px;
-	padding: 0 14px 0 8px;
+    font-size: 20px;
+    margin-right: 16px;
+    padding: 0 14px 0 8px;
 }
 #workspaces button.focused, #workspaces button.active {
-	color: @love;
+    color: @love;
 }
 #workspaces button.urgent {
-	background: @love;
-	color: @surface;
+    background: @love;
+    color: @surface;
 }
 #workspaces button:hover {
-	background: @love;
-	color: @surface;
+    background: @love;
+    color: @surface;
 }
 #window {
-	margin-right: 16px;
-	color: @text;
-	letter-spacing: -0.1rem;
+    margin-right: 16px;
+    color: @text;
+    letter-spacing: -0.1rem;
 }
-#mode {
-	margin: 8px 0 8px 0;
-	padding: 0 4px 0 4px;
-	background: @love;
-	color: @surface;
-	font-weight: 700;
-	letter-spacing: -0.1rem;
+#submap {
+    margin: 8px 0 8px 0;
+    padding: 0 4px 0 4px;
+    background: @love;
+    color: @surface;
+    font-weight: 700;
+    letter-spacing: -0.1rem;
 }
 
 /* - > middle - */
@@ -100,45 +100,45 @@ button,
 
 /* - > right - */
 .modules-right > widget > * {
-	margin-left: 16px;
-	letter-spacing: 0.1rem;
+    margin-left: 16px;
+    letter-spacing: 0.1rem;
 }
 #network {
-	padding: 0 17px 0 11px;
-	font-size: 24px;
+    padding: 0 17px 0 11px;
+    font-size: 24px;
 }
 #tray {
-	padding: 0 8px;
-	margin-right: 0px;
+    padding: 0 8px;
+    margin-right: 0px;
 }
 #power-profiles-daemon {
-	font-size: 26px;
-	padding: 0 12px 0 8px;
+    font-size: 26px;
+    padding: 0 12px 0 8px;
 }
 #power-profiles-daemon.performance {
-	color: @love; 
+    color: @love;
 }
 #power-profiles-daemon.balanced {
-	color: @gold;
+    color: @gold;
 }
 #power-profiles-daemon.power-saver {
-	color: @text; 
+    color: @text;
 }
 
 /* --- --- --- --- --- --- --- --- ---
  * > overlays
  * --- --- --- --- --- --- --- --- --- */
 tooltip {
-	background: @overlay;
-	color: @text;
-	border: 2px solid @muted;
+    background: @overlay;
+    color: @text;
+    border: 2px solid @muted;
 }
 menu {
-	background: @overlay;
-	color: @text;
-	padding: 16px 0;
-	border: 2px solid @muted;
+    background: @overlay;
+    color: @text;
+    padding: 16px 0;
+    border: 2px solid @muted;
 }
 menu *:hover {
-	background: @love;
+    background: @love;
 }
