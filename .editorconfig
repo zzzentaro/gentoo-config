@@ -9,11 +9,9 @@ indent_style = space
 indent_size = 4
 max_line_length = 80
 
-[*.bash]
+[{*.{c,h},Makefile}]
 indent_style = tab
 indent_size = 8
 
-[*.json]
-indent_style = space
-indent_size = 4
-
+[*.{html,yaml}]
+indent_size = 2
