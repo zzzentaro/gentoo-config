@@ -9,7 +9,7 @@ alias hex='sudo'
 # --- --- --- --- --- --- --- --- ---
 alias g='git'
 alias lg='lazygit'
-alias gc='gentoo-config'
+alias gc='cd ~/gentoo-config/ && lazygit'
 
 # --- --- --- --- --- --- --- --- ---
 # > for dir navigation n file management
@@ -135,20 +135,20 @@ eq() {
 	local item="$1"
 	local target
 	case "$item" in
-	'rc')
+	'')
 		target='.bashrc'
 		;;
-	'init')
+	'pro')
 		target='.bash_profile'
 		;;
-	'end')
+	'out')
 		target='.bash_logout'
 		;;
 	'e')
 		target='.vimrc'
 		;;
 	'wm')
-		target='.config/sway/config'
+		target='.config/hypr/hyprland.conf'
 		;;
 	'bar')
 		case "$2" in
