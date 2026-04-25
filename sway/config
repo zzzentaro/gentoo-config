@@ -23,6 +23,7 @@ set $muted  #6e6a86
 set $subtle #908caa
 set $text   #e0def4
 set $love   #eb6f92
+set $gold   #f6c177
 set $rose   #ebbcba
 set $iris   #c4a7e7
 
@@ -127,6 +128,9 @@ for_window [app_id="org.pulseaudio.pavucontrol"] {
   floating enable
   resize set 1200 700
 }
+for_window [app_id="firefox"] {
+  move container to workspace number 2
+}
 for_window [class="steam"] {
   move container to workspace number 8
 }
@@ -137,21 +141,20 @@ for_window [app_id="Waydroid"] {
   fullscreen enable
   move container to workspace number 10
 }
+for_window [class="steam_app_0"] {
+  floating enable
+  move container to workspace number 0
+  client.focused           $gold   $gold   $text  $gold     $gold
+  client.focused_inactive  $subtle $subtle $text  $subtle   $subtle
+  client.unfocused         $muted  $muted  $muted $muted    $muted
+  client.urgent            $iris   $iris   $text  $iris     $iris
+  client.background        $base
+}
 
 # --- --- --- --- --- --- --- --- ---
 # > obvious configs
 # --- --- --- --- --- --- --- --- ---
-bindsym $Mod+Left focus left
-bindsym $Mod+Down focus down
-bindsym $Mod+Up focus up
-bindsym $Mod+Right focus right
 
-bindsym $Mod+Shift+Left move left
-bindsym $Mod+Shift+Down move down
-bindsym $Mod+Shift+Up move up
-bindsym $Mod+Shift+Right move right
-
-# vim
 bindsym $Mod+$Left focus left
 bindsym $Mod+$Down focus down
 bindsym $Mod+$Up focus up
