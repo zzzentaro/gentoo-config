@@ -4,14 +4,26 @@ root = true
 charset = utf-8
 end_of_line = lf
 trim_trailing_whitespace = true
+max_line_length = 80
 insert_final_newline = true
 indent_style = space
 indent_size = 4
-max_line_length = 80
 
-[{*.{c,h},Makefile}]
+[{*.{c,h,sh,bash},Makefile,.bash_profile,.bashrc,.bash_logout}]
+charset = utf-8
+end_of_line = lf
+trim_trailing_whitespace = true
+max_line_length = 80
+insert_final_newline = true
 indent_style = tab
 indent_size = 8
 
 [*.{html,yaml}]
+charset = utf-8
+end_of_line = lf
+trim_trailing_whitespace = true
+max_line_length = 80
+insert_final_newline = true
+indent_style = space
 indent_size = 2
+
