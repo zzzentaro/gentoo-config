@@ -197,14 +197,11 @@ alias fmtsh='shfmt -w -s'
 # --- --- --- --- --- --- --- --- ---
 # > miscellaneous
 # --- --- --- --- --- --- --- --- ---
-alias ff='fastfetch'
-clear -x
+
 # - > waydroid -
 alias wdx='sudo -v && waydroid session stop; sleep 2 && sudo rc-service waydroid stop'
 alias wd='wdx && sudo rc-service waydroid start; sleep 2 && waydroid show-full-ui'
+alias ff='fastfetch'
 
-# --- --- --- --- --- --- --- --- ---
-# > finally initialise bash
-# --- --- --- --- --- --- --- --- ---
-[[ $SHLVL -le 2 ]] && fastfetch
-eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
+clear -x
+[[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch && eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
