@@ -22,3 +22,8 @@ app-misc/tealdeer
 sys-apps/eza
 app-misc/yazi
 app-text/tree
+
+# - > gui -
+media-gfx/feh
+x11-misc/pcmanfm
+
