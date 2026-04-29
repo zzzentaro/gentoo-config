@@ -204,4 +204,8 @@ alias wd='wdx && sudo rc-service waydroid start; sleep 2 && waydroid show-full-u
 alias ff='fastfetch'
 
 clear -x
-[[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch && eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
+if [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]]; then
+	fastfetch
+	eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
+	echo -e "\n  \e[3;35m\"$(shuf -n 1 ~/db/misfortune)\"\e[0m  \n"
+fi
