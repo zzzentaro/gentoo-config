@@ -15,6 +15,9 @@ ln -sfn "$HERE"/bash/logout.bash "$HOME"/.bash_logout
 ln -sfn "$HERE"/vim/rc.vim "$HOME"/.vimrc
 ln -sfn "$HERE"/.editorconfig "$HOME"/.editorconfig
 
+rm -rf "$HOME"/db
+ln -sfn "$HERE/db" "$HOME"/db
+
 # --- --- --- --- --- --- --- --- ---
 # > dotlocal shell
 # --- --- --- --- --- --- --- --- ---
@@ -39,7 +42,7 @@ for item in hypr waybar alacritty fastfetch oh-my-posh fuzzel yazi; do
 	rm -rf "$HOME/.config/$item"
 	ln -sfn "$HERE/$item" "$HOME/.config/$item"
 done
-mkdir -p "$HOME"/.config/vesktop/settings
+mkdir -p "$HOME"/.config/vesktop/settings/
 rm -f "$HOME"/.config/vesktop/settings/quickCss.css
 ln -sfn "$HERE"/vesktop/settings/quickCss.css "$HOME"/.config/vesktop/settings/quickCss.css
 
