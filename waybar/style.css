@@ -1,24 +1,4 @@
-/* --- --- --- --- --- --- --- --- ---
- * > rose pine ^^
- * --- --- --- --- --- --- --- --- --- */
-@define-color base            #191724;
-@define-color surface         #1f1d2e;
-@define-color overlay         #26233a;
-
-@define-color muted           #6e6a86;
-@define-color subtle          #908caa;
-@define-color text            #e0def4;
-
-@define-color love            #eb6f92;
-@define-color gold            #f6c177;
-@define-color rose            #ebbcba;
-@define-color pine            #31748f;
-@define-color foam            #9ccfd8;
-@define-color iris            #c4a7e7;
-
-@define-color highlightLow    #21202e;
-@define-color highlightMed    #403d52;
-@define-color highlightHigh   #524f67;
+@import "theme-mizu.css";
 
 /* - > reset - */
 * {
@@ -33,7 +13,7 @@
  * > main styles
  * --- --- --- --- --- --- --- --- --- */
 window#waybar {
-	background: @surface;
+	background: @base;
 }
 button,
 #scratchpad,
@@ -48,7 +28,7 @@ button,
     background: @surface;
     color: @text;
     padding: 0 18px 0 10px;
-    border: 2px solid @overlay;
+    border: 2px solid @surface;
 }
 #clock {
     padding: 0 16px;
@@ -58,28 +38,28 @@ button,
 }
 #battery:not(.plugged),
 #battery.full {
-    color: @iris;
+    color: @tertiary;
 }
 #battery.plugged {
-    color: @love;
+    color: @primary;
 }
 
-/* - > right - */
+/* - > left - */
 #workspaces button {
     font-size: 20px;
     margin-right: 16px;
     padding: 0 14px 0 8px;
 }
 #workspaces button.focused, #workspaces button.active {
-    color: @love;
+    color: @primary;
 }
 #workspaces button.urgent {
-    background: @love;
-    color: @surface;
+    background: @primary;
+    color: @base;
 }
 #workspaces button:hover {
-    background: @love;
-    color: @surface;
+    background: @primary;
+    color: @base;
 }
 #window {
     margin-right: 16px;
@@ -89,8 +69,8 @@ button,
 #submap {
     margin: 8px 0 8px 0;
     padding: 0 4px 0 4px;
-    background: @love;
-    color: @surface;
+    background: @primary;
+    color: @base;
     font-weight: 700;
     letter-spacing: -0.1rem;
 }
@@ -116,10 +96,10 @@ button,
     padding: 0 12px 0 8px;
 }
 #power-profiles-daemon.performance {
-    color: @love;
+    color: @secondary;
 }
 #power-profiles-daemon.balanced {
-    color: @gold;
+    color: @primary;
 }
 #power-profiles-daemon.power-saver {
     color: @text;
@@ -129,16 +109,16 @@ button,
  * > overlays
  * --- --- --- --- --- --- --- --- --- */
 tooltip {
-    background: @overlay;
+    background: @surface;
     color: @text;
     border: 2px solid @muted;
 }
 menu {
-    background: @overlay;
+    background: @surface;
     color: @text;
     padding: 16px 0;
     border: 2px solid @muted;
 }
 menu *:hover {
-    background: @love;
+    background: @primary;
 }

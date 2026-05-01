@@ -8,12 +8,12 @@ app-portage/eix
 # - > internet (real) -
 net-misc/networkmanager
 
-# - > scheduler aengel -
+# - > scheduler daemon -
 sys-process/cronie
 
 # - > ddr5-prices-are-insane-init -
 sys-block/zram-init
 
-# - > battery status aengel -
+# - > battery status -
 sys-power/upower
 
