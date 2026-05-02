@@ -1,0 +1,13 @@
+font=GoMono Nerd Font 12
+background-color=#393552
+text-color=#e0def4
+border-color=#eb6f92
+default-timeout=60000
+layer=overlay
+progress-color=over #f6c177
+
+[urgency=high]
+border-color=#c4a7e7
+
+[urgency=low]
+border-color=#191724
