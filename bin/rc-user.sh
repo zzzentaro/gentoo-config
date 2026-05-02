@@ -1,0 +1,62 @@
+#!/bin/sh
+set -eu
+
+. "${HOME}/.local/lib/zsl" || {
+	echo "[!!] zsl is missing"
+	exit 1
+}
+
+rc_user_conserve() {
+	readonly _TARGET_FILE='/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
+
+	if [ ! -f "$_TARGET_FILE" ]; then
+		zsl_error "Conservation mode path not found. Is ideapad_acpi module loaded?"
+		exit 1
+	fi
+
+	_CONSERVE_STATUS="$(cat "$_TARGET_FILE")"
+	if [ "$_CONSERVE_STATUS" -eq 0 ]; then
+		echo 1 | sudo tee "$_TARGET_FILE" >/dev/null
+		zsl_success "Battery conservation mode is now ENABLED! It will charge to around 80%!!"
+	else
+		echo 0 | sudo tee "$_TARGET_FILE" >/dev/null
+		zsl_success "Battery conservation mode is now DISABLED! It will charge to full capacity!!"
+	fi
+}
+
+rc_user_mode() {
+	case "$1" in
+	'night')
+		pactl set-source-mute @DEFAULT_SOURCE@ 1
+		pactl set-sink-mute @DEFAULT_SINK@ 1
+		brightnessctl set 5%
+		powerprofilesctl set performance
+		;;
+	'day')
+		pactl set-source-mute @DEFAULT_SOURCE@ 0
+		pactl set-sink-mute @DEFAULT_SINK@ 0
+		pactl set-source-volume @DEFAULT_SOURCE@ 50%
+		pactl set-sink-volume @DEFAULT_SINK@ 50%
+		brightnessctl set 10%
+		powerprofilesctl set balanced
+		;;
+	'morning')
+		pactl set-source-mute @DEFAULT_SOURCE@ 0
+		pactl set-sink-mute @DEFAULT_SINK@ 0
+		pactl set-source-volume @DEFAULT_SOURCE@ 50%
+		pactl set-sink-volume @DEFAULT_SINK@ 50%
+		brightnessctl set 20%
+		powerprofilesctl set power-saver
+		;;
+	*) zsl_error "no mode chosen" ;;
+	esac
+}
+
+_cmd="rc_user_${1:-}"
+if command -v "rc_user_${1:-}" >/dev/null; then
+	"$_cmd" "$@"
+	exit 0
+else
+	zsl_error
+	exit 1
+fi
