@@ -45,11 +45,13 @@ zsl_log() {
 	return "$_exit_code"
 }
 zsl_error() {
-	zsl_log "$RED" "!!" "${1:-Unknown error}" "${2:-1}"
+	zsl_log "$RED" ' !! ' "${1:-Unknown error}" "${2:-1}"
 }
-
 zsl_success() {
-	zsl_log "$GREEN" "ok" "${1:-Success}" 0
+	zsl_log "$GREEN" ' ok ' "${1:-Operation success}" 0
+}
+zsl_info() {
+	zsl_log "$YELLOW" 'info' "${1:-Additional information}" 0
 }
 
 zsl_is_root() { [ "$(id -u)" -eq 0 ]; }
