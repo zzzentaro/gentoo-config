@@ -1,10 +1,14 @@
-#!/usr/bin/env bash
+#!/bin/sh
+# This script is destructive.
+set -eu
 
-# --- --- --- --- --- --- --- --- ---
-# > establish connection
-# --- --- --- --- --- --- --- --- ---
-HERE="$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)"
-sudo chown -R "$USER":root "$HERE"
+is_root() { [ "$(id -u)" -eq 0 ]; }
+is_root && echo "[ !! ] Do not run as root" && exit 1
+has_home() { [ -e "$HOME" ]; }
+has_home || (echo '[ !! ] $HOME not found' && exit 1)
+
+HERE=$(cd "$(dirname "$0")" && pwd)
+sudo chown -R "$USER":"$USER" "$HERE"
 
 # --- --- --- --- --- --- --- --- ---
 # > home directory
@@ -29,10 +33,10 @@ for item in zsl; do
 done
 
 mkdir -p "$HOME"/.local/bin
-for item in gentoo-config portage menu noogetctl; do
-	chmod +x "$HERE/bin/${item}.bash"
+for item in gentoo-config nvidia-offload portage menu noogetctl; do
+	chmod +x "$HERE/bin/${item}.sh"
 	rm -f "$HOME/.local/bin/$item"
-	ln -sfn "$HERE/bin/${item}.bash" "$HOME/.local/bin/$item"
+	ln -sfn "$HERE/bin/${item}.sh" "$HOME/.local/bin/$item"
 done
 
 # --- --- --- --- --- --- --- --- ---
