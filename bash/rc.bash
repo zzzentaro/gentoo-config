@@ -18,7 +18,7 @@ alias gc='cd ~/gentoo-config/ && lazygit'
 # - > explorer -
 alias er='yazi'
 
-alias cpwl='wl-copy'
+alias clip='wl-copy'
 
 alias c='cd'
 alias ..='cd ..'
@@ -193,6 +193,7 @@ eq() {
 
 # - > formatter -
 alias fmtsh='shfmt -w -s'
+alias cksh='shellcheck -s sh'
 
 # --- --- --- --- --- --- --- --- ---
 # > miscellaneous
@@ -209,8 +210,5 @@ alias wd-start='wd-stop && sudo rc-service waydroid start && sleep 1 && waydroid
 alias steambrew='curl -fsSL "https://steambrew.app/install.sh" | bash'
 
 clear -x
-if [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]]; then
-	fastfetch
-	eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
-	echo -e "\n  \e[3;35m\"$(shuf -n 1 ~/db/misfortune)\"\e[0m  \n"
-fi
+[[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
