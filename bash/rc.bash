@@ -24,7 +24,7 @@ alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias ls='eza --group-directories-first --no-permissions --icons=auto --git'
+alias ls='eza --group-directories-first --group --no-permissions --icons=auto --git'
 alias l='ls -Ahl'
 
 alias mkdir='mkdir -p'
@@ -198,10 +198,15 @@ alias fmtsh='shfmt -w -s'
 # > miscellaneous
 # --- --- --- --- --- --- --- --- ---
 
-# - > waydroid -
-alias wdx='sudo -v && waydroid session stop; sleep 2 && sudo rc-service waydroid stop'
-alias wd='wdx && sudo rc-service waydroid start; sleep 2 && waydroid show-full-ui'
 alias ff='fastfetch'
+
+# - > waydroid -
+alias wd='waydroid'
+alias wd-stop='sudo waydroid session stop && sleep 1 && sudo rc-service waydroid stop'
+alias wd-start='wd-stop && sudo rc-service waydroid start && sleep 1 && waydroid show-full-ui'
+
+# - > quick fix -
+alias steambrew='curl -fsSL "https://steambrew.app/install.sh" | bash'
 
 clear -x
 if [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]]; then
