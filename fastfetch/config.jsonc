@@ -35,9 +35,9 @@
     "percent": {
       "type": 9,
       "color": {
-        "green": "blue",
+        "green": "light_blue",
         "yellow": "light_yellow",
-        "red": "magenta"
+        "red": "light_magenta"
       }
     }
   },
