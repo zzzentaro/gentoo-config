@@ -1,19 +1,17 @@
-# --- --- --- --- --- --- --- --- ---
-# > gentoo larry moo
-# --- --- --- --- --- --- --- --- ---
+# THIS IS PORTAGE SETS FILE
+# FOR Zentaro's MARCH_NATIVE
+
+# Gentoo Larry Moo
 app-eselect/eselect-repository
 app-portage/gentoolkit
 app-portage/eix
-
-# - > internet (real) -
+app-admin/eclean-kernel
+# Internet (real)
 net-misc/networkmanager
-
-# - > scheduler daemon -
+# Scheduler daemon
 sys-process/cronie
-
-# - > ddr5-prices-are-insane-init -
-sys-block/zram-init
-
-# - > battery status -
+# Battery statud
 sys-power/upower
+# Please let me buy a 32GB stick for the love of Larry
+sys-block/zram-init
 

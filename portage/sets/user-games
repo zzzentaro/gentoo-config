@@ -1,2 +1,7 @@
+# THIS IS PORTAGE SETS FILE
+# FOR GAMES
+
+app-emulation/wine-vanilla
 games-util/protonplus
 games-util/steam-launcher
+

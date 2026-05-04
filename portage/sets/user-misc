@@ -1,3 +1,6 @@
+# THIS IS PORTAGE SETS FILE
+# FOR temporary packages lol
+
 app-benchmarks/stress-ng
 app-benchmarks/geekbench-ml
 app-benchmarks/geekbench

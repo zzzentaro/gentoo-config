@@ -11,15 +11,15 @@
       "right": 0
     },
     "color": {
-      "1": "red",
+      "1": "light_blue",
       "2": "white"
     }
   },
   "display": {
     "separator": " ",
     "color": {
-      "keys": "red",
-      "title": "red"
+      "keys": "light_blue",
+      "title": "light_blue"
     },
     "key": {
       "width": 3,
@@ -35,9 +35,9 @@
     "percent": {
       "type": 9,
       "color": {
-        "green": "blue",
+        "green": "light_blue",
         "yellow": "light_yellow",
-        "red": "magenta"
+        "red": "light_magenta"
       }
     }
   },
@@ -46,7 +46,7 @@
       "type": "os",
       "format": "{2}",
       "key": " ",
-      "outputColor": "bright_red"
+      "outputColor": "bright_blue"
     },
     {
       "type": "kernel",

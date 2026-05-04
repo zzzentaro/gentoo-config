@@ -1,6 +1,6 @@
-# --- --- --- --- --- --- --- --- ---
-# > wayland android
-# --- --- --- --- --- --- --- --- ---
+# THIS IS PORTAGE SETS FILE
+# FOR wAYDROID
+
 app-arch/lzip
 app-containers/waydroid
 

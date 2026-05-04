@@ -1,48 +1,43 @@
 [[ $- != *i* ]] && return
+# THIS IS A BASHRC FILE
 
-alias x='exec bash'
-alias xx='exit'
+alias x='sync && exec bash'
+alias xx='sync && exit'
 alias hex='sudo'
+alias root='sudo su -'
 
-# --- --- --- --- --- --- --- --- ---
-# > version control is important!
-# --- --- --- --- --- --- --- --- ---
-alias g='git'
-alias lg='lazygit'
-alias gc='cd ~/gentoo-config/ && lazygit'
+alias ls='eza --group-directories-first --group --no-permissions --icons=auto --git'
+alias l='ls -Ahl'
 
-# --- --- --- --- --- --- --- --- ---
-# > for dir navigation n file management
-# --- --- --- --- --- --- --- --- ---
-
-# - > explorer -
-alias er='yazi'
-
-alias cpwl='wl-copy'
+alias grep='grep --color=auto'
+alias gr='grep'
 
 alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
 
-alias ls='eza --group-directories-first --no-permissions --icons=auto --git'
-alias l='ls -Ahl'
-
 alias mkdir='mkdir -p'
 alias md='mkdir'
-
-alias grep='grep --color=auto'
-alias gr='grep'
-
 alias cp='cp -i'
 alias rm='rm -i'
+
 alias df='df -h'
 alias free='free -h'
 
-# --- --- --- --- --- --- --- --- ---
-# > control panel (or what could be)
-# --- --- --- --- --- --- --- --- ---
-alias scr='brightnessctl set'
+alias clip='wl-copy'
 
+# Devel
+alias e="$EDITOR"
+alias es="sudoedit"
+
+alias g='git'
+alias lg='lazygit'
+alias gc='cd ~/gentoo-config/ && lazygit'
+alias fmtsh='shfmt -w -s'
+alias cksh='shellcheck -s sh'
+
+# Control
+alias scr='brightnessctl set'
 pps() {
 	local option="$1"
 
@@ -58,7 +53,6 @@ pps() {
 	echo "current: $(powerprofilesctl get)"
 	return
 }
-
 vol() {
 	local sink='@DEFAULT_SINK@'
 	local src='@DEFAULT_SOURCE@'
@@ -101,9 +95,7 @@ vol() {
 	return 0
 }
 
-# --- --- --- --- --- --- --- --- ---
-# > gentoo's portage
-# --- --- --- --- --- --- --- --- ---
+# Portage, The Heart of Gentoo!
 alias p='portage'
 alias psy='portage sync'
 alias p-+='portage rebuild'
@@ -117,95 +109,22 @@ alias p+='portage merge'
 alias p-='portage unmerge'
 alias pe='portage edit'
 
-alias d-c='sudo dispatch-conf'
-alias etc-u='sudo etc-update'
-alias env-u='sudo env-update'
+alias etup='sudo etc-update'
+alias enup='sudo env-update'
+alias dpco='sudo dispatch-conf'
 
 alias world='cat /var/lib/portage/world'
-alias worldmod="sudo $EDITOR /var/lib/portage/world"
+alias worldmod="sudoedit /var/lib/portage/world"
 alias sets='cat /var/lib/portage/world_sets'
-alias setsmod="sudo $EDITOR /var/lib/portage/world_sets"
+alias setsmod="sudoedit /var/lib/portage/world_sets"
 
-# --- --- --- --- --- --- --- --- ---
-# > editor
-# --- --- --- --- --- --- --- --- ---
-alias e="$EDITOR"
-alias es="sudo $EDITOR"
-eq() {
-	local item="$1"
-	local target
-	case "$item" in
-	'')
-		target='.bashrc'
-		;;
-	'pro')
-		target='.bash_profile'
-		;;
-	'out')
-		target='.bash_logout'
-		;;
-	'e')
-		target='.vimrc'
-		;;
-	'wm')
-		target='.config/hypr/hyprland.conf'
-		;;
-	'bar')
-		case "$2" in
-		's')
-			target='.config/waybar/style.css'
-			;;
-		*)
-			target='.config/waybar/config.jsonc'
-			;;
-		esac
-		;;
-	'run')
-		target='.config/fuzzel/fuzzel.ini'
-		;;
-	'not')
-		target='.config/mako/config'
-		;;
-	'f')
-		case "$2" in
-		'l')
-			target='.config/fastfetch/logo'
-			;;
-		*)
-			target='.config/fastfetch/config.jsonc'
-			;;
-		esac
-		;;
-	't')
-		target='.config/alacritty/alacritty.toml'
-		;;
-	'er')
-		target='.config/yazi/yazi.toml'
-		;;
-	*)
-		target='.bashrc'
-		;;
-	esac
-	"$EDITOR" "$HOME/$target"
-
-	return
-}
-
-# - > formatter -
-alias fmtsh='shfmt -w -s'
-
-# --- --- --- --- --- --- --- --- ---
-# > miscellaneous
-# --- --- --- --- --- --- --- --- ---
-
-# - > waydroid -
-alias wdx='sudo -v && waydroid session stop; sleep 2 && sudo rc-service waydroid stop'
-alias wd='wdx && sudo rc-service waydroid start; sleep 2 && waydroid show-full-ui'
+# Other aliases
 alias ff='fastfetch'
+## Waydroid
+alias wd-stop='sudo waydroid session stop && sudo rc-service waydroid stop'
+alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-ui'
 
+# Finally, start interactive shell
+eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
 clear -x
-if [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]]; then
-	fastfetch
-	eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
-	echo -e "\n  \e[3;35m\"$(shuf -n 1 ~/db/misfortune)\"\e[0m  \n"
-fi
+[[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch
