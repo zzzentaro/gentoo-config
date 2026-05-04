@@ -11,15 +11,15 @@
       "right": 0
     },
     "color": {
-      "1": "red",
+      "1": "light_blue",
       "2": "white"
     }
   },
   "display": {
     "separator": " ",
     "color": {
-      "keys": "red",
-      "title": "red"
+      "keys": "light_blue",
+      "title": "light_blue"
     },
     "key": {
       "width": 3,
@@ -46,7 +46,7 @@
       "type": "os",
       "format": "{2}",
       "key": " ",
-      "outputColor": "bright_red"
+      "outputColor": "bright_blue"
     },
     {
       "type": "kernel",
