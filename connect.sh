@@ -34,7 +34,7 @@ for item in zsl; do
 done
 
 mkdir -p "$_BIN_DIR"
-for item in nvidia-offload portage rc-user menu; do
+for item in nvidia-offload portage rc-user menu steambrew; do
 	rm -f "$_BIN_DIR/$item"
 	chmod +x "$_STORE__BIN_DIR/${item}.sh"
 	ln -sfn "$_STORE__BIN_DIR/${item}.sh" "$HOME/.local/bin/$item"
