@@ -1,6 +1,7 @@
 # THIS IS PORTAGE SETS FILE
 # FOR DEVELOPER PROGRAMS
 
+app-misc/tmux
 app-editors/vim
 app-editors/neovim
 dev-vcs/git
