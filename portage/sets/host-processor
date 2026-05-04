@@ -1,13 +1,19 @@
-# --- --- --- --- --- --- --- --- ---
-# > graphics processing unit
-# --- --- --- --- --- --- --- --- ---
+# THIS IS A PORTAGE SETS FILE
+# FOR Zentaro's MARCH_NATIVE
 
-# - > discrete -
+# My stupid nvda gpu
 x11-drivers/nvidia-drivers
-media-libs/nvidia-vaapi-driver
-# dev-util/nvidia-cuda-toolkit
+
+# Base VAAPI
+media-libs/libva
+media-video/libva-utils
 dev-util/clinfo
 
-# - > integrated -
-media-libs/libva-intel-driver
+# Nvda VAAPI
+media-libs/nvidia-vaapi-driver
+# dev-util/nvidia-cuda-toolkit
+
+# Intel VAAPi
 media-libs/libva-intel-media-driver
+# media-libs/libva-intel-driver
+

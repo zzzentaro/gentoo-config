@@ -1,40 +1,34 @@
-# --- --- --- --- --- --- --- --- ---
-# > child of wlroots
-# --- --- --- --- --- --- --- --- ---
+# THIS IS A PORTAGE SETS FILE
+# FOR HYPR ECOSYSTEM
 
-# - > window manager -
-gui-wm/hyprland
-
-# - > wallpaper daemon -
-gui-apps/hyprpaper
-
-# - > lock screen -
-gui-apps/hyprlock
-
-# - > session backend -
+# Session back-end
 sys-apps/dbus
 sys-auth/polkit
 sys-auth/hyprpolkitagent
 sys-apps/xdg-desktop-portal-gtk
 gui-libs/xdg-desktop-portal-hyprland
 
-# - > terminal emulator -
+# The window manager
+gui-wm/hyprland
+# Wallpaper daemon
+gui-apps/hyprpaper
+# Terminal emulator
 x11-terms/alacritty
-
-# - > status bar -
-gui-apps/waybar
-
-# - > application launcher -
+# Launcher
 gui-apps/fuzzel
-
-# - > notification toast -
+# Status bar
+gui-apps/waybar
+# Notification toast
 gui-apps/mako
+# Lock screen
+gui-apps/hyprlock
 
-# - > clipboard daemon -
+# Clipboard daemon
 gui-apps/wl-clipboard
 gui-apps/wl-clip-persist
 
-# - > screenshot tools -
+# Print screen
 gui-apps/grim
 gui-apps/slurp
 gui-apps/swappy
+

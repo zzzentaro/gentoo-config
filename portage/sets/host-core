@@ -1,41 +1,37 @@
-# --- --- --- --- --- --- --- --- ---
-# > nooget is my laptop!!
-# --- --- --- --- --- --- --- --- ---
+# THIS IS PORTAGE SETS FILE
+# FOR Zentaro's MARCH_NATIVE
 
-# - > login auth -
+# Long live init freedom!
+sys-apps/openrc
 sys-auth/pambase
 sys-libs/pam
 sys-auth/rtkit
 sys-apps/dbus
 sys-auth/elogind
-
-# - > system process -
+# Log, udev, and clock
 app-admin/sysklogd
 sys-block/io-scheduler-udev-rules
 net-misc/chrony
 
-# - > kernel -
+# Kernel
 sys-kernel/gentoo-kernel-bin
 sys-kernel/zen-sources
 sys-kernel/linux-firmware
 sys-firmware/intel-microcode
 sys-firmware/sof-firmware
 sys-kernel/installkernel
-
-# - > userspace -
-dev-util/sh
+# System-managed userspace
 app-shells/bash
 app-editors/nano
 app-admin/sudo
 
-# - > general media backend -
+# General media back-end
 media-video/ffmpeg
 app-arch/7zip
 app-misc/jq
 app-text/poppler
 media-gfx/imagemagick
-
-# - > audio media backend -
+# Audio media back-end
 media-video/pipewire
 media-video/wireplumber
 

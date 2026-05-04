@@ -1,28 +1,21 @@
-# --- --- --- --- --- --- --- --- ---
-# > basic human rights
-# --- --- --- --- --- --- --- --- ---
+# THIS IS PORTAGE SETS FILE
+# FOR THE USERSPACE
 
-# - > don't burn your eyes -
+# Don't burn your eyes
 app-misc/brightnessctl
-
-# - > don't burn your fans
+# Don't burn your fans
 sys-power/power-profiles-daemon
-
-# -> don't lose your pictures
+# Don't miss your pictures
 x11-misc/xdg-user-dirs
-
-# - > do i need to explain this? -
+# Do I need to explain this?
 app-misc/fastfetch
 app-misc/figlet
-
-# - > how do you know i don't read the manual? -
+# I hate man pages
 app-misc/tealdeer
-
-# - > ls but good -
+# ls but good
 sys-apps/eza
 app-text/tree
-
-# - > gui -
+# GUI
 media-gfx/feh
 x11-misc/pcmanfm
 
