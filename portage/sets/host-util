@@ -5,6 +5,7 @@
 app-eselect/eselect-repository
 app-portage/gentoolkit
 app-portage/eix
+app-admin/eclean-kernel
 # Internet (real)
 net-misc/networkmanager
 # Scheduler daemon
