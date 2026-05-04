@@ -1,4 +1,3 @@
-#!/bin/sh
 # Zentaro's Shell Library
 
 _disable_colours() {
