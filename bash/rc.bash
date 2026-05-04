@@ -30,6 +30,7 @@ alias clip='wl-copy'
 alias e="$EDITOR"
 alias es="sudoedit"
 
+alias z='tmux attach || tmux'
 alias g='git'
 alias lg='lazygit'
 alias gc='cd ~/gentoo-config/ && lazygit'
