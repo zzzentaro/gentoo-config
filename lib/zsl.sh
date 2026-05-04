@@ -55,7 +55,7 @@ zsl_info() {
 
 zsl_is_root() { [ "$(id -u)" -eq 0 ]; }
 zsl_need_user() {
-	zsl_is_root && zsl_error "Do not run as root"
+	zsl_is_root && zsl_error "Do not run as root" || return 0
 }
 zsl_need_home() {
 	[ -z "$HOME" ] && zsl_error '$HOME not found'
