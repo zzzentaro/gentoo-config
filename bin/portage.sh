@@ -26,7 +26,7 @@ _emerge() {
 }
 
 _no_args_second() {
-	[ -z "${2:-}" ] && zsl_error "Nothing to $1 with $_CMD"
+	[ -z "${2:-}" ] && zsl_error "Nothing to $1 with $_CMD" || return 0
 }
 
 # PORTAGE SYNC
@@ -52,7 +52,7 @@ portage_sync() {
 		zsl_info "Starting $item..." &&
 			_"$item" &&
 			zsl_success "$item complete!" ||
-			zsl_error "$item failed"
+			zsl_error "$item failed" && return 0
 	done
 	zsl_success "$_CMD $1 complete"
 }
@@ -158,25 +158,32 @@ portage_unmerge() {
 	sudo emerge --ask --deselect "$2" && sudo emerge --depclean
 }
 
-portage_edit() {
-	[ -z "${2:-}" ] && sudo "$EDITOR" "$_PORTAGE_DIR/make.conf" && return 1
-
-	_TARGET_DIR=''
-	case "${2:-}" in
-	use) _TARGET_DIR="$_PORTAGE_DIR/package.use/" ;;
-	mask) _TARGET_DIR="$_PORTAGE_DIR/package.mask/" ;;
-	unmask) _TARGET_DIR="$_PORTAGE_DIR/package.accept_keywords/" ;;
-	sets) _TARGET_DIR="$_PORTAGE_DIR/sets/" ;;
-	env) _TARGET_DIR="$_PORTAGE_DIR/env/" ;;
+# PORTAGE EDIT
+readonly _MAKE_CONF="$_PORTAGE_DIR/make.conf"
+_edit_make_conf() {
+	sudoedit "$_MAKE_CONF" 2>/dev/null || sudo -E "$EDITOR" "$_MAKE_CONF"
+}
+_select_target_dir() {
+	case "${1:-}" in
+	use) _SUB="package.use" ;;
+	mask) _SUB="package.mask" ;;
+	unmask) _SUB="package.accept_keywords" ;;
+	sets) _SUB="sets" ;;
+	env) _SUB="env" ;;
+		# TODO: refactor usage
 	*) echo "Usage: $_CMD edit [ use | unmask | sets ] [ ... ]" ;;
 	esac
-	[ ! -d "$_TARGET_DIR" ] && sudo mkdir -p "$_TARGET_DIR"
+	_TARGET_DIR="$_PORTAGE_DIR/${_SUB:-?}"
+	readonly _TARGET_DIR
+	[ -d "$_TARGET_DIR" ] || sudo mkdir -p "$_TARGET_DIR"
+	echo "$_TARGET_DIR"
+}
+portage_edit() {
+	[ -z "${2:-}" ] && _edit_make_conf && return
+	[ -z "${3:-}" ] && echo "# TODO: refactor usage" && return 1
 
-	if [ -z "${3:-}" ]; then
-		ls -Ahl "$_TARGET_DIR"
-	else
-		sudo "$EDITOR" "$_TARGET_DIR/$3"
-	fi
+	readonly _ITEM="$(_select_target_dir "${2:-?}")/${3:-}"
+	sudoedit "$_ITEM"
 }
 portage_help() {
 	echo "Usage:"
