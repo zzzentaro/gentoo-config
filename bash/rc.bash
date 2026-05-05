@@ -128,4 +128,4 @@ alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
 clear -x
-[[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch
+[[ "$SHLVL" -le 3 && "$WAYLAND_DISPLAY" ]] && fastfetch
