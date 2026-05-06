@@ -28,20 +28,19 @@ else
 fi
 
 zsl_log() {
-	_colour="$1"
-	_log_type="$2"
-	_log_msg="$3"
-	_exit_code="${4:-0}"
+	_LOG_COLOUR="$1"
+	_LOG_TYPE="$2"
+	_LOG_MSG="$3"
+	_EXIT_CODE="${4:-0}"
 
 	# send to stderr if the type is error
-	if [ "$_log_type" = "!!" ]; then
-
-		printf "%s[%s] %s%s\n" "$_colour" "$_log_type" "$_log_msg" "$ALL_OFF" >&2
+	if [ "$_LOG_TYPE" = " !! " ]; then
+		printf "[%s%s%s] %s\n" "$_LOG_COLOUR" "$_LOG_TYPE" "$ALL_OFF" "$_LOG_MSG" >&2
 	else
-		printf "%s[%s] %s%s\n" "$_colour" "$_log_type" "$_log_msg" "$ALL_OFF"
+		printf "[%s%s%s] %s\n" "$_LOG_COLOUR" "$_LOG_TYPE" "$ALL_OFF" "$_LOG_MSG"
 
 	fi
-	return "$_exit_code"
+	return "$_EXIT_CODE"
 }
 zsl_error() {
 	zsl_log "$RED" ' !! ' "${1:-Unknown error}" "${2:-1}"
