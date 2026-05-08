@@ -30,6 +30,7 @@ alias clip='wl-copy'
 alias e="$EDITOR"
 alias es="sudoedit"
 
+alias nmutt='neomutt'
 alias z='tmux attach || tmux'
 alias g='git'
 alias lg='lazygit'
