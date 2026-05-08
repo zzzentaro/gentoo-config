@@ -1,5 +1,6 @@
 #!/bin/sh
 set -eu
+. /etc/kernel.conf
 
 # pretend is mostly for testing
 _PRETEND=0
@@ -10,19 +11,6 @@ _mv() {
 		sudo mv "$@"
 	fi
 }
-
-readonly _BOOT_DIR='/boot'
-sudo mkdir -p /tmp/kernels
-readonly _TEMP_DIR='/tmp/kernels'
-# My setup has gentoo-kernel-bin default and zen-sources
-
-readonly _GENTOO_KERNEL_VERSION="7.0.3"
-readonly _GENTOO_KERNEL="$_GENTOO_KERNEL_VERSION-gentoo-dist"
-readonly _GENTOO_KERNEL_DIR="$_BOOT_DIR/kernels-gentoo"
-
-readonly _ZEN_KERNEL_VERSION="7.0.3"
-readonly _ZEN_KERNEL="$_ZEN_KERNEL_VERSION-zen1"
-readonly _ZEN_KERNEL_DIR="$_BOOT_DIR/kernels-zen"
 
 temp_old_file() {
 	__KERNEL_DIR="$1"
