@@ -1,9 +1,9 @@
 # Zentaro's Shell Library
 
-_disable_colours() {
+_zsl_disable_colours() {
 	unset ALL_OFF BOLD BLUE GREEN RED YELLOW
 }
-_enable_colours() {
+_zsl_enable_colours() {
 	if tput setaf 0 >/dev/null 2>&1; then
 		ALL_OFF="$(tput sgr0)"
 		BOLD="$(tput bold)"
@@ -22,9 +22,9 @@ _enable_colours() {
 	readonly ALL_OFF BOLD BLUE GREEN RED YELLOW
 }
 if [ -t 2 ]; then
-	_enable_colours
+	_zsl_enable_colours
 else
-	_disable_colours
+	_zsl_disable_colours
 fi
 
 zsl_log() {
@@ -52,9 +52,8 @@ zsl_info() {
 	zsl_log "$YELLOW" 'info' "${1:-Additional information}" 0
 }
 
-zsl_is_root() { [ "$(id -u)" -eq 0 ]; }
 zsl_need_user() {
-	zsl_is_root && zsl_error "Do not run as root" || return 0
+	[ "$(id -u)" -le 0 ] && zsl_error "Do not run as root"
 }
 zsl_need_home() {
 	[ -z "$HOME" ] && zsl_error '$HOME not found'
