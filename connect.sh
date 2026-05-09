@@ -22,22 +22,22 @@ ln -sfn "$_HERE"/.editorconfig "$HOME"/.editorconfig
 # Local directory program
 readonly _LOCAL_DIR="$HOME/.local"
 readonly _LIB_DIR="$_LOCAL_DIR/lib"
-readonly _STORE__LIB_DIR="$_HERE/lib"
+readonly _STORE_LIB_DIR="$_HERE/lib"
 readonly _BIN_DIR="$_LOCAL_DIR/bin"
-readonly _STORE__BIN_DIR="$_HERE/bin"
+readonly _STORE_BIN_DIR="$_HERE/bin"
 
 mkdir -p "$_LIB_DIR"
 for item in zsl; do
 	rm -f "$_LIB_DIR/$item"
-	chmod -x "$_STORE__LIB_DIR/$item.sh"
-	ln -sfn "$_STORE__LIB_DIR/$item.sh" "$_LIB_DIR/$item"
+	chmod -x "$_STORE_LIB_DIR/$item.sh"
+	ln -sfn "$_STORE_LIB_DIR/$item.sh" "$_LIB_DIR/$item"
 done
 
 mkdir -p "$_BIN_DIR"
-for item in nvidia-offload portage portage-sets-refresh rc-user menu steambrew; do
+for item in boot-chore nvidia-offload portage portage-sets-refresh rc-user menu steambrew; do
 	rm -f "$_BIN_DIR/$item"
-	chmod +x "$_STORE__BIN_DIR/${item}.sh"
-	ln -sfn "$_STORE__BIN_DIR/${item}.sh" "$HOME/.local/bin/$item"
+	chmod +x "$_STORE_BIN_DIR/$item.sh"
+	ln -sfn "$_STORE_BIN_DIR/$item.sh" "$HOME/.local/bin/$item"
 done
 
 # Config directory (dotfiles)
@@ -55,7 +55,9 @@ ln -sfn "$_HERE"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpape
 
 # Portage, The Heart of Gentoo. Have you mooed today?
 readonly _PORTAGE_DIR="/etc/portage"
+sudo chown -R root:root "$_PORTAGE_DIR"
 readonly _STORE_PORTAGE_DIR="$_HERE/portage"
+sudo chown -R root:root "$_STORE_PORTAGE_DIR"
 command -v emerge >/dev/null || exit
 for item in make.conf repos.conf sets; do
 	sudo rm -rf "${_PORTAGE_DIR:?}/$item"

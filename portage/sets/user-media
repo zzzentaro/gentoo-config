@@ -1,0 +1,8 @@
+# THIS IS PORTAGE SETS FILE
+# FOR creative apps, I guess?
+
+media-gfx/gimp
+media-gfx/krita
+media-video/mpv
+net-misc/yt-dlp
+

@@ -30,6 +30,8 @@ alias clip='wl-copy'
 alias e="$EDITOR"
 alias es="sudoedit"
 
+alias nmutt='neomutt'
+alias z='tmux attach || tmux'
 alias g='git'
 alias lg='lazygit'
 alias gc='cd ~/gentoo-config/ && lazygit'
@@ -98,10 +100,10 @@ vol() {
 # Portage, The Heart of Gentoo!
 alias p='portage'
 alias psy='portage sync'
-alias p-+='portage rebuild'
+alias p-+='portage rebuild; steambrew'
 alias p++='portage update'
 alias p--='portage clean'
-alias ps='portage search'
+alias pf='portage find'
 alias pu='portage usedesc'
 alias pk='portage kernel'
 alias prp='portage repo'

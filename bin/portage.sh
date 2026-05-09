@@ -1,16 +1,27 @@
 #!/bin/sh
-set -eu
-. "$HOME"/.local/lib/zsl || {
-	echo '[!!] zsl is missing'
+set -u
+readonly _CMD="portage"
+
+. "${HOME}/.local/lib/zsl" || {
+	echo "[!!] zsl is missing"
 	exit 1
 }
 zsl_need_command 'emerge'
-readonly _CMD="${0##*/}"
 
 readonly _PORTAGE_DIR='/etc/portage'
 
+_need_second_args() {
+	if [ -z "${2:-}" ]; then
+		zsl_error "Nothing to $1 with $_CMD"
+		exit 1
+	fi
+}
+_start() {
+	zsl_info "Starting $_CMD $1 ..."
+	sudo -v
+}
 # pretend is mostly for testing
-_PRETEND=1
+_PRETEND=0
 _ASK=0
 _emerge() {
 	if [ "$_PRETEND" -gt 0 ]; then
@@ -23,10 +34,6 @@ _emerge() {
 	else
 		sudo emerge --verbose "$1"
 	fi
-}
-
-_no_args_second() {
-	[ -z "${2:-}" ] && zsl_error "Nothing to $1 with $_CMD"
 }
 
 # PORTAGE SYNC
@@ -44,16 +51,12 @@ _health_check() {
 	sudo emaint --fix all
 }
 portage_sync() {
-	zsl_info "Starting $_CMD $1"
-	sudo -v
+	_start
 
-	for item in web_rsync emaint_sync health_check; do
-		sudo -v
-		zsl_info "Starting $item..." &&
-			_"$item" &&
-			zsl_success "$item complete!" ||
-			zsl_error "$item failed"
-	done
+	_web_rsync
+	_emaint_sync
+	_health_check
+
 	zsl_success "$_CMD $1 complete"
 }
 
@@ -75,8 +78,8 @@ _try_revdep_rebuild() {
 
 }
 portage_rebuild() {
-	zsl_info "$_CMD"
-	sudo -v
+	_start
+
 	for item in @preserved-rebuild @module-rebuild; do
 		sudo -v
 		zsl_info "Starting $item..." &&
@@ -89,11 +92,14 @@ portage_rebuild() {
 
 # #PORTAGE UPDATE
 portage_update() {
+	_start
 	sudo emerge --verbose --ask --update --newuse --deep --with-bdeps=y --tree @world
 }
 
 # PORTAGE CLEAN
 portage_clean() {
+	_start
+
 	sudo emerge --ask --depclean
 	sudo -v
 	sudo eclean-dist --deep
@@ -103,28 +109,43 @@ portage_clean() {
 	sudo eclean-kernel
 }
 
-portage_search_true() {
-	zsl_success "Found entry(s) for $2"
+# PORTAGE FIND
+_search() {
+	zsl_info "Entry(s) for ${1:-}"
 	if command -v eix >/dev/null; then
-		eix "$2"
+		EIX_LIMIT=1 eix "$1"
 	else
-		emerge --search "$2"
+		emerge --search "$1"
 	fi
+
+}
+_query() {
 	if command -v equery >/dev/null; then
-		zsl_info "Flag(s) for $2"
-		equery u "$2"
+		zsl_info "Flag(s) for $1"
+		equery u "$1"
 	fi
 }
-portage_search() {
-	_no_args_second "$@"
-	portage_search-true "$@"
+_find() {
+	shift
+	for package in "$@"; do
+		_search "$package"
+		_query "$package"
+	done
+}
+portage_find() {
+	_need_second_args "$@"
+	_find "$@"
 }
 
+# PORTAGE USEDESC
 portage_usedesc() {
+	_USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
 	if [ -z "${2:-}" ]; then
-		cat /var/db/repos/gentoo/profiles/use.desc
+		cat "$_USEDESC_FILE"
 	else
-		${rg:-grep} "$2" /var/db/repos/gentoo/profiles/use.desc
+		for flag in "$@"; do
+			${rg:-grep} "$flag" /var/db/repos/gentoo/profiles/use.desc
+		done
 	fi
 }
 
@@ -144,7 +165,7 @@ portage_repo() {
 }
 
 portage_merge() {
-	_no_args_second "$@"
+	_need_second_args "$@"
 
 	if command -v equery >/dev/null; then
 		equery u "$2"
@@ -153,30 +174,37 @@ portage_merge() {
 }
 
 portage_unmerge() {
-	_no_args_second "$@"
+	_need_second_args "$@"
 
 	sudo emerge --ask --deselect "$2" && sudo emerge --depclean
 }
 
-portage_edit() {
-	[ -z "${2:-}" ] && sudo "$EDITOR" "$_PORTAGE_DIR/make.conf" && return 1
-
-	_TARGET_DIR=''
-	case "${2:-}" in
-	use) _TARGET_DIR="$_PORTAGE_DIR/package.use/" ;;
-	mask) _TARGET_DIR="$_PORTAGE_DIR/package.mask/" ;;
-	unmask) _TARGET_DIR="$_PORTAGE_DIR/package.accept_keywords/" ;;
-	sets) _TARGET_DIR="$_PORTAGE_DIR/sets/" ;;
-	env) _TARGET_DIR="$_PORTAGE_DIR/env/" ;;
+# PORTAGE EDIT
+readonly _MAKE_CONF="$_PORTAGE_DIR/make.conf"
+_edit_make_conf() {
+	sudoedit "$_MAKE_CONF" 2>/dev/null || sudo -E "$EDITOR" "$_MAKE_CONF"
+}
+_select_target_dir() {
+	case "${1:-}" in
+	use) _SUB="package.use" ;;
+	mask) _SUB="package.mask" ;;
+	unmask) _SUB="package.accept_keywords" ;;
+	sets) _SUB="sets" ;;
+	env) _SUB="env" ;;
+		# TODO: refactor usage
 	*) echo "Usage: $_CMD edit [ use | unmask | sets ] [ ... ]" ;;
 	esac
-	[ ! -d "$_TARGET_DIR" ] && sudo mkdir -p "$_TARGET_DIR"
+	_TARGET_DIR="$_PORTAGE_DIR/${_SUB:-?}"
+	readonly _TARGET_DIR
+	[ -d "$_TARGET_DIR" ] || sudo mkdir -p "$_TARGET_DIR"
+	echo "$_TARGET_DIR"
+}
+portage_edit() {
+	[ -z "${2:-}" ] && _edit_make_conf && return
+	[ -z "${3:-}" ] && echo "# TODO: refactor usage" && return 1
 
-	if [ -z "${3:-}" ]; then
-		ls -Ahl "$_TARGET_DIR"
-	else
-		sudo "$EDITOR" "$_TARGET_DIR/$3"
-	fi
+	readonly _ITEM="$(_select_target_dir "${2:-?}")/${3:-}"
+	sudoedit "$_ITEM"
 }
 portage_help() {
 	echo "Usage:"

@@ -4,7 +4,9 @@
 # Session back-end
 sys-apps/dbus
 sys-auth/polkit
+x11-libs/libnotify
 sys-auth/hyprpolkitagent
+sys-apps/xdg-desktop-portal
 sys-apps/xdg-desktop-portal-gtk
 gui-libs/xdg-desktop-portal-hyprland
 
@@ -27,8 +29,9 @@ gui-apps/hyprlock
 gui-apps/wl-clipboard
 gui-apps/wl-clip-persist
 
-# Print screen
+# Screen capture
 gui-apps/grim
 gui-apps/slurp
 gui-apps/swappy
+gui-apps/wf-recorder
 

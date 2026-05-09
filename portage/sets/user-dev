@@ -1,12 +1,18 @@
 # THIS IS PORTAGE SETS FILE
 # FOR DEVELOPER PROGRAMS
 
-app-editors/vim
-app-editors/neovim
+# GIT GUD
 dev-vcs/git
 dev-vcs/lazygit
+# Terminal multiplexer
+app-misc/tmux
+# Editor
+app-editors/neovim
+# Mail client
+mail-client/neomutt
+# Language tools
+dev-lang/rust-bin
 dev-util/sh
 dev-util/shellcheck-bin
-dev-lang/rust-bin
 net-libs/nodejs
 
