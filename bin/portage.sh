@@ -1,11 +1,12 @@
 #!/bin/sh
-set -eu
-. "$HOME"/.local/lib/zsl || {
-	echo '[!!] zsl is missing'
+set -u
+readonly _CMD="portage"
+
+. "${HOME}/.local/lib/zsl" || {
+	echo "[!!] zsl is missing"
 	exit 1
 }
 zsl_need_command 'emerge'
-readonly _CMD="${0##*/}"
 
 readonly _PORTAGE_DIR='/etc/portage'
 
