@@ -10,6 +10,13 @@ zsl_need_command 'emerge'
 
 readonly _PORTAGE_DIR='/etc/portage'
 
+_no_args_second() {
+	if [ -z "${2:-}" ]; then
+		zsl_error "Nothing to $1 with $_CMD"
+		exit 1
+	fi
+}
+
 # pretend is mostly for testing
 _PRETEND=1
 _ASK=0
@@ -24,10 +31,6 @@ _emerge() {
 	else
 		sudo emerge --verbose "$1"
 	fi
-}
-
-_no_args_second() {
-	[ -z "${2:-}" ] && zsl_error "Nothing to $1 with $_CMD" || return 0
 }
 
 # PORTAGE SYNC
