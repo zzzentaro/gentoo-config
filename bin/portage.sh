@@ -51,13 +51,10 @@ portage_sync() {
 	zsl_info "Starting $_CMD $1"
 	sudo -v
 
-	for item in web_rsync emaint_sync health_check; do
-		sudo -v
-		zsl_info "Starting $item..." &&
-			_"$item" &&
-			zsl_success "$item complete!" ||
-			zsl_error "$item failed" && return 0
-	done
+	_web_rsync
+	_emaint_sync
+	_health_check
+
 	zsl_success "$_CMD $1 complete"
 }
 
