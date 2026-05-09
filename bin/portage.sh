@@ -109,21 +109,32 @@ portage_clean() {
 	sudo eclean-kernel
 }
 
-_find() {
-	zsl_success "Found entry(s) for ${1:-}"
+# PORTAGE FIND
+_search() {
+	zsl_info "Entry(s) for ${1:-}"
 	if command -v eix >/dev/null; then
-		eix "$2"
+		EIX_LIMIT=1 eix "$1"
 	else
-		emerge --search "$2"
+		emerge --search "$1"
 	fi
+
+}
+_query() {
 	if command -v equery >/dev/null; then
-		zsl_info "Flag(s) for $2"
-		equery u "$2"
+		zsl_info "Flag(s) for $1"
+		equery u "$1"
 	fi
+}
+_find() {
+	shift
+	for package in "$@"; do
+		_search "$package"
+		_query "$package"
+	done
 }
 portage_find() {
 	_need_second_args "$@"
-	_search "$@"
+	_find "$@"
 }
 
 # PORTAGE USEDESC
