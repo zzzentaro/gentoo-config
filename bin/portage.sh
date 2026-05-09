@@ -10,7 +10,7 @@ zsl_need_command 'emerge'
 
 readonly _PORTAGE_DIR='/etc/portage'
 
-_no_args_second() {
+_need_second_args() {
 	if [ -z "${2:-}" ]; then
 		zsl_error "Nothing to $1 with $_CMD"
 		exit 1
@@ -18,7 +18,7 @@ _no_args_second() {
 }
 
 # pretend is mostly for testing
-_PRETEND=1
+_PRETEND=0
 _ASK=0
 _emerge() {
 	if [ "$_PRETEND" -gt 0 ]; then
@@ -104,8 +104,8 @@ portage_clean() {
 	sudo eclean-kernel
 }
 
-portage_search_true() {
-	zsl_success "Found entry(s) for $2"
+_find() {
+	zsl_success "Found entry(s) for ${1:-}"
 	if command -v eix >/dev/null; then
 		eix "$2"
 	else
@@ -116,16 +116,20 @@ portage_search_true() {
 		equery u "$2"
 	fi
 }
-portage_search() {
-	_no_args_second "$@"
-	portage_search-true "$@"
+portage_find() {
+	_need_second_args "$@"
+	_search "$@"
 }
 
+# PORTAGE USEDESC
 portage_usedesc() {
+	_USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
 	if [ -z "${2:-}" ]; then
-		cat /var/db/repos/gentoo/profiles/use.desc
+		cat "$_USEDESC_FILE"
 	else
-		${rg:-grep} "$2" /var/db/repos/gentoo/profiles/use.desc
+		for flag in "$@"; do
+			${rg:-grep} "$flag" /var/db/repos/gentoo/profiles/use.desc
+		done
 	fi
 }
 
@@ -145,7 +149,7 @@ portage_repo() {
 }
 
 portage_merge() {
-	_no_args_second "$@"
+	_need_second_args "$@"
 
 	if command -v equery >/dev/null; then
 		equery u "$2"
@@ -154,7 +158,7 @@ portage_merge() {
 }
 
 portage_unmerge() {
-	_no_args_second "$@"
+	_need_second_args "$@"
 
 	sudo emerge --ask --deselect "$2" && sudo emerge --depclean
 }
