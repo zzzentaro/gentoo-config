@@ -1,12 +1,16 @@
 #!/bin/sh
-# This script is mostly for personal use and destructive
-# Back-up your own stuff <3
+# This script is for personal use and destructive
+# Back-up your stuff <3
 set -eu
 
-is_root() { [ "$(id -u)" -eq 0 ]; }
-is_root && echo "[ !! ] Do not run as root" && exit 1
-has_home() { [ -e "$HOME" ]; }
-has_home || { echo '[ !! ] $HOME not found' && exit 1; }
+if [ "$(id -u)" -eq 0 ]; then
+	echo "[ !! ] Do not run as root"
+	exit 1
+fi
+if [ -z "$HOME" ]; then
+	echo '[ !! ] HOME not found'
+	exit 1
+fi
 
 _HERE="$(cd "$(dirname "$0")" && pwd)"
 readonly _HERE
