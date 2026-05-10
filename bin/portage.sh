@@ -219,9 +219,6 @@ EOF
 readonly _FINAL_CMD="${_CMD}_${1:-help}"
 if command -v "$_FINAL_CMD" >/dev/null; then
 	"$_FINAL_CMD" "$@"
-	exit 0
 else
 	portage_help
-	ping -c 3 gentoo.org
-	exit 1
 fi
