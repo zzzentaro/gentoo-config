@@ -16,3 +16,6 @@ dev-util/sh
 dev-util/shellcheck-bin
 net-libs/nodejs
 
+# Gentoo
+dev-util/pkgdev
+
