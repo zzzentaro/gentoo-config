@@ -17,7 +17,7 @@ _need_second_args() {
 	fi
 }
 _start() {
-	zsl_info "Starting $_CMD $1 ..."
+	zsl_info "Initialise ${_CMD:-} ${1:-} ..."
 	sudo -v
 }
 # pretend is mostly for testing
@@ -51,7 +51,7 @@ _health_check() {
 	sudo emaint --fix all
 }
 portage_sync() {
-	_start
+	_start "$1"
 
 	_web_rsync
 	_emaint_sync
@@ -78,7 +78,7 @@ _try_revdep_rebuild() {
 
 }
 portage_rebuild() {
-	_start
+	_start "$1"
 
 	for item in @preserved-rebuild @module-rebuild; do
 		sudo -v
@@ -92,13 +92,13 @@ portage_rebuild() {
 
 # #PORTAGE UPDATE
 portage_update() {
-	_start
+	_start "$1"
 	sudo emerge --verbose --ask --update --newuse --deep --with-bdeps=y --tree @world
 }
 
 # PORTAGE CLEAN
 portage_clean() {
-	_start
+	_start "$1"
 
 	sudo emerge --ask --depclean
 	sudo -v
