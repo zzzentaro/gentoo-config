@@ -206,11 +206,14 @@ portage_edit() {
 	readonly _ITEM="$(_select_target_dir "${2:-?}")/${3:-}"
 	sudoedit "$_ITEM"
 }
+
 portage_help() {
-	echo "Usage:"
-	echo "   $_CMD < sync | rebuild | update | clean >"
-	echo "   $_CMD [ search | usedesc | kernel | repo ] [ ... ]"
-	echo "   $_CMD [ merge | unmerge | edit ] [ ... ]"
+	cat <<EOF
+Usage:
+    $_CMD < sync | rebuild | update | clean | repo >
+    $_CMD [ search | usedesc | kernel | repo ] [ ... ]
+    $_CMD [ merge | unmerge | edit ] [ ... ]"
+EOF
 }
 
 readonly _FINAL_CMD="${_CMD}_${1:-help}"
