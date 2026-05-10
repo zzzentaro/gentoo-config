@@ -25,14 +25,14 @@ _PRETEND=0
 _ASK=0
 _emerge() {
 	if [ "$_PRETEND" -gt 0 ]; then
-		sudo emerge --verbose --pretend "$1"
+		sudo emerge --verbose --pretend "$@"
 		return
 	fi
 
 	if [ "$_ASK" -gt 0 ]; then
-		sudo emerge --verbose --ask "$1"
+		sudo emerge --verbose --noreplace --autounmask --ask "$@"
 	else
-		sudo emerge --verbose "$1"
+		sudo emerge --verbose --noreplace --autounmask "$@"
 	fi
 }
 
@@ -166,11 +166,9 @@ portage_repo() {
 
 portage_merge() {
 	_need_second_args "$@"
-
-	if command -v equery >/dev/null; then
-		equery u "$2"
-	fi
-	sudo emerge --verbose --ask --autounmask "$2"
+	shift
+	_ASK=1
+	_emerge "$@"
 }
 
 portage_unmerge() {
@@ -201,9 +199,9 @@ _select_target_dir() {
 }
 portage_edit() {
 	[ -z "${2:-}" ] && _edit_make_conf && return
-	[ -z "${3:-}" ] && echo "# TODO: refactor usage" && return 1
+	[ -z "${3:-}" ] && ls -Ahl "$(_select_target_dir "${2:?}")/" && return 1
 
-	readonly _ITEM="$(_select_target_dir "${2:-?}")/${3:-}"
+	readonly _ITEM="$(_select_target_dir "${2:?}")/${3:-}"
 	sudoedit "$_ITEM"
 }
 
