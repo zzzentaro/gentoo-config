@@ -40,6 +40,9 @@ alias gc='cd ~/gentoo-config/ && lazygit'
 alias fmtsh='shfmt -w -s'
 alias cksh='shellcheck -s sh'
 
+## Gentoo
+alias manifest-ebuild='sudo pkgdev manifest && mine .'
+
 # Control
 alias scr='brightnessctl set'
 pps() {
