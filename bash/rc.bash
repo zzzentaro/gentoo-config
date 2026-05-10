@@ -26,6 +26,8 @@ alias free='free -h'
 
 alias clip='wl-copy'
 
+alias mine='sudo chown -R $(id -un):$(id -gn)'
+
 # Devel
 alias e="$EDITOR"
 alias es="sudoedit"
