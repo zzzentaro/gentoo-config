@@ -8,8 +8,6 @@ dev-vcs/lazygit
 app-misc/tmux
 # Editor
 app-editors/neovim
-# Mail client
-mail-client/neomutt
 # Language tools
 dev-lang/rust-bin
 dev-util/sh
