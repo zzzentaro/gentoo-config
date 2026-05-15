@@ -36,3 +36,7 @@ media-gfx/imagemagick
 media-video/pipewire
 media-video/wireplumber
 
+# Font
+media-fonts/noto
+media-fonts/noto-cjk
+media-fonts/noto-emoji

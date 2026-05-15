@@ -17,7 +17,7 @@ _need_second_args() {
 	fi
 }
 _start() {
-	zsl_info "Starting $_CMD $1 ..."
+	zsl_info "Initialise ${_CMD:-} ${1:-} ..."
 	sudo -v
 }
 # pretend is mostly for testing
@@ -25,14 +25,14 @@ _PRETEND=0
 _ASK=0
 _emerge() {
 	if [ "$_PRETEND" -gt 0 ]; then
-		sudo emerge --verbose --pretend "$1"
+		sudo emerge --verbose --pretend "$@"
 		return
 	fi
 
 	if [ "$_ASK" -gt 0 ]; then
-		sudo emerge --verbose --ask "$1"
+		sudo emerge --verbose --noreplace --autounmask --ask "$@"
 	else
-		sudo emerge --verbose "$1"
+		sudo emerge --verbose --noreplace --autounmask "$@"
 	fi
 }
 
@@ -51,7 +51,7 @@ _health_check() {
 	sudo emaint --fix all
 }
 portage_sync() {
-	_start
+	_start "$1"
 
 	_web_rsync
 	_emaint_sync
@@ -78,7 +78,7 @@ _try_revdep_rebuild() {
 
 }
 portage_rebuild() {
-	_start
+	_start "$1"
 
 	for item in @preserved-rebuild @module-rebuild; do
 		sudo -v
@@ -92,13 +92,13 @@ portage_rebuild() {
 
 # #PORTAGE UPDATE
 portage_update() {
-	_start
+	_start "$1"
 	sudo emerge --verbose --ask --update --newuse --deep --with-bdeps=y --tree @world
 }
 
 # PORTAGE CLEAN
 portage_clean() {
-	_start
+	_start "$1"
 
 	sudo emerge --ask --depclean
 	sudo -v
@@ -166,11 +166,9 @@ portage_repo() {
 
 portage_merge() {
 	_need_second_args "$@"
-
-	if command -v equery >/dev/null; then
-		equery u "$2"
-	fi
-	sudo emerge --verbose --ask --autounmask "$2"
+	shift
+	_ASK=1
+	_emerge "$@"
 }
 
 portage_unmerge() {
@@ -201,24 +199,24 @@ _select_target_dir() {
 }
 portage_edit() {
 	[ -z "${2:-}" ] && _edit_make_conf && return
-	[ -z "${3:-}" ] && echo "# TODO: refactor usage" && return 1
+	[ -z "${3:-}" ] && ls -Ahl "$(_select_target_dir "${2:?}")/" && return 1
 
-	readonly _ITEM="$(_select_target_dir "${2:-?}")/${3:-}"
+	readonly _ITEM="$(_select_target_dir "${2:?}")/${3:-}"
 	sudoedit "$_ITEM"
 }
+
 portage_help() {
-	echo "Usage:"
-	echo "   $_CMD < sync | rebuild | update | clean >"
-	echo "   $_CMD [ search | usedesc | kernel | repo ] [ ... ]"
-	echo "   $_CMD [ merge | unmerge | edit ] [ ... ]"
+	cat <<EOF
+Usage:
+    $_CMD < sync | rebuild | update | clean | repo >
+    $_CMD [ search | usedesc | kernel | repo ] [ ... ]
+    $_CMD [ merge | unmerge | edit ] [ ... ]"
+EOF
 }
 
 readonly _FINAL_CMD="${_CMD}_${1:-help}"
 if command -v "$_FINAL_CMD" >/dev/null; then
 	"$_FINAL_CMD" "$@"
-	exit 0
 else
 	portage_help
-	ping -c 3 gentoo.org
-	exit 1
 fi

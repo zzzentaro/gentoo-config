@@ -26,6 +26,8 @@ alias free='free -h'
 
 alias clip='wl-copy'
 
+alias mine='sudo chown -R $(id -un):$(id -gn)'
+
 # Devel
 alias e="$EDITOR"
 alias es="sudoedit"
@@ -34,9 +36,13 @@ alias nmutt='neomutt'
 alias z='tmux attach || tmux'
 alias g='git'
 alias lg='lazygit'
-alias gc='cd ~/gentoo-config/ && lazygit'
+alias lgs='sudo -E lazygit'
+alias gc='cd ~/gentoo-config'
 alias fmtsh='shfmt -w -s'
 alias cksh='shellcheck -s sh'
+
+## Gentoo
+alias manifest-ebuild='sudo pkgdev manifest && mine .'
 
 # Control
 alias scr='brightnessctl set'
