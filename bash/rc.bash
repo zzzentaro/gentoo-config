@@ -106,7 +106,7 @@ vol() {
 # Portage, The Heart of Gentoo!
 alias p='portage'
 alias psy='portage sync'
-alias p-+='portage rebuild; steambrew'
+alias p-+='portage rebuild'
 alias p++='portage update'
 alias p--='portage clean'
 alias pf='portage find'
