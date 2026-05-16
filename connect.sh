@@ -46,7 +46,7 @@ readonly _BIN_DIR="$_LOCAL_DIR/bin"
 readonly _STORE_BIN_DIR="$_HERE/bin"
 connect_bin() {
 	mkdir -p "$_BIN_DIR"
-	for item in cp-kernels boot-chore nvidia-offload portage portage-sets-refresh rc-user menu steambrew osu-update; do
+	for item in menu nvidia-offload portage cycle portage-sets-refresh rc-user install-millennium install-osu; do
 		rm -f "$_BIN_DIR/$item"
 		chmod +x "$_STORE_BIN_DIR/$item.sh"
 		ln -sfn "$_STORE_BIN_DIR/$item.sh" "$HOME/.local/bin/$item"
@@ -76,7 +76,6 @@ connect_pictures() {
 # Kernellations
 connect_linux() {
 	readonly _STORE_LINUX_DIR="$_HERE/linux"
-	sudo chown -R root:root "$_STORE_LINUX_DIR"
 	sudo ln -sfn "$_STORE_LINUX_DIR/kernel.conf" /etc/kernel.conf
 }
 
@@ -84,9 +83,6 @@ connect_linux() {
 connect_portage() {
 	readonly _PORTAGE_DIR="/etc/portage"
 	readonly _STORE_PORTAGE_DIR="$_HERE/portage"
-
-	sudo chown -R root:root "$_STORE_PORTAGE_DIR"
-	sudo chown -R root:root "$_PORTAGE_DIR"
 
 	for item in make.conf repos.conf sets; do
 		sudo rm -rf "${_PORTAGE_DIR:?}/$item"
