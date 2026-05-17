@@ -105,17 +105,8 @@ vol() {
 
 # Portage, The Heart of Gentoo!
 alias p='portage'
-alias psy='portage sync'
-alias p-+='portage rebuild'
-alias p++='portage update'
-alias p--='portage clean'
-alias pf='portage find'
-alias pu='portage usedesc'
-alias pk='portage kernel'
-alias prp='portage repo'
-alias p+='portage merge'
-alias p-='portage unmerge'
-alias pe='portage edit'
+
+alias cycle='portage sync; portage rebuild; portage update; portage fix; portage clean'
 
 alias etup='sudo etc-update'
 alias enup='sudo env-update'
