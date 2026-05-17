@@ -1,6 +1,6 @@
 #
 # Automatically generated file; DO NOT EDIT.
-# Linux/x86 7.0.5-zen1 Kernel Configuration
+# Linux/x86 7.0.8-zen Kernel Configuration
 #
 CONFIG_CC_VERSION_TEXT="gcc (Gentoo 15.2.1_p20260214 p5) 15.2.1 20260214"
 CONFIG_CC_IS_GCC=y
@@ -7042,21 +7042,3 @@ CONFIG_ARCH_USE_MEMTEST=y
 
 CONFIG_IO_URING_ZCRX=y
 CONFIG_IO_URING_BPF=y
-
-#
-# Gentoo Linux
-#
-CONFIG_GENTOO_LINUX=y
-CONFIG_GENTOO_LINUX_UDEV=y
-CONFIG_GENTOO_LINUX_PORTAGE=y
-
-#
-# Support for init systems, system and service managers
-#
-CONFIG_GENTOO_LINUX_INIT_SCRIPT=y
-# CONFIG_GENTOO_LINUX_INIT_SYSTEMD is not set
-# end of Support for init systems, system and service managers
-
-CONFIG_GENTOO_KERNEL_SELF_PROTECTION=y
-CONFIG_GENTOO_PRINT_FIRMWARE_INFO=y
-# end of Gentoo Linux

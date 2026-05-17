@@ -15,7 +15,6 @@ net-misc/chrony
 
 # Kernel
 sys-kernel/gentoo-kernel-bin
-sys-kernel/zen-sources
 sys-kernel/linux-firmware
 sys-firmware/intel-microcode
 sys-firmware/sof-firmware
@@ -40,3 +39,4 @@ media-video/wireplumber
 media-fonts/noto
 media-fonts/noto-cjk
 media-fonts/noto-emoji
+
