@@ -34,7 +34,7 @@ readonly _LIB_DIR="$_LOCAL_DIR/lib"
 readonly _STORE_LIB_DIR="$_HERE/lib"
 connect_lib() {
 	mkdir -p "$_LIB_DIR"
-	for item in zsl; do
+	for item in zxy; do
 		rm -f "$_LIB_DIR/$item"
 		chmod -x "$_STORE_LIB_DIR/$item.sh"
 		ln -sfn "$_STORE_LIB_DIR/$item.sh" "$_LIB_DIR/$item"
