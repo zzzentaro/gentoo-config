@@ -403,7 +403,11 @@ hl.window_rule({
 	border_color = theme.tertiary,
 })
 
-hl.window_rule({ match = { class = "Waydroid" }, workspace = "9 silent" })
+hl.window_rule({
+	match = { class = "Waydroid" },
+	workspace = "9 silent",
+	fullscreen = true,
+})
 hl.window_rule({
 	match = { title = "Honkai: Star Rail" },
 	workspace = "9 silent",
