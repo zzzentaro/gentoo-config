@@ -33,16 +33,18 @@ zxy_log() {
 	__MSG="$1"
 	__CODE="${2:-0}"
 
-	if [ "$__CODE" -gt 0 ]; then
+	__KEY='--'
+	__COLOUR="$BLUE"
+	if [ "$__CODE" -eq 1 ] || [ "$__CODE" -eq 3 ]; then
 		__COLOUR="$RED"
 		__KEY='!!'
-	else
-
-		__COLOUR="$BLUE"
-		__KEY='--'
 	fi
 
-	printf '%s %s %s%s\n' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+	if [ "$__CODE" -eq 2 ] || [ "$__CODE" -eq 3 ]; then
+		printf '%s %s %s%s' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+	else
+		printf '%s %s %s%s\n' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+	fi
 }
 
 zxy_is_root() {
@@ -65,8 +67,15 @@ zxy_need_home() {
 	fi
 }
 zxy_need_command() {
-	if ! command -v "$1" >/dev/null; then
-		zxy_log "Missing dependency: $1"
-		exit 1
-	fi
+	__MISSING=''
+	for cmd in "$@"; do
+		if ! command -v "$cmd" >/dev/null 2>&1; then
+			__MISSING="$__MISSING $cmd"
+		fi
+	done
+
+	[ -z "$__MISSING" ] && return 0
+
+	zxy_log "Missing dependencies:$__MISSING" 1
+	exit 1
 }
