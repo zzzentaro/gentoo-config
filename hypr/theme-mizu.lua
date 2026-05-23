@@ -58,17 +58,17 @@ local muted = surface2
 local secondary = yellow
 
 local THEME = {
-    primary = primary,
-    primaryAlpha = primaryAlpha,
-    muted = muted,
-    secondary = secondary,
+	primary = primary,
+	primaryAlpha = primaryAlpha,
+	muted = muted,
+	secondary = secondary,
 }
 
 hl.env("XCURSOR_THEME", "BreezeX-RosePineDawn")
-hl.env("XCURSOR_SIZE", "48")
+hl.env("XCURSOR_SIZE", 48)
 
 hl.env("HYPRCURSOR_THEME", "rose-pine-dawn-hyprcursor")
-hl.env("HYPRCURSOR_SIZE", "48")
+hl.env("HYPRCURSOR_SIZE", 48)
 
 hl.env("GTK_THEME", "RosePine")
 
