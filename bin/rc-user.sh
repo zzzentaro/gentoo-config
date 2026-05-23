@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
 
-. "${HOME}/.local/lib/zsl" || {
-	echo "[!!] zsl is missing"
+. "${HOME}/.local/lib/zxy" || {
+	echo "[!!] zxy is missing"
 	exit 1
 }
 
@@ -10,17 +10,17 @@ rc_user_conserve() {
 	readonly _TARGET_FILE='/sys/bus/platform/drivers/ideapad_acpi/VPC2004:00/conservation_mode'
 
 	if [ ! -f "$_TARGET_FILE" ]; then
-		zsl_error "Conservation mode path not found. Is ideapad_acpi module loaded?"
+		zxy_log "Conservation mode path not found. Is ideapad_acpi module loaded?"
 		exit 1
 	fi
 
 	_CONSERVE_STATUS="$(cat "$_TARGET_FILE")"
 	if [ "$_CONSERVE_STATUS" -eq 0 ]; then
 		echo 1 | sudo tee "$_TARGET_FILE" >/dev/null
-		zsl_success "Battery conservation mode is now ENABLED! It will charge to around 80%!!"
+		zxy_log "Battery conservation mode is now ENABLED! It will charge to around 80%!!"
 	else
 		echo 0 | sudo tee "$_TARGET_FILE" >/dev/null
-		zsl_success "Battery conservation mode is now DISABLED! It will charge to full capacity!!"
+		zxy_log "Battery conservation mode is now DISABLED! It will charge to full capacity!!"
 	fi
 }
 
@@ -48,7 +48,7 @@ rc_user_mode() {
 		brightnessctl set 20%
 		powerprofilesctl set power-saver
 		;;
-	*) zsl_error "no mode chosen" ;;
+	*) zxy_log "no mode chosen" ;;
 	esac
 }
 
@@ -57,6 +57,6 @@ if command -v "rc_user_${1:-}" >/dev/null; then
 	"$_cmd" "$@"
 	exit 0
 else
-	zsl_error
+	zxy_log
 	exit 1
 fi
