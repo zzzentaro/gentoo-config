@@ -46,7 +46,7 @@ readonly _BIN_DIR="$_LOCAL_DIR/bin"
 readonly _STORE_BIN_DIR="$_HERE/bin"
 connect_bin() {
 	mkdir -p "$_BIN_DIR"
-	for item in menu nvidia-offload portage cycle portage-sets-refresh rc-user install-millennium install-osu; do
+	for item in zen-kernel menu nvidia-offload portage portage-sets-refresh rc-user install-millennium install-osu; do
 		rm -f "$_BIN_DIR/$item"
 		chmod +x "$_STORE_BIN_DIR/$item.sh"
 		ln -sfn "$_STORE_BIN_DIR/$item.sh" "$HOME/.local/bin/$item"
