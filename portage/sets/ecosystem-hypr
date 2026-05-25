@@ -12,6 +12,7 @@ gui-libs/xdg-desktop-portal-hyprland
 
 # The window manager
 gui-wm/hyprland
+gui-apps/hyprshutdown
 # Wallpaper daemon
 gui-apps/hyprpaper
 # Terminal emulator
