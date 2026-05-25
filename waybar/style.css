@@ -1,4 +1,4 @@
-@import "theme-mizu.css";
+@import "theme.css";
 
 /* - > reset - */
 * {
@@ -28,7 +28,7 @@ button,
     background: @surface;
     color: @text;
     padding: 0 18px 0 10px;
-    border: 2px solid @surface;
+    border: 2px solid @muted;
 }
 #clock {
     padding: 0 16px;

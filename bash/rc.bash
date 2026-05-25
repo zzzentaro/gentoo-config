@@ -106,7 +106,8 @@ vol() {
 # Portage, The Heart of Gentoo!
 alias p='portage'
 
-alias cycle='portage sync; portage rebuild; portage update; portage fix; portage clean'
+alias cycle='portage sync; sudo -v; portage fix; sudo -v; portage clean'
+alias recycle='portage sync; sudo -v; portage rebuild; sudo -v; portage update; sudo -v portage fix; sudo -v; portage clean'
 
 alias etup='sudo etc-update'
 alias enup='sudo env-update'
@@ -122,6 +123,8 @@ alias ff='fastfetch'
 ## Waydroid
 alias wd-stop='sudo waydroid session stop && sudo rc-service waydroid stop'
 alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-ui'
+
+alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
 
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"

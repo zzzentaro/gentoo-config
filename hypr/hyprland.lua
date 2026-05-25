@@ -1,5 +1,4 @@
 -- THIS IS A HYPRLAND WM CONFIG FILE
-local theme = require("./theme")
 
 -- Connected device
 hl.monitor({
@@ -20,29 +19,35 @@ hl.config({
 })
 
 -- Start hyprland
+hl.on("hyprland.start", function()
+	hl.exec_cmd("pipewire & pipewire-pulse & wireplumber &")
+	hl.exec_cmd(
+		"waybar & hyprpaper & mako & wl-clip-persist --clipboard regular &"
+	)
+	-- 3) Reset settings
+	hl.exec_cmd("brightnessctl set 10% % & powerprofilesctl set power-saver")
+end)
+local theme = require("./theme")
 
 -- Export graphics variables
-hl.env("LIBVA_DRIVER_NAME", "iHD")
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "--[[nvidia]]")
-hl.env("__VK_LAYER_NV_optimus", "NVIDIA_only")
-hl.env("__NV_PRIME_RENDER_OFFLOAD_PROVIDER", "NVIDIA-GO")
-hl.env("__NV_PRIME_RENDER_OFFLOAD", "0")
+hl.env("__EGL_VENDOR_LIBRARY_DIRS", "/usr/share/glvnd/egl_vendor.d")
+hl.env(
+	"__EGL_VENDOR_LIBRARY_FILENAMES",
+	"/usr/share/glvnd/egl_vendor.d/50_mesa.json"
+)
+hl.env("VK_ICD_FILENAMES", "/usr/share/vulkan/icd.d/intel_icd.x86_64.json")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
+hl.env("GBM_BACKEND", "nvidia-drm") -- nvidia-drm
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia") -- nvidia
+hl.env("__VK_LAYER_NV_optimus", "NVIDIA_only") -- NVIDIA_only
+hl.env("__NV_PRIME_RENDER_OFFLOAD_PROVIDER", "NVIDIA-GO") -- NVIDIA-GO
+hl.env("__NV_PRIME_RENDER_OFFLOAD", "1")
 
 -- Export toolkit backed variables
 hl.env("GDK_BACKEND", "wayland,x11,*")
 hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("SDL_VIDEODRIVER", "wayland")
 hl.env("CLUTTER_BACKEND", "wayland")
-
-hl.on("hyprland.start", function()
-	hl.exec_cmd("pipewire & pipewire-pulse & wireplumber")
-	hl.exec_cmd(
-		"waybar & hyprpaper & mako & wl-clip-persist --clipboard regular"
-	)
-	-- 3) Reset settings
-	hl.exec_cmd("brightnessctl set 10% % & powerprofilesctl set power-saver")
-end)
 
 -- Bind
 local MOD = "SUPER"
