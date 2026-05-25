@@ -23,7 +23,6 @@ local THEME = {
 	tertiary = "rgb(" .. iris .. ")",
 }
 
-hl.exec_cmd("hyprctl hyprpaper wallpaper ,~/Pictures/Wallpapers/kanaria.png")
 hl.env("XCURSOR_THEME", "BreezeX-RosePineDawn")
 hl.env("XCURSOR_SIZE", 48)
 hl.env("HYPRCURSOR_THEME", "rose-pine-dawn-hyprcursor")
