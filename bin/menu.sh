@@ -9,12 +9,12 @@ menu_power() {
 		fuzzel --dmenu -I -a top -l 4 -w 16 --prompt="󰦄 " --placeholder="Is it over?")
 	case "$_POWER_OPTION" in
 	*Retreat*)
-		exit_wm
-		loginctl poweroff
+		exit_wm &&
+			loginctl poweroff
 		;;
 	*Retry*)
-		exit_wm
-		loginctl reboot
+		exit_wm &&
+			loginctl reboot
 		;;
 	*Pause*) exit_wm ;;
 	*) menu ;;
