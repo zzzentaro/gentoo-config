@@ -106,8 +106,8 @@ vol() {
 # Portage, The Heart of Gentoo!
 alias p='portage'
 
-alias cycle='portage sync; sudo -v; portage fix; sudo -v; portage clean'
-alias recycle='portage sync; sudo -v; portage rebuild; sudo -v; portage update; sudo -v portage fix; sudo -v; portage clean'
+alias cycle='portage sync; portage update; portage fix; portage clean'
+alias recycle='portage sync; portage rebuild; portage update; portage fix; portage clean'
 
 alias etup='sudo etc-update'
 alias enup='sudo env-update'
