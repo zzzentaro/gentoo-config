@@ -46,7 +46,7 @@ readonly _BIN_DIR="$_LOCAL_DIR/bin"
 readonly _STORE_BIN_DIR="$_HERE/bin"
 connect_bin() {
 	mkdir -p "$_BIN_DIR"
-	for item in zen-kernel menu nvidia-offload portage portage-sets-refresh rc-user install-millennium install-osu; do
+	for item in zen-kernel theme menu nvidia-offload portage portage-sets-refresh rc-user install-millennium install-osu; do
 		rm -f "$_BIN_DIR/$item"
 		chmod +x "$_STORE_BIN_DIR/$item.sh"
 		ln -sfn "$_STORE_BIN_DIR/$item.sh" "$HOME/.local/bin/$item"
@@ -67,10 +67,14 @@ connect_config() {
 	_connect_config_extra
 }
 
-# Wallpaper
+# Wallpapers
+readonly _STORE_ASSETS_DIR="$_HERE/assets"
+readonly _WALLPAPER_DIR="$HOME/Pictures/wallpapers"
 connect_pictures() {
-	mkdir -p "$HOME"/Pictures/Wallpapers
-	ln -sfn "$_HERE"/Pictures/Wallpapers/lemuen-panels.png "$HOME"/Pictures/Wallpapers/lemuen-panels.png
+	mkdir -p "$_WALLPAPER_DIR"
+	for wallpaper in gentoo.png wallpaper-mizu wallpaper-garnet lemuen.png; do
+		ln -sfn "$_STORE_ASSETS_DIR/$wallpaper" "$_WALLPAPER_DIR/$wallpaper"
+	done
 }
 
 # Kernellations
