@@ -1,0 +1,77 @@
+#!/bin/sh
+set -eu
+. "$HOME/.local/lib/zxy" || {
+	printf " !! zxy is missing\n"
+	exit 1
+}
+readonly _CONFIG="$HOME/.config"
+
+readonly _THEME="${1:-}"
+if [ -z "$_THEME" ]; then
+	zxy_log 'No theme given' 2
+fi
+
+theme_log() {
+	__ITEM="$1"
+	if [ -z "$__ITEM" ]; then
+		zxy_log 'No item given' 1
+	fi
+
+	__CODE="${2:-0}"
+	if [ "$__CODE" -eq 0 ]; then
+		zxy_log "Theme $_THEME set for $__ITEM" "$__CODE"
+	else
+		zxy_log "Theme $_THEME not set for $__ITEM" "$__CODE"
+	fi
+}
+
+symlink_theme() {
+	__ITEM="$1"
+	__TARGET="$2"
+	__LINK="$3"
+
+	if [ -f "$__TARGET" ]; then
+		ln -sfn "$__TARGET" "$__LINK"
+		theme_log "$__ITEM"
+	else
+		theme_log "$__ITEM" 1 || true
+	fi
+}
+
+readonly _ALACRITTY_DIR="$_CONFIG/alacritty"
+symlink_theme 'Alacritty' \
+	"$_ALACRITTY_DIR/theme-$_THEME.toml" \
+	"$_ALACRITTY_DIR/theme.toml"
+
+readonly _FASTFETCH_DIR="$_CONFIG/fastfetch"
+symlink_theme 'Fastfetch' \
+	"$_FASTFETCH_DIR/config-$_THEME.jsonc" \
+	"$_FASTFETCH_DIR/config.jsonc"
+
+readonly _FUZZEL_DIR="$_CONFIG/fuzzel"
+symlink_theme 'Fuzzel' \
+	"$_FUZZEL_DIR/theme-$_THEME.ini" \
+	"$_FUZZEL_DIR/theme.ini"
+
+readonly _HYPR_DIR="$_CONFIG/hypr"
+symlink_theme 'Hyprland' \
+	"$_HYPR_DIR/theme-$_THEME.lua" \
+	"$_HYPR_DIR/theme.lua"
+
+readonly _WALLPAPER_DIR="$HOME/Pictures/wallpapers"
+symlink_theme 'Hyprpaper' \
+	"$_WALLPAPER_DIR/wallpaper-$_THEME" \
+	"$_WALLPAPER_DIR/wallpaper"
+
+readonly _OMP_DIR="$_CONFIG/oh-my-posh"
+symlink_theme 'Oh My Posh' \
+	"$_OMP_DIR/config-$_THEME.jsonc" \
+	"$_OMP_DIR/config.jsonc"
+
+readonly _WAYBAR_DIR="$_CONFIG/waybar"
+symlink_theme 'Waybar' \
+	"$_WAYBAR_DIR/theme-$_THEME.css" \
+	"$_WAYBAR_DIR/theme.css"
+
+zxy_log 'Reload desktop'
+hyprctl reload

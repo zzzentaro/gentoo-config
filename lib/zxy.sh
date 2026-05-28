@@ -28,22 +28,36 @@ else
 fi
 
 zxy_log() {
-	[ -z "$1" ] && return 1
-
 	__MSG="$1"
-	__CODE="${2:-0}"
+	if [ -z "$__MSG" ]; then
+		zxy_log "No message to log" 1
+		return 1
+	fi
 
-	__KEY='--'
+	__CODE="${2:-0}"
+	case "$__CODE" in
+	'')
+		zxy_log "No code given" 1
+		return 1
+		;;
+	*[!0-9]*)
+		zxy_log "Code is not an integer" 1
+		return 1
+		;;
+	esac
+
 	__COLOUR="$BLUE"
-	if [ "$__CODE" -eq 1 ] || [ "$__CODE" -eq 3 ]; then
+	__KEY='--'
+	if [ "$__CODE" -gt 0 ]; then
 		__COLOUR="$RED"
 		__KEY='!!'
 	fi
 
-	if [ "$__CODE" -eq 2 ] || [ "$__CODE" -eq 3 ]; then
-		printf '%s %s %s%s' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+	printf '%s %s %s%s\n' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+	if [ "$__CODE" -gt 1 ]; then
+		exit 1
 	else
-		printf '%s %s %s%s\n' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
+		return "$__CODE"
 	fi
 }
 
