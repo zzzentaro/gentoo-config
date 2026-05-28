@@ -45,8 +45,8 @@ linkin() { # link (inside) + log
 	__to="$2"
 
 	if [ "$#" -ge 3 ]; then
-		readonly __ro_from="$__from"
-		readonly __ro_to="$__to"
+		__ro_from="$__from"
+		__ro_to="$__to"
 
 		shift 2
 		for item in "$@"; do
@@ -61,18 +61,18 @@ linkin() { # link (inside) + log
 
 # XDG_CONFIG_HOME
 readonly _MY_CONFIG_STORE="$_MY_STORE/config"
-readonly _CONFIG_HOME="$HOME/.config"
-mkdir -p -- "$_CONFIG_HOME"
 
 ## Bash is special
-log '-- Bourne Again SHell'
+log 'CONNECTING BASH...' 1 || true
 _bash_store="$_MY_CONFIG_STORE/bash"
 _bash_home="$HOME"
 linkin "$_bash_store/profile.bash" "$_bash_home/.bash_profile"
 linkin "$_bash_store/bashrc.bash" "$_bash_home/.bashrc"
 linkin "$_bash_store/logout.bash" "$_bash_home/.bash_logout"
 
-log '-- XDG_CONFIG_HOME'
+log 'CONNECTING CONFIG...' 1 || true
+readonly _CONFIG_HOME="$HOME/.config"
+mkdir -p -- "$_CONFIG_HOME"
 linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
 	alacritty \
 	fastfetch \
@@ -87,3 +87,21 @@ linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
 #swaylock \
 #vesktop \
 #yazi
+
+log 'CONNECTING LOCAL...' 1 || true
+readonly _lib_store="$_MY_STORE/local/lib" _lib_home="$HOME/.local/lib"
+readonly _bin_store="$_MY_STORE/local/bin" _bin_home="$HOME/.local/bin"
+mkdir -p -- "$_lib_home" "$_bin_home"
+
+linkin "$_lib_store" "$_lib_home" zxy
+linkin "$_bin_store" "$_bin_home" \
+	install-millennium \
+	install-osu \
+	menu \
+	nvidia-offload \
+	portage \
+	portage-sets-refresh \
+	rc-user \
+	theme \
+	uninstall-millennium \
+	zen-kernel
