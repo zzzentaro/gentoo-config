@@ -24,7 +24,7 @@ alias rm='rm -i'
 alias df='df -h'
 alias free='free -h'
 
-alias clip='wl-copy'
+alias wcp='wl-copy'
 
 alias mine='sudo chown -R $(id -un):$(id -gn)'
 
