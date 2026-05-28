@@ -1,106 +1,106 @@
 #!/bin/sh
-# This script is for personal use and destructive
-# Back-up your stuff <3
+# THIS SCRIPT IS PERSONAL USE AND DESTRUCTIVE
 set -eu
 
-if [ "$(id -u)" -eq 0 ]; then
-	echo "[ !! ] Do not run as root"
-	exit 1
-fi
-if [ -z "$HOME" ]; then
-	echo '[ !! ] HOME not found'
-	exit 1
-fi
+log() {
+	__msg="$1"
+	[ -z "$__msg" ] && log 'Nothing to log' 1
 
+	__code="${2:-0}"
+	__key='--'
+	[ "$__code" -gt 0 ] && __key='!!'
+
+	printf ' %s %s\n' "$__key" "$__msg"
+	[ "$__code" -ge 2 ] && exit 1
+	return "$__code"
+}
+
+# Evaluate
+[ "$(id -u)" -eq 0 ] && log 'Do not run as root' 2
+[ -z "$HOME" ] && log 'HOME not found' 2
+
+# SETUP
 _HERE="$(cd "$(dirname "$0")" && pwd)"
 readonly _HERE
+readonly _MY_STORE="$_HERE/home/zentaro"
 
-sudo chown -R "$USER":"$USER" "$_HERE"
+backup() {
+	[ "$#" -lt 1 ] && log 'Nothing to backup' 1
 
-# Home directory item
-connect_home() {
-	ln -sfn "$_HERE"/bash/profile.bash "$HOME"/.bash_profile
-	ln -sfn "$_HERE"/bash/rc.bash "$HOME"/.bashrc
-	ln -sfn "$_HERE"/bash/logout.bash "$HOME"/.bash_logout
-	ln -sfn "$_HERE"/vim/rc.vim "$HOME"/.vimrc
-	ln -sfn "$_HERE"/.editorconfig "$HOME"/.editorconfig
-}
-
-# Local directory program
-readonly _LOCAL_DIR="$HOME/.local"
-
-## Library directory
-readonly _LIB_DIR="$_LOCAL_DIR/lib"
-readonly _STORE_LIB_DIR="$_HERE/lib"
-connect_lib() {
-	mkdir -p "$_LIB_DIR"
-	for item in zxy; do
-		rm -f "$_LIB_DIR/$item"
-		chmod -x "$_STORE_LIB_DIR/$item.sh"
-		ln -sfn "$_STORE_LIB_DIR/$item.sh" "$_LIB_DIR/$item"
+	__backup_dir="$_HERE/tmp"
+	mkdir -p -- "$__backup_dir"
+	for item in "$@"; do
+		log "Backup $item"
+		rm -rf -- "$__backup_dir/$(basename "$item")"
+		mv -- "$item" "$__backup_dir" || log "Failed to backup $item" 1
 	done
 }
+linkin() { # link (inside) + log
+	[ "$#" -lt 2 ] && log 'Not enough args' 1
 
-## Executable directory
-readonly _BIN_DIR="$_LOCAL_DIR/bin"
-readonly _STORE_BIN_DIR="$_HERE/bin"
-connect_bin() {
-	mkdir -p "$_BIN_DIR"
-	for item in zen-kernel theme menu nvidia-offload portage portage-sets-refresh rc-user install-millennium install-osu; do
-		rm -f "$_BIN_DIR/$item"
-		chmod +x "$_STORE_BIN_DIR/$item.sh"
-		ln -sfn "$_STORE_BIN_DIR/$item.sh" "$HOME/.local/bin/$item"
-	done
+	__from="$1"
+	[ ! -e "$__from" ] && log "$__from does not exist" 1
+
+	__to="$2"
+
+	if [ "$#" -ge 3 ]; then
+		__ro_from="$__from"
+		__ro_to="$__to"
+
+		shift 2
+		for item in "$@"; do
+			linkin "$__ro_from/$item" "$__ro_to/$item"
+		done
+	else
+		[ ! -L "$__to" ] && [ -e "$__to" ] && backup "$__to"
+		log "Link $(basename "$__from")"
+		ln -sfn -- "$__from" "$__to" || log "Failed to link $__from $__to" 1
+	fi
 }
 
-# Config directory (dotfiles)
-readonly _CONFIG_DIR="$HOME/.config"
-_connect_config_extra() {
-	mkdir -p "$_CONFIG_DIR"/vesktop/settings/
-	ln -sfn "$_HERE"/vesktop/settings/quickCss.css "$_CONFIG_DIR"/vesktop/settings/quickCss.css
-}
-connect_config() {
-	for item in hypr alacritty waybar mako fuzzel nvim fastfetch oh-my-posh; do
-		rm -rf "${_CONFIG_DIR:?}/$item"
-		ln -sfn "$_HERE/$item" "$_CONFIG_DIR/$item"
-	done
-	_connect_config_extra
-}
+# XDG_CONFIG_HOME
+readonly _MY_CONFIG_STORE="$_MY_STORE/config"
 
-# Wallpapers
-readonly _STORE_ASSETS_DIR="$_HERE/assets"
-readonly _WALLPAPER_DIR="$HOME/Pictures/wallpapers"
-connect_pictures() {
-	mkdir -p "$_WALLPAPER_DIR"
-	for wallpaper in gentoo.png wallpaper-mizu wallpaper-garnet lemuen.png; do
-		ln -sfn "$_STORE_ASSETS_DIR/$wallpaper" "$_WALLPAPER_DIR/$wallpaper"
-	done
-}
+## Bash is special
+log 'CONNECTING BASH...' 1 || true
+_bash_store="$_MY_CONFIG_STORE/bash"
+_bash_home="$HOME"
+linkin "$_bash_store/profile.bash" "$_bash_home/.bash_profile"
+linkin "$_bash_store/bashrc.bash" "$_bash_home/.bashrc"
+linkin "$_bash_store/logout.bash" "$_bash_home/.bash_logout"
 
-# Kernellations
-connect_linux() {
-	readonly _STORE_LINUX_DIR="$_HERE/linux"
-	sudo ln -sfn "$_STORE_LINUX_DIR/kernel.conf" /etc/kernel.conf
-}
+log 'CONNECTING CONFIG...' 1 || true
+readonly _CONFIG_HOME="$HOME/.config"
+mkdir -p -- "$_CONFIG_HOME"
+linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
+	alacritty \
+	fastfetch \
+	fuzzel \
+	hypr \
+	mako \
+	nvim \
+	oh-my-posh \
+	vim \
+	waybar
+#sway \
+#swaylock \
+#vesktop \
+#yazi
 
-# Portage, The Heart of Gentoo. Have you mooed today?
-connect_portage() {
-	readonly _PORTAGE_DIR="/etc/portage"
-	readonly _STORE_PORTAGE_DIR="$_HERE/portage"
+log 'CONNECTING LOCAL...' 1 || true
+readonly _lib_store="$_MY_STORE/local/lib" _lib_home="$HOME/.local/lib"
+readonly _bin_store="$_MY_STORE/local/bin" _bin_home="$HOME/.local/bin"
+mkdir -p -- "$_lib_home" "$_bin_home"
 
-	for item in make.conf repos.conf sets; do
-		sudo rm -rf "${_PORTAGE_DIR:?}/$item"
-		sudo ln -sfn "$_STORE_PORTAGE_DIR/$item" "$_PORTAGE_DIR/$item"
-	done
-}
-
-main() {
-	connect_home
-	connect_lib
-	connect_bin
-	connect_config
-	connect_pictures
-	connect_linux
-	command -v emerge >/dev/null && connect_portage
-}
-main
+linkin "$_lib_store" "$_lib_home" zxy
+linkin "$_bin_store" "$_bin_home" \
+	install-millennium \
+	install-osu \
+	menu \
+	nvidia-offload \
+	portage \
+	portage-sets-refresh \
+	rc-user \
+	theme \
+	uninstall-millennium \
+	zen-kernel

@@ -1,5 +1,5 @@
 [[ $- != *i* ]] && return
-# THIS IS A BASHRC FILE
+# THIS IS A BASHRC
 
 alias x='sync && exec bash'
 alias xx='sync && exit'
@@ -26,7 +26,7 @@ alias free='free -h'
 
 alias wcp='wl-copy'
 
-alias mine='sudo chown -R $(id -un):$(id -gn)'
+alias mine="chown -R $(id -un):$(id -gn) ${@:?}"
 
 # Devel
 alias e="$EDITOR"

@@ -1,4 +1,4 @@
-# Zentaro's eXecutables Yearn
+# Zentaro's eXecutables utilitY
 
 _disable_colours() {
 	unset ALL_OFF BOLD BLUE GREEN RED YELLOW
