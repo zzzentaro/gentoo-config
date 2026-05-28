@@ -22,7 +22,6 @@ log() {
 # SETUP
 _HERE="$(cd "$(dirname "$0")" && pwd)"
 readonly _HERE
-sudo chown -R "$USER":"$USER" "$_HERE"
 readonly _MY_STORE="$_HERE/home/zentaro"
 
 backup() {
