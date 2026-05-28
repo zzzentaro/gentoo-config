@@ -104,3 +104,10 @@ linkin "$_bin_store" "$_bin_home" \
 	theme \
 	uninstall-millennium \
 	zen-kernel
+
+command -v emerge >/dev/null 2>&1 || exit
+log 'CONNECTING PORTAGE...' 1 || true
+readonly _portage_store="$_HERE/etc/portage" _portage_home='/etc/portage'
+mkdir -p -- "$_portage_home"
+
+linkin "$_portage_store" "$_portage_home" make.conf sets repos.conf
