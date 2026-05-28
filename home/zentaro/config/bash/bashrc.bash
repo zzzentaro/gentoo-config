@@ -26,7 +26,7 @@ alias free='free -h'
 
 alias wcp='wl-copy'
 
-alias mine='sudo chown -R $(id -un):$(id -gn)'
+alias mine="chown -R $(id -un):$(id -gn) ${@:?}"
 
 # Devel
 alias e="$EDITOR"
