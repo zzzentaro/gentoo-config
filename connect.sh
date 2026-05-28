@@ -28,7 +28,7 @@ readonly _MY_STORE="$_HERE/home/zentaro"
 backup() {
 	[ "$#" -lt 1 ] && log 'Nothing to backup' 1
 
-	__backup_dir="$_HERE/backup"
+	__backup_dir="$_HERE/tmp"
 	mkdir -p -- "$__backup_dir"
 	for item in "$@"; do
 		log "Backup $item"
