@@ -1,27 +1,11 @@
 #!/bin/sh
 set -eu
 
-_SRC_DIR="${1:-.}"
-
-#  Must be executed as root,
-#  because sudo/doas/derivative can and will time out
-if [ "$(id -u)" -gt 0 ]; then
-	echo " !! Executor is not root, exit"
-	exit 1
-fi
-
-#  Not the best handler, but narrows possibility down
-#  that script is executed not source directory
-if [ ! -f "$_SRC_DIR/.config" ]; then
-	echo ' !! Missing config, exit'
-	exit 1
-fi
-
 _COMPILE=0
 _find_flag() {
 	while getopts ":c" opt; do
 		case "$opt" in
-		u) _COMPILE=1 ;;
+		c) _COMPILE=1 ;;
 		?)
 			echo "invalid option: '$OPTARG'" >&2
 			exit 1
@@ -30,6 +14,7 @@ _find_flag() {
 	done
 }
 
+_SRC_DIR='.'
 remake() {
 	make --directory="$_SRC_DIR" "$@"
 }
@@ -44,6 +29,21 @@ compile() {
 main() {
 	_find_flag "$@"
 	shift $((OPTIND - 1))
+
+	_SRC_DIR="${1:-.}"
+	#  Must be executed as root,
+	#  because sudo/doas/derivative can and will time out
+	if [ "$(id -u)" -gt 0 ]; then
+		echo " !! Executor is not root, exit"
+		exit 1
+	fi
+
+	#  Not the best handler, but narrows possibility down
+	#  that script is executed not source directory
+	if [ ! -f "$_SRC_DIR/.config" ]; then
+		echo ' !! Missing config, exit'
+		exit 1
+	fi
 
 	echo ' -- Update existing config'
 	remake oldconfig
