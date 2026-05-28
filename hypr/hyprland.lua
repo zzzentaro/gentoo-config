@@ -191,7 +191,7 @@ hl.bind(MOD .. " + C", hl.dsp.exec_cmd("menu"))
 
 -- Print screen
 local psf =
-	'$(xdg-user-dir PICTURES)/Screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
+	'$(xdg-user-dir PICTURES)/screenshots/ps_$(date +"%Y%m%d%H%M%S").png'
 hl.bind(
 	"Print",
 	hl.dsp.exec_cmd("grim - | tee " .. psf .. " | swappy -f - -o " .. psf)
