@@ -1,5 +1,5 @@
 [[ $- != *i* ]] && return
-# THIS IS A BASHRC FILE
+# THIS IS A BASHRC
 
 alias x='sync && exec bash'
 alias xx='sync && exit'
