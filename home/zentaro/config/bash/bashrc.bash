@@ -1,48 +1,37 @@
 [[ $- != *i* ]] && return
 # THIS IS A BASHRC
 
-alias x='sync && exec bash'
-alias xx='sync && exit'
+alias x='sync; clear -x; exec bash'
 alias hex='sudo'
 alias root='sudo su -'
 
-alias ls='eza --group-directories-first --group --no-permissions --icons=auto --git'
-alias l='ls -Ahl'
-
-alias grep='grep --color=auto'
-alias gr='grep'
-
+alias l='eza -Ahl --group-directories-first --git'
 alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
-
-alias mkdir='mkdir -p'
-alias md='mkdir'
+alias md='mkdir -p'
 alias cp='cp -i'
 alias rm='rm -i'
 
-alias df='df -h'
-alias free='free -h'
-
+alias gr=grep
 alias wcp='wl-copy'
 
-alias mine="chown -R $(id -un):$(id -gn) ${@:?}"
+alias mine="chown -R $(id -un):$(id -gn)"
 
 # Devel
 alias e="$EDITOR"
 alias es="sudoedit"
 
-alias nmutt='neomutt'
-alias z='tmux attach || tmux'
+alias z='tmux attach >/dev/null || tmux'
 alias g='git'
 alias lg='lazygit'
-alias lgs='sudo -E lazygit'
-alias gc='cd ~/gentoo-config'
-alias fmtsh='shfmt -w -s'
+alias cg='cd ~/gentoo-config'
+
 alias cksh='shellcheck -s sh'
+alias fmtsh='shfmt -w -s'
 
 ## Gentoo
-alias manifest-ebuild='sudo pkgdev manifest && mine .'
+alias manifest='sudo pkgdev manifest && mine .'
 
 # Control
 alias scr='brightnessctl set'
@@ -128,5 +117,4 @@ alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_statu
 
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
-clear -x
 [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch
