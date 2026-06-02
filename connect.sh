@@ -73,14 +73,14 @@ linkin() { # link (inside) + log
 readonly _MY_CONFIG_STORE="$_MY_STORE/config"
 
 ## Bash is special
-log 'CONNECTING BASH...' 1 || true
+log 'CONNECT BASH...' 1 || true
 _bash_store="$_MY_CONFIG_STORE/bash"
 _bash_home="$HOME"
 linkin "$_bash_store/profile.bash" "$_bash_home/.bash_profile"
 linkin "$_bash_store/bashrc.bash" "$_bash_home/.bashrc"
 linkin "$_bash_store/logout.bash" "$_bash_home/.bash_logout"
 
-log 'CONNECTING CONFIG...' 1 || true
+log 'CONNECT CONFIG...' 1 || true
 readonly _CONFIG_HOME="$HOME/.config"
 mkdir -p -- "$_CONFIG_HOME"
 linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
@@ -98,7 +98,7 @@ linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
 #vesktop \
 #yazi
 
-log 'CONNECTING LOCAL...' 1 || true
+log 'CONNECT LOCAL...' 1 || true
 readonly _lib_store="$_MY_STORE/local/lib" _lib_home="$HOME/.local/lib"
 readonly _bin_store="$_MY_STORE/local/bin" _bin_home="$HOME/.local/bin"
 mkdir -p -- "$_lib_home" "$_bin_home"
@@ -117,7 +117,7 @@ linkin "$_bin_store" "$_bin_home" \
 	zen-kernel
 
 command -v emerge >/dev/null 2>&1 || exit
-log 'CONNECTING PORTAGE...' 1 || true
+log 'CONNECT PORTAGE...' 1 || true
 readonly _portage_store="$_HERE/etc/portage" _portage_home='/etc/portage'
 [ ! -d "$_portage_home" ] && sudo mkdir -p -- "$_portage_home"
 
