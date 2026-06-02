@@ -34,11 +34,10 @@ main() {
         sudo ln -sfn "$_SOURCE_DIR" "$_SYMLINK"
     fi
 
-    if [ -d "$_SOURCE_DIR" ]; then
-        zxy_log "Zen kernel is installed"
-    else
-        zxy_log "Zen kernel is not installed" 1
-    fi
+    case "$(uname -r)" in
+    *zen*) zxy_log "Zen kernel is installed" ;;
+    *) zxy_log "Zen kernel is not installed" 1 || true ;;
+    esac
 
     if [ "$(readlink -f "$_SYMLINK")" = "$_SOURCE_DIR" ]; then
         zxy_log "$_SYMLINK is linked to $_SOURCE_DIR"
