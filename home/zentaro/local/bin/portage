@@ -152,8 +152,6 @@ portage_edit() {
     [ ! -d "$__portage/$__dir" ] && zxy_log "Directory $__portage/$__dir does not exist" 1
 
     __file="${2:-}"
-    [ ! -f "$__portage/$__dir/$__file" ] && ls -AhLl -- "$__portage/$__dir" && return
-
     editor "$__portage/$__dir/$__file"
 }
 
