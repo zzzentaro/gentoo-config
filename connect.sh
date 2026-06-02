@@ -29,10 +29,19 @@ backup() {
 
 	__backup_dir="$_HERE/tmp"
 	mkdir -p -- "$__backup_dir"
+
 	for item in "$@"; do
 		log "Backup $item"
-		rm -rf -- "$__backup_dir/$(basename "$item")"
-		mv -- "$item" "$__backup_dir" || log "Failed to backup $item" 1
+
+		__rm='rm -rf --'
+		__mv='mv --'
+		if [ ! -w "$item" ]; then
+			__rm="sudo $__rm"
+			__mv="sudo $__mv"
+		fi
+
+		$__rm "$__backup_dir/$(basename "$item")"
+		$__mv "$item" "$__backup_dir" || log "Failed to backup $item" 1
 	done
 }
 linkin() { # link (inside) + log
@@ -52,9 +61,11 @@ linkin() { # link (inside) + log
 			linkin "$__ro_from/$item" "$__ro_to/$item"
 		done
 	else
+		__ln='ln -sfn --'
+		[ ! -w "$(dirname "$__to")" ] && __ln="sudo $__ln"
 		[ ! -L "$__to" ] && [ -e "$__to" ] && backup "$__to"
 		log "Link $(basename "$__from")"
-		ln -sfn -- "$__from" "$__to" || log "Failed to link $__from $__to" 1
+		$__ln "$__from" "$__to" || log "Failed to link $__from $__to" 1
 	fi
 }
 
@@ -104,3 +115,10 @@ linkin "$_bin_store" "$_bin_home" \
 	theme \
 	uninstall-millennium \
 	zen-kernel
+
+command -v emerge >/dev/null 2>&1 || exit
+log 'CONNECTING PORTAGE...' 1 || true
+readonly _portage_store="$_HERE/etc/portage" _portage_home='/etc/portage'
+[ ! -d "$_portage_home" ] && sudo mkdir -p -- "$_portage_home"
+
+linkin "$_portage_store" "$_portage_home" make.conf sets repos.conf

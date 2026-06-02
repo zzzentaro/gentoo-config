@@ -31,18 +31,15 @@ zxy_log() {
 	__MSG="$1"
 	if [ -z "$__MSG" ]; then
 		zxy_log "No message to log" 1
-		return 1
 	fi
 
 	__CODE="${2:-0}"
 	case "$__CODE" in
 	'')
 		zxy_log "No code given" 1
-		return 1
 		;;
 	*[!0-9]*)
 		zxy_log "Code is not an integer" 1
-		return 1
 		;;
 	esac
 
@@ -54,11 +51,9 @@ zxy_log() {
 	fi
 
 	printf '%s %s %s%s\n' "$__COLOUR" "$__KEY" "$__MSG" "$ALL_OFF"
-	if [ "$__CODE" -gt 1 ]; then
-		exit 1
-	else
-		return "$__CODE"
-	fi
+
+	[ "$__CODE" -gt 1 ] && exit 1
+	return "$__CODE"
 }
 
 zxy_is_root() {
@@ -80,16 +75,25 @@ zxy_need_home() {
 		exit 1
 	fi
 }
+zxy_is_cmd() {
+	[ "$#" -lt 1 ] && log 'No command to check' 1
+
+	for cmd in "$@"; do
+		if command -v "$cmd" >/dev/null 2>&1; then
+			return 0
+		else
+			return 1
+		fi
+	done
+}
 zxy_need_command() {
 	__MISSING=''
 	for cmd in "$@"; do
-		if ! command -v "$cmd" >/dev/null 2>&1; then
+		if ! zxy_is_cmd "$cmd"; then
 			__MISSING="$__MISSING $cmd"
 		fi
 	done
 
 	[ -z "$__MISSING" ] && return 0
-
-	zxy_log "Missing dependencies:$__MISSING" 1
-	exit 1
+	zxy_log "Missing dependencies:$__MISSING" 2
 }

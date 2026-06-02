@@ -4,7 +4,7 @@ set -eu
     printf ' !! zxy is missing\n'
     exit 1
 }
-zxy_need_command 'sudo' 'git'
+zxy_need_command sudo git
 
 readonly _ZEN_KERNEL_GIT='https://github.com/zen-kernel/zen-kernel.git'
 readonly _SOURCE_DIR='/usr/src/zen-kernel'

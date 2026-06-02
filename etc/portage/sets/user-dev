@@ -9,10 +9,9 @@ app-misc/tmux
 # Editor
 app-editors/neovim
 # Language tools
-dev-lang/rust-bin
+dev-lang/rust
 dev-util/sh
 dev-util/shellcheck-bin
-net-libs/nodejs
 
 # Gentoo
 dev-util/pkgdev

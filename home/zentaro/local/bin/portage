@@ -1,24 +1,22 @@
 #!/bin/sh
-set -u
+set -eu
 . "$HOME/.local/lib/zxy" || {
     printf " !! zxy is missing\n"
     exit 1
 }
-readonly _CMD="portage"
-zxy_need_command 'sudo' 'emerge'
+readonly _CMD=portage
+zxy_need_command sudo emerge
 
 # Sync
 portage_sync() {
-    sudo rm -f /var/db/repos/gentoo/metadata/timestamp.x #&& sudo emerge-webrsync
+    sudo rm -f /var/db/repos/gentoo/metadata/timestamp.x && sudo emerge-webrsync
     sudo emaint sync
 }
 
 # Rebuild
 portage_rebuild() {
-    for sets in @preserved-rebuild @module-rebuild; do
-        sudo emerge "$sets"
-    done
-    command -v revdep-rebuild >/dev/null 2>&1 && sudo revdep-rebuild
+    sudo emerge @preserved-rebuild @module-rebuild
+    zxy_is_cmd 'revdep-rebuild' && sudo revdep-rebuild
 }
 
 # Update
@@ -44,37 +42,42 @@ portage_clean() {
 }
 
 # Find
-_search() {
+search() {
+    __package="$1"
+    [ -z "$__package" ] && log 'No package to search' 1
+
     zxy_log "Entry(s) for ${1:-}"
-    if command -v eix >/dev/null; then
+    if zxy_is_cmd eix; then
         EIX_LIMIT=1 eix "$1"
     else
         emerge --search "$1"
     fi
 
 }
-_query() {
-    if command -v equery >/dev/null; then
+query() {
+    __package="$1"
+    [ -z "$__package" ] && log 'No package to query' 1
+
+    if zxy_is_cmd equery; then
         zxy_log "Flag(s) for $1"
         equery u "$1"
     fi
 }
 portage_find() {
-    shift
     for package in "$@"; do
-        _search "$package"
-        _query "$package"
+        search "$package"
+        query "$package"
     done
 }
 
 # Usedesc
 portage_usedesc() {
     _USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
-    if [ -z "${2:-}" ]; then
+    if [ -z "$1" ]; then
         cat "$_USEDESC_FILE"
     else
         for flag in "$@"; do
-            ${rg:-grep} "$flag" /var/db/repos/gentoo/profiles/use.desc
+            grep "$flag" /var/db/repos/gentoo/profiles/use.desc
         done
     fi
 }
@@ -98,74 +101,102 @@ portage_repo() {
 
 # Merge
 portage_merge() {
-    if [ "$#" -lt 2 ]; then
-        portage_help
-        return 1
-    fi
-    shift
-    sudo emerge --verbose --ask "$@"
+    [ "$#" -lt 1 ] && log 'Nothing to merge' 1
+
+    sudo emerge --ask "$@"
 }
 
 portage_unmerge() {
-    if [ "$#" -lt 2 ]; then
-        portage_help
-        return 1
-    fi
-    shift
-    sudo emerge --ask --deselect "$@" && sudo emerge --depclean
+    [ "$#" -lt 1 ] && log 'Nothing to unmerge' 1
+
+    sudo emerge --ask --unmerge "$@"
 }
 
 # Edit
-readonly _PORTAGE_DIR='/etc/portage'
-readonly _MAKE_CONF="$_PORTAGE_DIR/make.conf"
-edit() {
-    "${EDITOR:-nano}" "$1" 2>/dev/null ||
-        sudoedit "$1" 2>/dev/null ||
-        sudo -E "$EDITOR" "$1"
-}
-_select_dir() {
-    case "${1:-}" in
-    use) _SUB="package.use" ;;
-    mask) _SUB="package.mask" ;;
-    unmask) _SUB="package.accept_keywords" ;;
-    sets) _SUB="sets" ;;
-    env) _SUB="env" ;;
-    *)
-        portage_help
-        return 1
-        ;;
-    esac
-    _TARGET_DIR="$_PORTAGE_DIR/${_SUB:-?}"
-    readonly _TARGET_DIR
-    [ -d "$_TARGET_DIR" ] || sudo mkdir -p "$_TARGET_DIR"
-    echo "$_TARGET_DIR"
+editor() {
+    __text="$1"
+    [ -z "$__text" ] && log 'No text to edit' 1
+
+    EDITOR="${EDITOR:-nano}"
+    if [ -w "$__text" ]; then
+        "$EDITOR" "$__text"
+    else
+        sudoedit "$__text"
+    fi
 }
 portage_edit() {
-    shift
+    __portage='/etc/portage'
+    [ ! -d "$__portage" ] && log 'Portage directory missing' 1
 
-    if [ -z "${1:-}" ]; then
-        edit "$_MAKE_CONF"
-        exit
-    elif [ -z "${2:-}" ]; then
-        ls -Ahl "$(_select_dir "$1")"
-        exit
+    __make_conf="${__portage:?}/make.conf"
+    __dir="${1:-}"
+    if [ -z "$__dir" ]; then
+        editor "$__make_conf"
+        return
     fi
 
-    edit "$(_select_dir "$1")/${2:-}"
+    case "$__dir" in
+    'unmask' | 'umask' | 'um' | 'accept' | 'acpt')
+        __dir='package.accept_keywords'
+        ;;
+    'mask' | 'm' | 'hide')
+        __dir='package.mask'
+        ;;
+    'use' | 'u')
+        __dir='package.use'
+        ;;
+    'make.conf' | 'make')
+        portage_edit
+        ;;
+    esac
+    [ ! -d "$__portage/$__dir" ] && zxy_log "Directory $__portage/$__dir does not exist" 1
+
+    __file="${2:-}"
+    [ ! -f "$__portage/$__dir/$__file" ] && ls -AhLl -- "$__portage/$__dir" && return
+
+    editor "$__portage/$__dir/$__file"
 }
 
 portage_help() {
     cat <<EOF
 Usage:
     $_CMD < sync | rebuild | update | clean | repo >
-    $_CMD [ search | usedesc | kernel | repo ] [ ... ]
+    $_CMD [ search | usedesc | kernel ] [ ... ]
     $_CMD [ merge | unmerge | edit ] [ ... ]"
 EOF
+    return 1
 }
-
-readonly _FINAL_CMD="${_CMD}_${1:-help}"
-if command -v "$_FINAL_CMD" >/dev/null; then
-    "$_FINAL_CMD" "$@"
-else
-    portage_help
-fi
+readonly _SUB_CMD="${1:-help}"
+case "$_SUB_CMD" in
+'sync' | 'sy') portage_sync ;;
+'rebuild' | 'reb') portage_rebuild ;;
+'update' | 'up') portage_update ;;
+'clean' | 'cl') portage_clean ;;
+'repo' | 'r') portage_clean ;;
+# accept args
+'find' | 'f')
+    shift
+    portage_find "$@"
+    ;;
+'usedesc' | 'use' | 'u')
+    shift
+    portage_usedesc "$@"
+    ;;
+'kernel' | 'k')
+    shift
+    portage_kernel "$@"
+    ;;
+'merge' | 'm' | '+')
+    shift
+    portage_merge "$@"
+    ;;
+'unmerge' | 'um' | '-')
+    shift
+    portage_unmerge "$@"
+    ;;
+'edit' | 'e')
+    shift
+    portage_edit "$@"
+    ;;
+*) portage_help ;;
+esac
