@@ -36,7 +36,7 @@ main() {
 
     case "$(uname -r)" in
     *zen*) zxy_log "Zen kernel is installed" ;;
-    *) zxy_log "Zen kernel is not installed" 1 ;;
+    *) zxy_log "Zen kernel is not installed" 1 || true ;;
     esac
 
     if [ "$(readlink -f "$_SYMLINK")" = "$_SOURCE_DIR" ]; then

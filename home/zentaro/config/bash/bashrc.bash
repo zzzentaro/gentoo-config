@@ -2,7 +2,7 @@
 # THIS IS A BASHRC
 
 alias x='sync; clear -x; exec bash'
-alias hex='sudo'
+alias s='sudo'
 alias root='sudo su -'
 
 alias l='eza -Ahl --group-directories-first --git'
@@ -22,11 +22,14 @@ alias mine="chown -R $(id -un):$(id -gn)"
 alias e="$EDITOR"
 alias es="sudoedit"
 
-alias z='tmux attach >/dev/null || tmux'
+alias z='tmux attach 2>/dev/null || tmux'
 alias g='git'
 alias lg='lazygit'
 alias cg='cd ~/gentoo-config'
+alias cgh='cd ~/gentoo-config/home/zentaro'
 
+alias cksh='shellcheck -s sh'
+alias fmtsh='shfmt -w -s'
 alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
 
@@ -35,21 +38,6 @@ alias manifest='sudo pkgdev manifest && mine .'
 
 # Control
 alias scr='brightnessctl set'
-pps() {
-	local option="$1"
-
-	case "$option" in
-	1) powerprofilesctl set power-saver ;;
-	2) powerprofilesctl set balanced ;;
-	3) powerprofilesctl set performance ;;
-	*)
-		echo "usage: $FUNCNAME <option>"
-		echo "option: 1 (power-saver), 2 (balanced), 3 (performance)"
-		;;
-	esac
-	echo "current: $(powerprofilesctl get)"
-	return
-}
 vol() {
 	local sink='@DEFAULT_SINK@'
 	local src='@DEFAULT_SOURCE@'

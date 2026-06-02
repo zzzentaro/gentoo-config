@@ -21,7 +21,7 @@ portage_rebuild() {
 
 # Update
 portage_update() {
-    sudo emerge --verbose --ask --update --newuse --deep --with-bdeps=y --tree @world
+    sudo emerge --ask --update --newuse --deep --keep-going --autounmask @world
 }
 
 # Fix
@@ -84,12 +84,12 @@ portage_usedesc() {
 
 # Kernel
 portage_kernel() {
-    if [ -z "$1" ]; then
+    if [ -z "${1:-}" ]; then
         zxy_log "Kernel(s) inside /usr/src/"
         ls -Ahl /usr/src
         echo
     else
-        sudo eselect kernel set "$2"
+        sudo eselect kernel set "$1"
     fi
     eselect kernel list
 }

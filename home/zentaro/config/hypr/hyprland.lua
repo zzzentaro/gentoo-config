@@ -36,12 +36,12 @@ hl.env(
 	"/usr/share/glvnd/egl_vendor.d/50_mesa.json"
 )
 hl.env("VK_ICD_FILENAMES", "/usr/share/vulkan/icd.d/intel_icd.x86_64.json")
-hl.env("LIBVA_DRIVER_NAME", "nvidia")
-hl.env("GBM_BACKEND", "nvidia-drm") -- nvidia-drm
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia") -- nvidia
-hl.env("__VK_LAYER_NV_optimus", "NVIDIA_only") -- NVIDIA_only
-hl.env("__NV_PRIME_RENDER_OFFLOAD_PROVIDER", "NVIDIA-GO") -- NVIDIA-GO
-hl.env("__NV_PRIME_RENDER_OFFLOAD", "1")
+hl.env("LIBVA_DRIVER_NAME", "iHD")
+hl.env("GBM_BACKEND", "") -- nvidia-drm
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "") -- nvidia
+hl.env("__VK_LAYER_NV_optimus", "") -- NVIDIA_only
+hl.env("__NV_PRIME_RENDER_OFFLOAD_PROVIDER", "") -- NVIDIA-GO
+hl.env("__NV_PRIME_RENDER_OFFLOAD", "0")
 
 -- Export toolkit backed variables
 hl.env("GDK_BACKEND", "wayland,x11,*")
@@ -181,7 +181,7 @@ hl.bind(MOD .. " + ALT + Return", hl.dsp.exec_cmd(terminalFloat))
 local fileManager = "pcmanfm"
 hl.bind(MOD .. " + E", hl.dsp.exec_cmd(fileManager))
 
-local browser = "firefox-bin"
+local browser = "firefox"
 hl.bind(MOD .. " + B", hl.dsp.exec_cmd(browser))
 
 local launcher = "fuzzel"
@@ -345,8 +345,6 @@ hl.animation({
 })
 
 -- Rule (latest takes priority)
-hl.window_rule({ match = { class = ".*" }, size = "1 1" })
-
 hl.window_rule({
 	name = "suppress-maximize-events",
 	match = { class = ".*" },
@@ -383,7 +381,7 @@ hl.window_rule({
 
 hl.window_rule({
 	name = "browser",
-	match = { class = "firefox" },
+	match = { class = "firefox-esr" },
 	workspace = "2 silent",
 })
 
