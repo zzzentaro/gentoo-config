@@ -1,161 +1,161 @@
 #!/bin/sh
 set -u
 . "$HOME/.local/lib/zxy" || {
-	printf " !! zxy is missing\n"
-	exit 1
+    printf " !! zxy is missing\n"
+    exit 1
 }
 readonly _CMD="portage"
 zxy_need_command 'sudo' 'emerge'
 
 # Sync
 portage_sync() {
-	sudo rm -f /var/db/repos/gentoo/metadata/timestamp.x #&& sudo emerge-webrsync
-	sudo emaint sync
+    sudo rm -f /var/db/repos/gentoo/metadata/timestamp.x #&& sudo emerge-webrsync
+    sudo emaint sync
 }
 
 # Rebuild
 portage_rebuild() {
-	for sets in @preserved-rebuild @module-rebuild; do
-		sudo emerge "$sets"
-	done
-	command -v revdep-rebuild >/dev/null 2>&1 && sudo revdep-rebuild
+    for sets in @preserved-rebuild @module-rebuild; do
+        sudo emerge "$sets"
+    done
+    command -v revdep-rebuild >/dev/null 2>&1 && sudo revdep-rebuild
 }
 
 # Update
 portage_update() {
-	sudo emerge --verbose --ask --update --newuse --deep --with-bdeps=y --tree @world
+    sudo emerge --ask --update --newuse --deep --keep-going --autounmask @world
 }
 
 # Fix
 portage_fix() {
-	for cmd in etc-update env-update dispatch-conf; do
-		zxy_log "$cmd"
-		sudo "$cmd"
-	done
-	sudo emaint --fix all
+    for cmd in etc-update env-update dispatch-conf; do
+        zxy_log "$cmd"
+        sudo "$cmd"
+    done
+    sudo emaint --fix all
 }
 
 # Clean
 portage_clean() {
-	sudo emerge --ask --depclean
-	sudo eclean-dist --deep
-	sudo eclean-pkg --deep
-	sudo eclean-kernel
+    sudo emerge --ask --depclean
+    sudo eclean-dist --deep
+    sudo eclean-pkg --deep
+    sudo eclean-kernel
 }
 
 # Find
 _search() {
-	zxy_log "Entry(s) for ${1:-}"
-	if command -v eix >/dev/null; then
-		EIX_LIMIT=1 eix "$1"
-	else
-		emerge --search "$1"
-	fi
+    zxy_log "Entry(s) for ${1:-}"
+    if command -v eix >/dev/null; then
+        EIX_LIMIT=1 eix "$1"
+    else
+        emerge --search "$1"
+    fi
 
 }
 _query() {
-	if command -v equery >/dev/null; then
-		zxy_log "Flag(s) for $1"
-		equery u "$1"
-	fi
+    if command -v equery >/dev/null; then
+        zxy_log "Flag(s) for $1"
+        equery u "$1"
+    fi
 }
 portage_find() {
-	shift
-	for package in "$@"; do
-		_search "$package"
-		_query "$package"
-	done
+    shift
+    for package in "$@"; do
+        _search "$package"
+        _query "$package"
+    done
 }
 
 # Usedesc
 portage_usedesc() {
-	_USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
-	if [ -z "${2:-}" ]; then
-		cat "$_USEDESC_FILE"
-	else
-		for flag in "$@"; do
-			${rg:-grep} "$flag" /var/db/repos/gentoo/profiles/use.desc
-		done
-	fi
+    _USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
+    if [ -z "${2:-}" ]; then
+        cat "$_USEDESC_FILE"
+    else
+        for flag in "$@"; do
+            ${rg:-grep} "$flag" /var/db/repos/gentoo/profiles/use.desc
+        done
+    fi
 }
 
 # Kernel
 portage_kernel() {
-	if [ -z "${2:-}" ]; then
-		zxy_log "Kernel(s) inside /usr/src/"
-		ls -Ahl /usr/src
-		echo
-	else
-		sudo eselect kernel set "$2"
-	fi
-	eselect kernel list
+    if [ -z "${1:-}" ]; then
+        zxy_log "Kernel(s) inside /usr/src/"
+        ls -Ahl /usr/src
+        echo
+    else
+        sudo eselect kernel set "$1"
+    fi
+    eselect kernel list
 }
 
 # Repo
 portage_repo() {
-	eselect repository list -i
+    eselect repository list -i
 }
 
 # Merge
 portage_merge() {
-	if [ "$#" -lt 2 ]; then
-		portage_help
-		return 1
-	fi
-	shift
-	sudo emerge --verbose --ask "$@"
+    if [ "$#" -lt 2 ]; then
+        portage_help
+        return 1
+    fi
+    shift
+    sudo emerge --verbose --ask "$@"
 }
 
 portage_unmerge() {
-	if [ "$#" -lt 2 ]; then
-		portage_help
-		return 1
-	fi
-	shift
-	sudo emerge --ask --deselect "$@" && sudo emerge --depclean
+    if [ "$#" -lt 2 ]; then
+        portage_help
+        return 1
+    fi
+    shift
+    sudo emerge --ask --deselect "$@" && sudo emerge --depclean
 }
 
 # Edit
 readonly _PORTAGE_DIR='/etc/portage'
 readonly _MAKE_CONF="$_PORTAGE_DIR/make.conf"
 edit() {
-	"${EDITOR:-nano}" "$1" 2>/dev/null ||
-		sudoedit "$1" 2>/dev/null ||
-		sudo -E "$EDITOR" "$1"
+    "${EDITOR:-nano}" "$1" 2>/dev/null ||
+        sudoedit "$1" 2>/dev/null ||
+        sudo -E "$EDITOR" "$1"
 }
 _select_dir() {
-	case "${1:-}" in
-	use) _SUB="package.use" ;;
-	mask) _SUB="package.mask" ;;
-	unmask) _SUB="package.accept_keywords" ;;
-	sets) _SUB="sets" ;;
-	env) _SUB="env" ;;
-	*)
-		portage_help
-		return 1
-		;;
-	esac
-	_TARGET_DIR="$_PORTAGE_DIR/${_SUB:-?}"
-	readonly _TARGET_DIR
-	[ -d "$_TARGET_DIR" ] || sudo mkdir -p "$_TARGET_DIR"
-	echo "$_TARGET_DIR"
+    case "${1:-}" in
+    use) _SUB="package.use" ;;
+    mask) _SUB="package.mask" ;;
+    unmask) _SUB="package.accept_keywords" ;;
+    sets) _SUB="sets" ;;
+    env) _SUB="env" ;;
+    *)
+        portage_help
+        return 1
+        ;;
+    esac
+    _TARGET_DIR="$_PORTAGE_DIR/${_SUB:-?}"
+    readonly _TARGET_DIR
+    [ -d "$_TARGET_DIR" ] || sudo mkdir -p "$_TARGET_DIR"
+    echo "$_TARGET_DIR"
 }
 portage_edit() {
-	shift
+    shift
 
-	if [ -z "${1:-}" ]; then
-		edit "$_MAKE_CONF"
-		exit
-	elif [ -z "${2:-}" ]; then
-		ls -Ahl "$(_select_dir "$1")"
-		exit
-	fi
+    if [ -z "${1:-}" ]; then
+        edit "$_MAKE_CONF"
+        exit
+    elif [ -z "${2:-}" ]; then
+        ls -Ahl "$(_select_dir "$1")"
+        exit
+    fi
 
-	edit "$(_select_dir "$1")/${2:-}"
+    edit "$(_select_dir "$1")/${2:-}"
 }
 
 portage_help() {
-	cat <<EOF
+    cat <<EOF
 Usage:
     $_CMD < sync | rebuild | update | clean | repo >
     $_CMD [ search | usedesc | kernel | repo ] [ ... ]
@@ -165,7 +165,7 @@ EOF
 
 readonly _FINAL_CMD="${_CMD}_${1:-help}"
 if command -v "$_FINAL_CMD" >/dev/null; then
-	"$_FINAL_CMD" "$@"
+    "$_FINAL_CMD" "$@"
 else
-	portage_help
+    portage_help
 fi
