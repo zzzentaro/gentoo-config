@@ -3,7 +3,7 @@
 
 # Control
 app-misc/brightnessctl
-sys-power/power-profiles-daemon
+#sys-power/power-profiles-daemon
 
 # File management
 x11-misc/xdg-user-dirs
