@@ -73,7 +73,9 @@ portage_find() {
 # Usedesc
 portage_usedesc() {
     _USEDESC_FILE='/var/db/repos/gentoo/profiles/use.desc'
-    if [ -z "$1" ]; then
+
+    __USEDESC="${1:-}"
+    if [ -z "$__USEDESC" ]; then
         cat "$_USEDESC_FILE"
     else
         for flag in "$@"; do
