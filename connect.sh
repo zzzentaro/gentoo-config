@@ -79,6 +79,7 @@ _bash_home="$HOME"
 linkin "$_bash_store/profile.bash" "$_bash_home/.bash_profile"
 linkin "$_bash_store/bashrc.bash" "$_bash_home/.bashrc"
 linkin "$_bash_store/logout.bash" "$_bash_home/.bash_logout"
+linkin "$_bash_store/functions" "$_bash_home/.bashrc.d"
 
 log 'CONNECT CONFIG...' 1 || true
 readonly _CONFIG_HOME="$HOME/.config"
