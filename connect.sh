@@ -108,6 +108,7 @@ linkin "$_lib_store" "$_lib_home" zxy
 linkin "$_bin_store" "$_bin_home" \
 	install-millennium \
 	install-osu \
+	install-lmms \
 	menu \
 	nvidia-offload \
 	portage \

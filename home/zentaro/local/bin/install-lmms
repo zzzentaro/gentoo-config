@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+
+# https://github.com/LMMS/lmms/releases/latest
+_BIN='https://github.com/LMMS/lmms/releases/download/v1.2.2/lmms-1.2.2-linux-x86_64.AppImage'
+_PATH="${HOME:?}/.local/bin/lmms"
+
+rm -f "$_PATH"
+wget --continue --tries=3 "$_BIN" --output-document "$_PATH"
+chmod +x "$_PATH"
