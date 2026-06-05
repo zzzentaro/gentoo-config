@@ -43,7 +43,7 @@ alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
 
 ## Gentoo
-alias manifest='sudo pkgdev manifest && mine .'
+alias manifest='sudo pkgdev manifest'
 
 # Control
 alias scr='brightnessctl set'
