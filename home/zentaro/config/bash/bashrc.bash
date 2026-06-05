@@ -1,6 +1,15 @@
 [[ $- != *i* ]] && return
 # THIS IS A BASHRC
 
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+unset rc
+
 alias x='sync; clear -x; exec bash'
 alias s='sudo'
 alias root='sudo su -'
