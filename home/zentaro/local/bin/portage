@@ -120,8 +120,8 @@ editor() {
     [ -z "$__text" ] && log 'No text to edit' 1
 
     EDITOR="${EDITOR:-nano}"
-    if [ -w "$__text" ]; then
-        "$EDITOR" "$__text"
+    if [ -w "$(dirname "$__text")" ] || [ -L "$__text" ]; then
+        $EDITOR "$__text"
     else
         sudoedit "$__text"
     fi
@@ -171,6 +171,7 @@ case "$_SUB_CMD" in
 'sync' | 'sy') portage_sync ;;
 'rebuild' | 'reb') portage_rebuild ;;
 'update' | 'up') portage_update ;;
+'fix' | 'x') portage_fix ;;
 'clean' | 'cl') portage_clean ;;
 'repo' | 'r') portage_clean ;;
 # accept args
