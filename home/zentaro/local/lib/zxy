@@ -28,7 +28,7 @@ else
 fi
 
 zxy_log() {
-	__MSG="$1"
+	__MSG="${1:-}"
 	if [ -z "$__MSG" ]; then
 		zxy_log "No message to log" 1
 	fi
