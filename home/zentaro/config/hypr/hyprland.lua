@@ -172,16 +172,14 @@ hl.bind(
 
 local terminal = "alacritty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
-local terminalFloat = "alacritty -T floatty"
 hl.on("hyprland.start", function()
-	hl.exec_cmd(terminalFloat)
+	hl.exec_cmd("alacritty -T floatty -e 'tmux attach 2>/dev/null || tmux'")
 end)
-hl.bind(MOD .. " + ALT + Return", hl.dsp.exec_cmd(terminalFloat))
 
 local fileManager = "pcmanfm"
 hl.bind(MOD .. " + E", hl.dsp.exec_cmd(fileManager))
 
-local browser = "firefox"
+local browser = "firefox-bin"
 hl.bind(MOD .. " + B", hl.dsp.exec_cmd(browser))
 
 local launcher = "fuzzel"
@@ -374,14 +372,15 @@ hl.window_rule({
 hl.window_rule({
 	name = "float-terminal",
 	match = { title = "floatty" },
-	float = true,
-	move = "12 48",
-	size = "1400 1020",
+	float = false,
+	--move = "12 48",
+	--size = "1400 1020",
+	workspace = "3",
 })
 
 hl.window_rule({
 	name = "browser",
-	match = { class = "firefox-esr" },
+	match = { class = "firefox" },
 	workspace = "2 silent",
 })
 
