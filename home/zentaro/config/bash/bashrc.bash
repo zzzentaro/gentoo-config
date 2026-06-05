@@ -111,6 +111,7 @@ alias wd-stop='sudo waydroid session stop && sudo rc-service waydroid stop'
 alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-ui'
 
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
+alias welcome2osu='nvidia-offload osu &'
 
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
