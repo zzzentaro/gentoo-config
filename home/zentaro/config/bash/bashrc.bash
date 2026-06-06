@@ -1,6 +1,15 @@
 [[ $- != *i* ]] && return
 # THIS IS A BASHRC
 
+if [ -d ~/.bashrc.d ]; then
+	for rc in ~/.bashrc.d/*; do
+		if [ -f "$rc" ]; then
+			. "$rc"
+		fi
+	done
+fi
+unset rc
+
 alias x='sync; clear -x; exec bash'
 alias s='sudo'
 alias root='sudo su -'
@@ -34,7 +43,7 @@ alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
 
 ## Gentoo
-alias manifest='sudo pkgdev manifest && mine .'
+alias manifest='sudo pkgdev manifest'
 
 # Control
 alias scr='brightnessctl set'
@@ -102,6 +111,7 @@ alias wd-stop='sudo waydroid session stop && sudo rc-service waydroid stop'
 alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-ui'
 
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
+alias welcome2osu='nvidia-offload osu &'
 
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
