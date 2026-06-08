@@ -173,7 +173,7 @@ hl.bind(
 local terminal = "alacritty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.on("hyprland.start", function()
-	hl.exec_cmd("alacritty -T floatty -e 'tmux attach 2>/dev/null || tmux'")
+	hl.exec_cmd("alacritty -T floatty")
 end)
 
 local fileManager = "pcmanfm"
@@ -370,7 +370,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "float-terminal",
+	name = "floatty",
 	match = { title = "floatty" },
 	float = false,
 	--move = "12 48",
