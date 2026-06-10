@@ -39,15 +39,6 @@
         "tooltip-format": "{:%A, %d %B %Y}",
         "on-click": "bash menu"
     },
-    "network": {
-        "format-wifi": "󰖩",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) 󰖩",
-        "format-ethernet": "",
-        "tooltip-format-ethernet": "{ifname} ",
-        "format-disconnected": "󰤮",
-        "tooltip-format-disconnected": "No connection",
-        "on-click": "alacritty -e nmtui"
-    },
     "modules-right": [
         "tray",
         "pulseaudio",
@@ -109,6 +100,15 @@
             "󰂂",
             ""
         ]
+    },
+    "network": {
+        "format-wifi": "󰤨",
+        "tooltip-format-wifi": "{signalStrength}% {essid} 󰤨",
+        "format-ethernet": "",
+        "tooltip-format-ethernet": "{ifname} ",
+        "format-disconnected": "󰣽",
+        "tooltip-format-disconnected": "Disconnected 󰣽",
+        "on-click": "alacritty -e sleep 1; nmtui"
     },
     "power-profiles-daemon": {
         "format": "{icon}",
