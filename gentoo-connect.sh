@@ -118,6 +118,14 @@ linkin "$_bin_store" "$_bin_home" \
 	uninstall-millennium \
 	zen-kernel
 
+log 'CONNECT WALLPAPER...' 1 || true
+readonly _wal_store="$_HERE/usr/share/wallpapers" _wal_home="$HOME/Pictures/Wallpapers"
+mkdir -p -- "$_wal_home"
+
+linkin "$_wal_store" "$_wal_home" \
+	wallpaper-mizu \
+	wallpaper-garnet
+
 command -v emerge >/dev/null 2>&1 || exit
 log 'CONNECT PORTAGE...' 1 || true
 readonly _portage_store="$_HERE/etc/portage" _portage_home='/etc/portage'
