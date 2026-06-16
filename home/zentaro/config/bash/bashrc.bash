@@ -1,49 +1,40 @@
-[[ $- != *i* ]] && return
+[[ "$-" != *i* ]] && return
 # THIS IS A BASHRC
 
-if [ -d ~/.bashrc.d ]; then
+if [[ -d ~/.bashrc.d ]]; then
 	for rc in ~/.bashrc.d/*; do
-		if [ -f "$rc" ]; then
-			. "$rc"
-		fi
+		[[ -f "$rc" ]] && source -- "$rc"
 	done
 fi
 unset rc
 
-alias x='sync; clear -x; exec bash'
+alias x="sync; clear -x; exec $SHELL"
 alias s='sudo'
-alias root='sudo su -'
 
 alias l='eza -Ahl --group-directories-first --git'
 alias c='cd'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias md='mkdir -p'
-alias cp='cp -i'
-alias rm='rm -i'
-
-alias gr=grep
-alias wcp='wl-copy'
 
 alias mine="chown -R $(id -un):$(id -gn)"
 
+alias wcp='wl-copy'
+
 # Devel
 alias e="$EDITOR"
-alias es="sudoedit"
+alias es='sudoedit'
 
-alias z='tmux attach 2>/dev/null || tmux'
-alias g='git'
-alias lg='lazygit'
 alias cg='cd ~/gentoo-config'
 alias cgh='cd ~/gentoo-config/home/zentaro'
+alias t='tmux attach 2>/dev/null || tmux'
+alias g='git'
+alias lg='lazygit'
 
 alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
 alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
-
-## Gentoo
-alias manifest='sudo pkgdev manifest'
 
 # Control
 alias scr='brightnessctl set'
@@ -104,6 +95,8 @@ alias worldmod="sudoedit /var/lib/portage/world"
 alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudoedit /var/lib/portage/world_sets"
 
+alias manifest='sudo pkgdev manifest'
+
 # Other aliases
 alias ff='fastfetch'
 ## Waydroid
@@ -111,7 +104,7 @@ alias wd-stop='sudo waydroid session stop && sudo rc-service waydroid stop'
 alias wd-start='wd-stop && sudo rc-service waydroid start && waydroid show-full-ui'
 
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
-alias welcome2osu='nvidia-offload osu &'
+alias welcome-to-osu='nvidia-offload osu &'
 
 # Finally, start interactive shell
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
