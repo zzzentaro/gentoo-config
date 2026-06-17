@@ -1,38 +1,42 @@
-# THIS IS A PORTAGE SETS FILE
-# FOR HYPR ECOSYSTEM
+# PORTAGE SETS FOR HYPRLAND
 
-# Session back-end
+## Session back-end
 sys-apps/dbus
 sys-auth/polkit
-x11-libs/libnotify
 sys-auth/hyprpolkitagent
 sys-apps/xdg-desktop-portal
 sys-apps/xdg-desktop-portal-gtk
 gui-libs/xdg-desktop-portal-hyprland
-
-# The window manager
-gui-wm/hyprland
-gui-apps/hyprshutdown
-# Wallpaper daemon
-gui-apps/hyprpaper
-# Terminal emulator
-x11-terms/alacritty
-# Launcher
-gui-apps/fuzzel
-# Status bar
-gui-apps/waybar
-# Notification toast
-gui-apps/mako
-# Lock screen
-gui-apps/hyprlock
-
-# Clipboard daemon
+### Clipboard daemon
 gui-apps/wl-clipboard
 gui-apps/wl-clip-persist
+### Notification
+x11-libs/libnotify
+gui-apps/mako
 
-# Screen capture
+## Main
+gui-wm/hyprland
+### Wallpaper
+gui-apps/hyprpaper
+### Bar
+gui-apps/waybar
+### Term
+x11-terms/alacritty
+### Launcher
+gui-apps/fuzzel
+### Lock
+gui-apps/hyprlock
+### Image viewer
+media-gfx/feh
+### Video player
+media-video/mpv
+### File manager
+x11-misc/pcmanfm
+### Optional
+gui-apps/hyprshutdown
+
+## Screen capture
 gui-apps/grim
 gui-apps/slurp
 gui-apps/swappy
 gui-apps/wf-recorder
-

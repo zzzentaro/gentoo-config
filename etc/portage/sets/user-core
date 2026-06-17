@@ -1,18 +1,10 @@
-# THIS IS PORTAGE SETS FILE
-# FOR THE USERSPACE
+# PORTAGE SETS FOR USERSPACE
 
-# Control
 app-misc/brightnessctl
 #sys-power/power-profiles-daemon
 
-# File management
 x11-misc/xdg-user-dirs
 sys-apps/eza
-app-text/tree
 sys-apps/fd
 sys-apps/ripgrep
-
-# GUI
-media-gfx/feh
-x11-misc/pcmanfm
-
+app-text/tree
