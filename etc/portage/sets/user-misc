@@ -1,7 +1,8 @@
 # THIS IS PORTAGE SETS FILE
 # FOR packages that isn't really important lol
 
+sys-apps/flatpak
+
 app-misc/tealdeer
 app-misc/fastfetch
 app-misc/figlet
-

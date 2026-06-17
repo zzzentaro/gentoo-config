@@ -4,6 +4,5 @@
 app-emulation/wine-vanilla
 games-util/protonplus
 games-util/steam-launcher
-# games-misc/the-honkers-railway-launcher
 #games-arcade/osu-lazer
 sys-fs/fuse:0

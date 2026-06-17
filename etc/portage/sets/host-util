@@ -1,17 +1,12 @@
-# THIS IS PORTAGE SETS FILE
-# FOR Zentaro's MARCH_NATIVE
+# PORTAGE SETS FOR SYSTEM ADMINISTRATION
 
-# Gentoo Larry Moo
-app-eselect/eselect-repository
 app-portage/gentoolkit
+app-eselect/eselect-repository
 app-portage/eix
 app-admin/eclean-kernel
-# Internet (real)
-net-misc/networkmanager
-# Scheduler daemon
+
 sys-process/cronie
-# Battery statud
 sys-power/upower
-# Please let me buy a 32GB stick for the love of Larry
 sys-block/zram-init
 
+net-misc/networkmanager

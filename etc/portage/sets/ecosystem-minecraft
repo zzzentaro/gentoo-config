@@ -1,0 +1,7 @@
+# PORTAGE SETS FOR MINECRAFT
+
+games-action/prismlauncher
+x11-apps/xrandr
+dev-java/openjdk:8
+dev-java/openjdk:21
+dev-java/openjdk:25

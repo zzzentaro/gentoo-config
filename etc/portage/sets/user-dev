@@ -1,18 +1,16 @@
-# THIS IS PORTAGE SETS FILE
-# FOR DEVELOPER PROGRAMS
+# PORTAGE SETS FOR DEVELOPMENT
 
-# GIT GUD
 dev-vcs/git
 dev-vcs/lazygit
-# Terminal multiplexer
 app-misc/tmux
-# Editor
+
+## Editor
 app-editors/neovim
-# Language tools
+
+## Lang
 dev-lang/rust
 dev-util/sh
 dev-util/shellcheck-bin
 
-# Gentoo
+## Gentoo
 dev-util/pkgdev
-
