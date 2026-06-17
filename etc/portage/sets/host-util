@@ -8,5 +8,3 @@ app-admin/eclean-kernel
 sys-process/cronie
 sys-power/upower
 sys-block/zram-init
-
-net-misc/networkmanager
