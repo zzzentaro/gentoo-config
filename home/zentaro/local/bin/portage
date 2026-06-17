@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 . "$HOME/.local/lib/zxy" || {
-    printf " !! zxy is missing\n"
+    printf ' !! zxy is missing\n'
     exit 1
 }
 readonly _CMD=portage
@@ -10,18 +10,18 @@ zxy_need_command sudo emerge
 # Sync
 portage_sync() {
     sudo rm -f /var/db/repos/gentoo/metadata/timestamp.x && sudo emerge-webrsync
-    sudo emaint sync
+    sudo emaint sync --all
 }
 
 # Rebuild
 portage_rebuild() {
     sudo emerge @preserved-rebuild @module-rebuild
-    zxy_is_cmd 'revdep-rebuild' && sudo revdep-rebuild
+    zxy_is_cmd revdep-rebuild && sudo revdep-rebuild
 }
 
 # Update
 portage_update() {
-    sudo emerge --ask --update --newuse --deep --keep-going --autounmask @world
+    sudo emerge --ask --update --newuse --deep --with-bdeps=y --keep-going @world
 }
 
 # Fix
@@ -120,7 +120,7 @@ editor() {
     [ -z "$__text" ] && log 'No text to edit' 1
 
     EDITOR="${EDITOR:-nano}"
-    if [ -w "$(dirname "$__text")" ] || [ -L "$__text" ]; then
+    if [ -w "$__text" ] || [ -L "$__text" ]; then
         $EDITOR "$__text"
     else
         sudoedit "$__text"
@@ -154,6 +154,11 @@ portage_edit() {
     [ ! -d "$__portage/$__dir" ] && zxy_log "Directory $__portage/$__dir does not exist" 1
 
     __file="${2:-}"
+    if [ -z "$__file" ]; then
+        ls -AhLl -- "$__portage/$__dir"
+        return
+    fi
+
     editor "$__portage/$__dir/$__file"
 }
 
