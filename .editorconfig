@@ -15,8 +15,10 @@ indent_size = 8
 
 [{*.{sh,bash},.bash_profile,.bashrc,.bash_logout}]
 indent_style = tab
-indent_size = 4
+shell_variant = posix
+binary_next_line = true
+keep_padding = true
+function_next_line = true
 
 [*.{html,yaml}]
-indent_style = space
 indent_size = 2
