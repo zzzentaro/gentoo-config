@@ -59,9 +59,12 @@ symlink_theme 'Hyprland' \
     "$_HYPR_DIR/theme.lua"
 
 readonly _WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+killall hyprpaper
 symlink_theme 'Hyprpaper' \
     "$_WALLPAPER_DIR/wallpaper-$_THEME" \
     "$_WALLPAPER_DIR/wallpaper"
+hyprpaper >/dev/null &
+2>&1
 
 readonly _OMP_DIR="$_CONFIG/oh-my-posh"
 symlink_theme 'Oh My Posh' \
@@ -69,9 +72,12 @@ symlink_theme 'Oh My Posh' \
     "$_OMP_DIR/config.jsonc"
 
 readonly _WAYBAR_DIR="$_CONFIG/waybar"
+killall waybar
 symlink_theme 'Waybar' \
     "$_WAYBAR_DIR/theme-$_THEME.css" \
     "$_WAYBAR_DIR/theme.css"
+waybar >/dev/null &
+2>&1
 
 zxy_log 'Reload desktop'
-hyprctl reload
+hyprctl reload >/dev/null 2>&1
