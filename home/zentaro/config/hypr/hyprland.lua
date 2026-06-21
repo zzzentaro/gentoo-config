@@ -20,7 +20,7 @@ hl.config({
 
 -- Start hyprland
 hl.on("hyprland.start", function()
-	hl.exec_cmd("pipewire & pipewire-pulse & wireplumber &")
+	hl.exec_cmd("gentoo-pipewire-launcher &")
 	hl.exec_cmd(
 		"waybar & hyprpaper & mako & wl-clip-persist --clipboard regular &"
 	)
