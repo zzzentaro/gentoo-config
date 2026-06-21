@@ -1,9 +1,12 @@
 -- rose-pine.lua
+
+local colorscheme = "rose-pine"
 return {
-	"rose-pine/neovim",
-	name = "rose-pine",
+	colorscheme .. "/neovim",
+	name = colorscheme,
 	lazy = false,
+
 	config = function()
-		vim.cmd.colorscheme("rose-pine")
+		vim.cmd.colorscheme(colorscheme)
 	end,
 }
