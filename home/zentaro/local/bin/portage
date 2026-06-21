@@ -48,7 +48,7 @@ search() {
 
     zxy_log "Entry(s) for ${1:-}"
     if zxy_is_cmd eix; then
-        EIX_LIMIT=1 eix "$1"
+        eix "$1"
     else
         emerge --search "$1"
     fi
