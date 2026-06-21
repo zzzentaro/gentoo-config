@@ -16,8 +16,6 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias md='mkdir -p'
 
-alias mine="chown -R $(id -un):$(id -gn)"
-
 alias wcp='wl-copy'
 
 # Devel
@@ -36,17 +34,9 @@ alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
 
 # Control
-alias scr='brightnessctl set'
+alias bright='brightnessctl set'
 
-# Portage, The Heart of Gentoo!
 alias p='portage'
-
-alias cycle='portage sync; portage update; portage fix; portage clean'
-alias recycle='portage sync; portage rebuild; portage update; portage fix; portage clean'
-
-alias etup='sudo etc-update'
-alias enup='sudo env-update'
-alias dpco='sudo dispatch-conf'
 
 alias world='cat /var/lib/portage/world'
 alias worldmod="sudoedit /var/lib/portage/world"
