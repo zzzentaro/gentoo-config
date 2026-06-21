@@ -1,134 +1,68 @@
 #!/bin/sh
-# THIS SCRIPT IS PERSONAL USE AND DESTRUCTIVE
 set -eu
 
-log() {
-	__msg="$1"
-	[ -z "$__msg" ] && log 'Nothing to log' 1
+# Setup
+HERE="$(cd -- "$(dirname -- "$0")" && pwd)"
+readonly HERE
+echo "@ $HERE"
 
-	__code="${2:-0}"
-	__key='--'
-	[ "$__code" -gt 0 ] && __key='!!'
+readonly backup_dir="$HERE/tmp"
+mkdir -p -- "$backup_dir"
 
-	printf ' %s %s\n' "$__key" "$__msg"
-	[ "$__code" -ge 2 ] && exit 1
-	return "$__code"
+readonly repo_home="$HERE/home/zentaro"
+
+linkin()
+{
+	echo "mv -- "$2" "$backup_dir/$(basename "$2")-$(date +%F)-$(date +%s)" || true"
+	mv -- "$2" "$backup_dir/$(basename "$2")-$(date +%F)-$(date +%s)" || true
+
+	echo "ln -sfn -- "$1" "$2""
+	ln -sfn -- "$1" "$2"
 }
 
-# Evaluate
-[ "$(id -u)" -eq 0 ] && log 'Do not run as root' 2
-[ -z "$HOME" ] && log 'HOME not found' 2
+## Config
+echo 'linkin config'
+readonly home_config="$HOME/.config" repo_home_config="$repo_home/config"
+mkdir -p -- "$home_config"
 
-# SETUP
-_HERE="$(cd "$(dirname "$0")" && pwd)"
-readonly _HERE
-readonly _MY_STORE="$_HERE/home/zentaro"
-
-backup() {
-	[ "$#" -lt 1 ] && log 'Nothing to backup' 1
-
-	__backup_dir="$_HERE/tmp"
-	mkdir -p -- "$__backup_dir"
-
-	for item in "$@"; do
-		log "Backup $item"
-
-		__rm='rm -rf --'
-		__mv='mv --'
-		if [ ! -w "$item" ]; then
-			__rm="sudo $__rm"
-			__mv="sudo $__mv"
-		fi
-
-		$__rm "$__backup_dir/$(basename "$item")"
-		$__mv "$item" "$__backup_dir" || log "Failed to backup $item" 1
-	done
-}
-linkin() { # link (inside) + log
-	[ "$#" -lt 2 ] && log 'Not enough args' 1
-
-	__from="$1"
-	[ ! -e "$__from" ] && log "$__from does not exist" 1
-
-	__to="$2"
-
-	if [ "$#" -ge 3 ]; then
-		__ro_from="$__from"
-		__ro_to="$__to"
-
-		shift 2
-		for item in "$@"; do
-			linkin "$__ro_from/$item" "$__ro_to/$item"
-		done
-	else
-		__ln='ln -sfn --'
-		[ ! -w "$(dirname "$__to")" ] && __ln="sudo $__ln"
-		[ ! -L "$__to" ] && [ -e "$__to" ] && backup "$__to"
-		log "Link $(basename "$__from")"
-		$__ln "$__from" "$__to" || log "Failed to link $__from $__to" 1
-	fi
-}
-
-# XDG_CONFIG_HOME
-readonly _MY_CONFIG_STORE="$_MY_STORE/config"
+for config in "$repo_home_config/"*; do
+	linkin "$config" "$home_config/$(basename -- "$config")"
+done
 
 ## Bash is special
-log 'CONNECT BASH...' 1 || true
-_bash_store="$_MY_CONFIG_STORE/bash"
-_bash_home="$HOME"
-linkin "$_bash_store/profile.bash" "$_bash_home/.bash_profile"
-linkin "$_bash_store/bashrc.bash" "$_bash_home/.bashrc"
-linkin "$_bash_store/logout.bash" "$_bash_home/.bash_logout"
-linkin "$_bash_store/functions" "$_bash_home/.bashrc.d"
+echo 'linkin bash'
+readonly repo_bash="$repo_home_config/bash" home_bash="$HOME"
 
-log 'CONNECT CONFIG...' 1 || true
-readonly _CONFIG_HOME="$HOME/.config"
-mkdir -p -- "$_CONFIG_HOME"
-linkin "$_MY_CONFIG_STORE" "$_CONFIG_HOME" \
-	alacritty \
-	fastfetch \
-	fuzzel \
-	hypr \
-	mako \
-	nvim \
-	oh-my-posh \
-	vim \
-	waybar
-#sway \
-#swaylock \
-#vesktop \
-#yazi
+linkin "$repo_bash/profile.bash" "$home_bash/.bash_profile"
+linkin "$repo_bash/bashrc.bash" "$home_bash/.bashrc"
+linkin "$repo_bash/logout.bash" "$home_bash/.bash_logout"
+linkin "$repo_bash/functions" "$home_bash/.bashrc.d"
 
-log 'CONNECT LOCAL...' 1 || true
-readonly _lib_store="$_MY_STORE/local/lib" _lib_home="$HOME/.local/lib"
-readonly _bin_store="$_MY_STORE/local/bin" _bin_home="$HOME/.local/bin"
-mkdir -p -- "$_lib_home" "$_bin_home"
+## Local
+echo 'linkin local'
+readonly repo_home_lib="$repo_home/local/lib" home_lib="$HOME/.local/lib"
+mkdir -p -- "$home_lib"
+readonly repo_home_bin="$repo_home/local/bin" home_bin="$HOME/.local/bin"
+mkdir -p -- "$home_bin"
 
-linkin "$_lib_store" "$_lib_home" zxy
-linkin "$_bin_store" "$_bin_home" \
-	install-millennium \
-	install-osu \
-	install-lmms \
-	menu \
-	nvidia-offload \
-	portage \
-	portage-sets-refresh \
-	rc-user \
-	theme \
-	uninstall-millennium \
-	zen-kernel
+for bin in "$repo_home_bin/"*; do
+	linkin "$bin" "$home_bin/$(basename -- "$bin")"
+done
 
-log 'CONNECT WALLPAPER...' 1 || true
-readonly _wal_store="$_HERE/usr/share/wallpapers" _wal_home="$HOME/Pictures/Wallpapers"
-mkdir -p -- "$_wal_home"
+echo 'linkin wal'
+readonly repo_wal="$HERE/usr/share/wallpapers" home_wal="$HOME/Pictures/Wallpapers"
+mkdir -p -- "$home_wal"
 
-linkin "$_wal_store" "$_wal_home" \
-	wallpaper-mizu \
-	wallpaper-garnet
+for wal in "$repo_wal/"*; do
+	linkin "$wal" "$home_wal/$(basename -- "$wal")"
+done
 
 command -v emerge >/dev/null 2>&1 || exit
-log 'CONNECT PORTAGE...' 1 || true
-readonly _portage_store="$_HERE/etc/portage" _portage_home='/etc/portage'
-[ ! -d "$_portage_home" ] && sudo mkdir -p -- "$_portage_home"
 
-linkin "$_portage_store" "$_portage_home" make.conf sets repos.conf
+echo 'linkin portage'
+readonly repo_portage="$HERE/etc/portage" host_portage='/etc/portage'
+[ ! -d "$host_portage" ] && sudo mkdir -p -- "$host_portage"
+
+for item in "$repo_portage/"*; do
+	linkin "$item" "$host_portage/$(basename -- "$item")"
+done
