@@ -1,4 +1,4 @@
--- THIS IS A HYPRLAND WM CONFIG FILE
+-- HYPRLAND CONFIG
 
 -- Connected device
 hl.monitor({
@@ -163,17 +163,14 @@ hl.bind(MOD .. " + CTRL + F", hl.dsp.window.cycle_next({ direction = "down" }))
 hl.bind(MOD .. " + SHIFT + F", hl.dsp.window.fullscreen(0))
 
 hl.bind(MOD .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(
-	MOD .. " + ALT + Q",
-	hl.dsp.exec_cmd(
-		"command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"
-	)
-)
+hl.bind(MOD .. " + ALT + Q", hl.dsp.exec_cmd("hyprexit"))
 
 local terminal = "alacritty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
+
+local term_float = terminal .. " -T floatty"
 hl.on("hyprland.start", function()
-	hl.exec_cmd("alacritty -T floatty")
+	hl.exec_cmd(term_float)
 end)
 
 local fileManager = "pcmanfm"
@@ -380,46 +377,35 @@ hl.window_rule({
 
 hl.window_rule({
 	name = "browser",
-	match = { class = "firefox" },
+	match = { class = "firefox-bin" },
 	workspace = "2 silent",
 })
 
-hl.window_rule({ match = { class = "steam" }, workspace = "8 silent" })
-hl.window_rule({ match = { class = "discord" }, workspace = "8 silent" })
+hl.window_rule({ match = { title = "Steam" }, workspace = "8 silent" })
 
 hl.window_rule({
-	name = "gryphlink",
-	match = { title = "GRYPHLINK" },
-	workspace = "10 silent",
-	float = true,
-	rounding = 16,
-	border_color = theme.secondary,
-})
-
-hl.window_rule({
-	name = "hsr",
-	match = { class = "moe.launcher.the-honkers-railway-launcher" },
-	workspace = "10 silent",
-	rounding = 20,
-	float = true,
-	border_color = theme.tertiary,
-})
-
-hl.window_rule({
-	match = { class = "Waydroid" },
+	match = { title = "Waydroid" },
 	workspace = "9 silent",
 	fullscreen = true,
 })
-hl.window_rule({
-	match = { title = "Honkai: Star Rail" },
-	workspace = "9 silent",
-})
 hl.window_rule({ match = { class = "osu!" }, workspace = "9 silent" })
-
 hl.window_rule({
 	name = "endfield",
 	match = { title = "Endfield" },
 	workspace = "9 silent",
 	rounding = 0,
 	fullscreen = true,
+})
+
+hl.window_rule({
+	match = { title = "ProtonPlus" },
+	workspace = "10 silent",
+})
+hl.window_rule({
+	match = { class = "org.prismlauncher.PrismLauncher" },
+	workspace = "10 silent",
+})
+hl.window_rule({
+	match = { title = "Twintail Launcher" },
+	workspace = "10 silent",
 })
