@@ -1,10 +1,12 @@
 -- catppuccin.lua
+
+local colorscheme = "catppuccin"
 return {
-	"catppuccin/nvim",
-	name = "catppuccin",
+	colorscheme .. "/nvim",
+	name = colorscheme,
 	lazy = false,
-	-- priority = 1000,
-	-- config = function()
-	-- 	vim.cmd.colorscheme("catppuccin-frappe")
-	-- end,
+
+	--config = function()
+	--	vim.cmd.colorscheme(colorscheme)
+	--end,
 }
