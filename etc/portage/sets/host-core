@@ -13,7 +13,7 @@ sys-block/io-scheduler-udev-rules
 net-misc/chrony
 
 # Kernel
-sys-kernel/gentoo-kernel-bin
+sys-kernel/gentoo-kernel
 sys-kernel/linux-firmware
 sys-firmware/intel-microcode
 sys-firmware/sof-firmware
