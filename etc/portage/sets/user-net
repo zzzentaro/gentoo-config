@@ -1,5 +1,6 @@
-# PORTAGE SETS FOR INTERNET ACCESS
+# portage sets user-net
 
+net-wireless/iwd
 net-misc/networkmanager
 
 www-client/firefox-bin
