@@ -4,7 +4,7 @@ set -eu
     echo ' !! zxy is missing'
     exit 1
 }
-zxy_need_command emerge
+zxy_need_command sudo emerge
 
 readonly _SETS_DIR='/etc/portage/sets'
 
@@ -17,7 +17,7 @@ _query_sets() {
 _select_one_set() {
     _SELECTED_SET="$(basename "$1")"
     zxy_log "Selected set: @$_SELECTED_SET"
-    sudo emerge --noreplace "@$_SELECTED_SET"
+    sudo emerge --noreplace -- "@$_SELECTED_SET"
 }
 portage_sets_select() {
     _query_sets _select_one_set
@@ -34,7 +34,7 @@ _read_set_and_deselect_atom() {
     zxy_log "Deselecting atom(s) in: @$_SELECTED_SET"
     while IFS= read -r _line; do
         _is_empty_or_comment "$_line" && continue
-        sudo emerge --deselect "$_line"
+        sudo emerge --deselect -- "$_line"
     done <"$1"
 }
 portage_atom_deselect() {
