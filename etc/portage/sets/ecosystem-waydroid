@@ -1,4 +1,4 @@
-# PORTAGE SETS FOR WAYDROID
+# portage sets ecosystem-waydroid
 
 app-arch/lzip
 app-containers/waydroid
