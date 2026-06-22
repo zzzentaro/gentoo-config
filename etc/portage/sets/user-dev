@@ -1,10 +1,10 @@
-# PORTAGE SETS FOR DEVELOPMENT
+# portage sets user-dev
 
 dev-vcs/git
 dev-vcs/lazygit
 app-misc/tmux
 
-## Editor
+# editor
 app-editors/neovim
 
 ## Lang
@@ -13,4 +13,3 @@ dev-util/sh
 dev-util/shellcheck-bin
 
 ## Gentoo
-dev-util/pkgdev

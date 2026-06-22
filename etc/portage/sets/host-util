@@ -1,10 +1,12 @@
-# PORTAGE SETS FOR SYSTEM ADMINISTRATION
-
-app-portage/gentoolkit
-app-eselect/eselect-repository
-app-portage/eix
-app-admin/eclean-kernel
+# portage sets host-util
 
 sys-process/cronie
 sys-power/upower
 sys-block/zram-init
+
+# gentoo
+app-portage/gentoolkit
+app-eselect/eselect-repository
+app-portage/eix
+app-admin/eclean-kernel
+dev-util/pkgdev
