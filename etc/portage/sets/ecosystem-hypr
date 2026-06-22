@@ -1,41 +1,45 @@
-# PORTAGE SETS FOR HYPRLAND
+# portage sets ecosystem-hypr
 
-## Session back-end
+# session backend
 sys-apps/dbus
 sys-auth/polkit
 sys-auth/hyprpolkitagent
 sys-apps/xdg-desktop-portal
 sys-apps/xdg-desktop-portal-gtk
 gui-libs/xdg-desktop-portal-hyprland
-### Clipboard daemon
+
+# clipboard and daemon
 gui-apps/wl-clipboard
 gui-apps/wl-clip-persist
-### Notification
+
+# notification
 x11-libs/libnotify
 gui-apps/mako
 
-## Main
+# main
 gui-wm/hyprland
-### Wallpaper
+# wallpaper
 gui-apps/hyprpaper
-### Bar
+# status bar
 gui-apps/waybar
-### Term
+# term
 x11-terms/alacritty
-### Launcher
+# launcher
 gui-apps/fuzzel
-### Lock
+# lock
 gui-apps/hyprlock
-### Image viewer
+# image viewer
 media-gfx/feh
-### Video player
+# video player
 media-video/mpv
-### File manager
-x11-misc/pcmanfm
-### Optional
+# file manager
+xfce-base/thunar
+xfce-base/tumbler
+media-video/ffmpegthumbnailer
+# optional
 gui-apps/hyprshutdown
 
-## Screen capture
+# screen capture
 gui-apps/grim
 gui-apps/slurp
 gui-apps/swappy
