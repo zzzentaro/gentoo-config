@@ -20,28 +20,16 @@ hl.config({
 
 -- Start hyprland
 hl.on("hyprland.start", function()
-	hl.exec_cmd("gentoo-pipewire-launcher &")
+	hl.exec_cmd("gentoo-pipewire-launcher restart &")
 	hl.exec_cmd(
 		"waybar & hyprpaper & mako & wl-clip-persist --clipboard regular &"
 	)
-	-- 3) Reset settings
-	hl.exec_cmd("brightnessctl set 10% % & powerprofilesctl set power-saver")
+	hl.exec_cmd("brightnessctl set 50%")
 end)
 local theme = require("./theme")
 
 -- Export graphics variables
-hl.env("__EGL_VENDOR_LIBRARY_DIRS", "/usr/share/glvnd/egl_vendor.d")
-hl.env(
-	"__EGL_VENDOR_LIBRARY_FILENAMES",
-	"/usr/share/glvnd/egl_vendor.d/50_mesa.json"
-)
-hl.env("VK_ICD_FILENAMES", "/usr/share/vulkan/icd.d/intel_icd.x86_64.json")
-hl.env("LIBVA_DRIVER_NAME", "iHD")
-hl.env("GBM_BACKEND", "") -- nvidia-drm
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "") -- nvidia
-hl.env("__VK_LAYER_NV_optimus", "") -- NVIDIA_only
-hl.env("__NV_PRIME_RENDER_OFFLOAD_PROVIDER", "") -- NVIDIA-GO
-hl.env("__NV_PRIME_RENDER_OFFLOAD", "0")
+hl.env("LIBVA_DRIVER_NAME", "nvidia")
 
 -- Export toolkit backed variables
 hl.env("GDK_BACKEND", "wayland,x11,*")
@@ -173,7 +161,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd(term_float)
 end)
 
-local fileManager = "pcmanfm"
+local fileManager = "thunar"
 hl.bind(MOD .. " + E", hl.dsp.exec_cmd(fileManager))
 
 local browser = "firefox-bin"
