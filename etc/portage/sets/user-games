@@ -1,7 +1,9 @@
-# THIS IS PORTAGE SETS FILE
-# FOR GAMES
+# portage sets user-games
 
 app-emulation/wine-vanilla
 games-util/protonplus
 games-util/steam-launcher
+games-util/mangohud
+dev-libs/icu
 sys-fs/fuse:0
+games-misc/an-anime-game-launcher
