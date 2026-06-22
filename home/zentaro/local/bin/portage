@@ -138,16 +138,19 @@ portage_edit() {
     fi
 
     case "$__dir" in
-    'unmask' | 'umask' | 'um' | 'accept' | 'acpt')
-        __dir='package.accept_keywords'
+    unmask | umask | um | accept | acpt)
+        __dir=package.accept_keywords
         ;;
-    'mask' | 'm' | 'hide')
-        __dir='package.mask'
+    mask | m | hide)
+        __dir=package.mask
         ;;
-    'use' | 'u')
-        __dir='package.use'
+    use | u)
+        __dir=package.use
         ;;
-    'make.conf' | 'make')
+    s)
+        __dir=sets
+        ;;
+    make.conf | make | mk)
         portage_edit
         ;;
     esac
@@ -173,34 +176,34 @@ EOF
 }
 readonly _SUB_CMD="${1:-help}"
 case "$_SUB_CMD" in
-'sync' | 'sy') portage_sync ;;
-'rebuild' | 'reb') portage_rebuild ;;
-'update' | 'up') portage_update ;;
-'fix' | 'x') portage_fix ;;
-'clean' | 'cl') portage_clean ;;
-'repo' | 'r') portage_clean ;;
+sync | sy) portage_sync ;;
+rebuild | reb | rb) portage_rebuild ;;
+update | up) portage_update ;;
+fix | x) portage_fix ;;
+clean | cl) portage_clean ;;
+repo | r) portage_clean ;;
 # accept args
-'find' | 'f')
+find | f)
     shift
     portage_find "$@"
     ;;
-'usedesc' | 'use' | 'u')
+usedesc | use | u)
     shift
     portage_usedesc "$@"
     ;;
-'kernel' | 'k')
+kernel | k)
     shift
     portage_kernel "$@"
     ;;
-'merge' | 'm' | '+')
+merge | m | +)
     shift
     portage_merge "$@"
     ;;
-'unmerge' | 'um' | '-')
+unmerge | um | -)
     shift
     portage_unmerge "$@"
     ;;
-'edit' | 'e')
+edit | e)
     shift
     portage_edit "$@"
     ;;
