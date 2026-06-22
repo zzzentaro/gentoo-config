@@ -1,40 +1,43 @@
-# PORTAGE SETS FOR ESSENTIAL PACKAGES
+# portage sets host-core
 
-# Long live init freedom!
+# system init
 sys-apps/openrc
 sys-auth/pambase
 sys-libs/pam
 sys-auth/rtkit
 sys-apps/dbus
 sys-auth/elogind
-# Log, udev, and clock
+
+# log, scheduler, clock
 app-admin/sysklogd
 sys-block/io-scheduler-udev-rules
 net-misc/chrony
 
-# Kernel
+# kernelspace
 sys-kernel/gentoo-kernel
+sys-kernel/cachyos-sources
 sys-kernel/linux-firmware
 sys-firmware/intel-microcode
 sys-firmware/sof-firmware
 sys-kernel/installkernel
-# System-managed userspace
+
+# system-managed userspace
 app-shells/bash
 app-editors/nano
 app-admin/sudo
 
-# General media back-end
+# general media backend
 media-video/ffmpeg
 media-video/ffmpegthumbnailer
 app-arch/7zip
 app-misc/jq
 app-text/poppler
 media-gfx/imagemagick
-# Audio media back-end
+# audio backend
 media-video/pipewire
 media-video/wireplumber
 
-# Font
+# font
 media-fonts/noto
 media-fonts/noto-cjk
 media-fonts/noto-emoji
