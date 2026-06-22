@@ -46,6 +46,7 @@ readonly repo_home_bin="$repo_home/local/bin" home_bin="$HOME/.local/bin"
 mkdir -p -- "$home_bin"
 
 for bin in "$repo_home_bin/"*; do
+	chmod +x "$bin"
 	linkin "$bin" "$home_bin/$(basename -- "$bin")"
 done
 
