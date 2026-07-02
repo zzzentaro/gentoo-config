@@ -7,53 +7,51 @@ if [[ -d ~/.bashrc.d ]]; then
 fi
 unset rc
 
+## Core
 alias x="sync; clear; exec $SHELL"
-alias s='sudo'
+alias s=sudo
 
+## Everything is a file
 alias l='eza -Ahl --group-directories-first --git'
-alias c='cd'
+alias c=cd
 alias ..='cd ..'
 alias ...='cd ../..'
 alias md='mkdir -p'
 
 alias wcp='wl-copy'
 
-# Devel
-alias e="$EDITOR"
-alias sue='sudoedit'
-
-alias cg='cd ~/gentoo-config'
-alias cgh='cd ~/gentoo-config/home/zentaro'
+## Devel
+alias g=git
+alias lg=lazygit
+alias e=$EDITOR
+alias sue=sudoedit
 alias t='tmux attach 2>/dev/null || tmux'
-alias g='git'
-alias lg='lazygit'
 
 alias cksh='shellcheck -s sh'
 alias fmtsh='shfmt -w -s'
-alias cksh='shellcheck -s sh'
-alias fmtsh='shfmt -w -s'
 
-# Control
-alias bright='brightnessctl set'
-
-alias p='portage'
-
+### Gentoo
+alias gc='cd ~/gentoo-config'
+alias gch='cd ~/gentoo-config/home/zentaro'
+alias p=portage
+alias manifest='sudo pkgdev manifest'
 alias world='cat /var/lib/portage/world'
 alias worldmod="sudoedit /var/lib/portage/world"
 alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudoedit /var/lib/portage/world_sets"
 
-alias manifest='sudo pkgdev manifest'
+## Control
+alias bright='brightnessctl set'
 
-# Other aliases
-alias ff='fastfetch'
-## Waydroid
-alias wd-stop='sudo -- waydroid -- session stop && sudo -- rc-service -- waydroid stop'
-alias wd-start='wd-stop && sudo -- rc-service -- waydroid start && waydroid -- show-full-ui &'
-
+## Extra
+alias f=fastfetch
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
 alias osu-run='nvidia-offload osu &'
 
-# Finally, start interactive shell
+### Waydroid
+alias wd-stop='sudo -- waydroid -- session stop && sudo -- rc-service -- waydroid stop'
+alias wd-start='wd-stop && sudo -- rc-service -- waydroid start && nvidia-offload waydroid -- show-full-ui'
+
+## Eval
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/config.jsonc)"
 [[ "$SHLVL" -le 2 && "$WAYLAND_DISPLAY" ]] && fastfetch
