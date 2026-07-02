@@ -1,7 +1,7 @@
-# portage sets user-net
+# SETS: user-net
 
 net-wireless/iwd
 net-misc/networkmanager
 
-www-client/firefox-bin
+www-client/firefox
 #net-im/discord
