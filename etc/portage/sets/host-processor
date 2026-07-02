@@ -1,14 +1,16 @@
-# portage sets host-processor
+# SETS: host-processor
 
 media-libs/libva
 #media-video/libva-utils
 #dev-util/clinfo
 
-# integrated
+## Integrated (intel)
+
 media-libs/libva-intel-media-driver
 #media-libs/libva-intel-driver
 
-# discrete
+## Discrete (nvidia)
+
 x11-drivers/nvidia-drivers
 #media-libs/nvidia-vaapi-driver
 #dev-util/nvidia-cuda-toolkit
