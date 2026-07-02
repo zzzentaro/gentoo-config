@@ -1,124 +1,118 @@
 @import "theme.css";
 
-/* - > reset - */
+/*
+ * WAYBAR STYLE
+ */
 * {
-    font-family: 'GoMono Nerd Font';
-    border: none;
-    border-radius: 0;
-    box-shadow: none;
-    text-shadow: none;
+    all: unset;
+    font-size: 12px;
+    font-family: "GoMono Nerd Font";
 }
-
-/* --- --- --- --- --- --- --- --- ---
- * > main styles
- * --- --- --- --- --- --- --- --- --- */
 window#waybar {
-	background: @base;
-}
-button,
-#scratchpad,
-#clock,
-#tray,
-#network,
-#pulseaudio,
-#backlight,
-#battery,
-#idle_inhibitor,
-#power-profiles-daemon {
-    background: @surface;
-    color: @text;
-    padding: 0 18px 0 10px;
-    border: 2px solid @muted;
-}
-#clock {
-    padding: 0 16px;
-}
-#battery {
-    padding: 0 8px;
-}
-#battery:not(.plugged),
-#battery.full {
-    color: @tertiary;
-}
-#battery.plugged {
-    color: @primary;
+    all: unset;
+    background: @background;
 }
 
-/* - > left - */
-#workspaces button {
-    font-size: 20px;
-    margin-right: 16px;
-    padding: 0 14px 0 8px;
+/*
+ * Left modules
+ */
+.modules-left {
+    all: unset;
+    padding-left: 8px;
+    margin: 6px 0 6px 0;
 }
-#workspaces button.focused, #workspaces button.active {
-    color: @primary;
+#workspaces {
+    all: unset;
+}
+#workspaces button {
+    all: unset;
+    padding: 0 4px 0 4px;
+    border-radius: 2px;
+    font-weight: 700;
+}
+#workspaces button.empty {
+    color: @muted;
+}
+#workspaces button.active,
+#workspaces button.empty.active {
+    background: @secondary;
+    color: @background;
 }
 #workspaces button.urgent {
-    background: @primary;
-    color: @base;
-}
-#workspaces button:hover {
-    background: @primary;
-    color: @base;
+    background: @tertiary;
+    color: @background;
 }
 #window {
-    margin-right: 16px;
-    color: @text;
-    letter-spacing: -0.1rem;
+    padding-right: 6px;
+    color: @foreground;
 }
 #submap {
-    margin: 8px 0 8px 0;
-    padding: 0 4px 0 4px;
-    background: @primary;
-    color: @base;
+    margin-right: 6px;
+    color: @foreground;
+}
+
+/*
+ * Center modules
+ */
+.modules-center {
+    all: unset;
+    margin: 6px 0 6px 0;
+}
+#clock {
+    padding: 0 6px 0 6px;
+    border-radius: 2px;
     font-weight: 700;
-    letter-spacing: -0.1rem;
+    background: @secondary;
+    color: @background;
 }
 
-/* - > middle - */
-
-
-/* - > right - */
-.modules-right > widget > * {
-    margin-left: 16px;
-    letter-spacing: 0.1rem;
-}
-#network {
-    padding: 0 17px 0 11px;
-    font-size: 24px;
+/*
+ * Right modules
+ */
+.margin-right {
+    all: unset;
+    margin: 6px 0 6px 0;
 }
 #tray {
-    padding: 0 8px;
-    margin-right: 0px;
-}
-#power-profiles-daemon {
-    font-size: 26px;
-    padding: 0 12px 0 8px;
-}
-#power-profiles-daemon.performance {
-    color: @secondary;
-}
-#power-profiles-daemon.balanced {
-    color: @primary;
-}
-#power-profiles-daemon.power-saver {
-    color: @text;
+    padding: 0 6px;
 }
 
-/* --- --- --- --- --- --- --- --- ---
- * > overlays
- * --- --- --- --- --- --- --- --- --- */
+#pulseaudio,
+#backlight,
+#battery {
+    all: unset;
+    padding: 0 4px 0 4px;
+    border-radius: 2px;
+    font-weight: 700;
+    color: @secondary;
+}
+
+#network {
+    padding: 0 8px 0 8px;
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+/*
+ * Overlays
+ */
 tooltip {
-    background: @surface;
-    color: @text;
     border: 2px solid @muted;
+
+    background: @background;
+    color: @foreground;
 }
-menu {
-    background: @surface;
-    color: @text;
-    padding: 16px 0;
+#tray menu {
+    padding: 2px 2px;
     border: 2px solid @muted;
+
+    background: @background;
+    color: @foreground;
 }
-menu *:hover {
-    background: @primary;
+#tray menu * {
+    padding: 2px 2px;
+}
+#tray menu *:hover {
+    color: @secondary;
+    font-weight: 700;
 }
