@@ -1,9 +1,22 @@
-# portage sets user-games
+# SETS: user-games
+
+## Library
+
+dev-libs/icu
+sys-fs/fuse:0
+
+## Wine + proton
 
 app-emulation/wine-vanilla
 games-util/protonplus
+
+## Launchers
+
 games-util/steam-launcher
-games-util/mangohud
-dev-libs/icu
-sys-fs/fuse:0
+games-util/heroic-bin
 games-misc/an-anime-game-launcher
+
+## Extra
+
+games-util/gamemode
+games-util/mangohud
