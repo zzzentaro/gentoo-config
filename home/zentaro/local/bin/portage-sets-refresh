@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+set -u
 . "$HOME"/.local/lib/zxy || {
     echo ' !! zxy is missing'
     exit 1
