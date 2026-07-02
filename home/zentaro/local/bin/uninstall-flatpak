@@ -1,0 +1,10 @@
+#!/bin/sh
+set -u
+
+sudo emerge --deselect -- flatpak
+sudo emerge --depclean -- flatpak
+sudo emerge --unmerge -- flatpak
+
+sudo rm -fr -- "/.var/lib/flatpak"
+rm -fr -- "$HOME/.var"
+rm -fr -- "$HOME/.local/share/flatpak"
