@@ -1,46 +1,68 @@
-# portage sets ecosystem-hypr
+# SETS: ecosystem-hypr
 
-# session backend
+## MAIN
+
+gui-wm/hyprland
+gui-apps/hyprshutdown
+
+### Session backend
+
 sys-apps/dbus
 sys-auth/polkit
 sys-auth/hyprpolkitagent
 sys-apps/xdg-desktop-portal
 sys-apps/xdg-desktop-portal-gtk
 gui-libs/xdg-desktop-portal-hyprland
-
-# clipboard and daemon
-gui-apps/wl-clipboard
-gui-apps/wl-clip-persist
-
-# notification
 x11-libs/libnotify
-gui-apps/mako
 
-# main
-gui-wm/hyprland
-# wallpaper
+### Wallpaper daemon
+
 gui-apps/hyprpaper
-# status bar
-gui-apps/waybar
-# term
+
+### Terminal emulator
+
 x11-terms/alacritty
-# launcher
+
+### All-purpose launcher
+
 gui-apps/fuzzel
-# lock
+
+### Lock screen
+
 gui-apps/hyprlock
-# image viewer
-media-gfx/feh
-# video player
-media-video/mpv
-# file manager
+
+## SUPPLEMENTARIES
+
+### Status bar
+
+gui-apps/waybar
+
+gui-apps/quickshell
+dev-qt/qtlanguageserver
+dev-qt/qtdeclarative
+
+### File manager
+
 xfce-base/thunar
 xfce-base/tumbler
 media-video/ffmpegthumbnailer
-# optional
-gui-apps/hyprshutdown
 
-# screen capture
+### Image viewer
+
+media-gfx/feh
+
+### Video player
+
+media-video/mpv
+
+### Screen capture
+
 gui-apps/grim
 gui-apps/slurp
 gui-apps/swappy
-gui-apps/wf-recorder
+media-video/gpu-screen-recorder
+
+### Clipboard
+
+gui-apps/wl-clipboard
+app-misc/cliphist
