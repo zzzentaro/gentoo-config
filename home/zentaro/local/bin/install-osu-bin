@@ -1,0 +1,8 @@
+#!/bin/sh
+
+src='https://github.com/ppy/osu/releases/latest/download/osu.AppImage'
+out="${HOME:?no home}/.local/bin/osu"
+
+rm -f "$out"
+wget "$src" --output-document "$out"
+chmod +x "$out"
