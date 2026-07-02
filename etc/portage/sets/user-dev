@@ -1,15 +1,18 @@
-# portage sets user-dev
+# SETS: user-dev
+
+## Git, text editor, tmux
 
 dev-vcs/git
 dev-vcs/lazygit
+app-editors/neovim
 app-misc/tmux
 
-# editor
-app-editors/neovim
-
 ## Lang
+
 dev-lang/rust
 dev-util/sh
 dev-util/shellcheck-bin
 
-## Gentoo
+## Tools
+
+<net-libs/nodejs-24.9999
