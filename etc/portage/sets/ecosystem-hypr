@@ -21,7 +21,7 @@ gui-apps/hyprpaper
 
 ### Terminal emulator
 
-x11-terms/kitty
+x11-terms/alacritty
 
 ### All-purpose launcher
 
