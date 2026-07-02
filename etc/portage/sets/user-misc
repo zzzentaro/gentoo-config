@@ -1,6 +1,9 @@
-# portage sets user-misc
+# SETS: user-misc
 
-sys-fs/gdu
+## Packages occasionally used but not stale either
+
 app-misc/tealdeer
+sys-fs/gdu
 app-misc/fastfetch
 app-misc/figlet
+media-sound/libcava
