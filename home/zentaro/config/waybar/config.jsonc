@@ -2,123 +2,101 @@
     "reload_style_on_change": true,
     "layer": "top",
     "position": "top",
-    "height": 36,
+    "height": 32,
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/window",
         "hyprland/submap"
     ],
     "hyprland/workspaces": {
-        "all-outputs": false,
+        "format-icons": {
+            "1": "ゼ",
+            "2": "ン",
+            "3": "タ",
+            "4": "ロ",
+            "5": "x",
+            "6": "レ",
+            "7": "ミ",
+            "8": "ュ",
+            "9": "ア",
+            "10": "ン"
+        },
         "persistent-workspaces": {
             "1": [],
             "2": [],
             "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
             "8": [],
-            "9": []
+            "9": [],
+            "10": []
         },
-        "format": "{icon}",
-        "format-icons": {
-            "1": "",
-            "2": "",
-            "3": "",
-            "4": "4",
-            "5": "5",
-            "6": "6",
-            "7": "7",
-            "8": "󰭻",
-            "9": "",
-            "10": ""
-        }
+        "format": "{icon}"
     },
-    "modules-center": [
-        "clock"
-    ],
+    "hyprland/window": {
+        "format": "| {initialTitle}"
+    },
+    "hyprland/submap": {
+        "format": "| {}",
+        "always-on": true,
+        "default-submap": " "
+    },
+
+    "modules-center": ["clock"],
     "clock": {
         "format": "{:%I:%M %p}",
         "tooltip-format": "{:%A, %d %B %Y}",
-        "on-click": "bash menu"
+        "on-click": "menu"
     },
-    "modules-right": [
-        "tray",
-        "pulseaudio",
-        "backlight",
-        "battery",
-        "network",
-        "power-profiles-daemon"
-    ],
+
+    "modules-right": ["tray", "pulseaudio", "backlight", "battery", "network"],
     "tray": {
         "show-passive-items": true,
         "icon-size": 20,
         "spacing": 8
     },
     "pulseaudio": {
-        "format": "{volume}%{icon}",
-        "format-bluetooth": "{volume}%{icon}",
-        "format-muted": "",
+        "format": "[{volume}% {icon}]",
+        "format-bluetooth": "[{volume}% {icon}]",
+        "format-muted": " ",
         "format-icons": {
-            "default": [
-                "",
-                ""
-            ],
-            "headphone": "",
-            "headset": "",
-            "phone": "",
-            "phone-muted": "",
-            "hands-free": "",
-            "car": "",
-            "portable": ""
+            "default": [" ", " "],
+            "headphone": " ",
+            "headset": " ",
+            "phone": " ",
+            "phone-muted": " ",
+            "hands-free": " ",
+            "car": " ",
+            "portable": " "
         },
         "scroll-step": 5,
         "on-click": "pavucontrol"
     },
     "backlight": {
-        "device": "intel_backlight",
-        "format": "{percent}%{icon}",
-        "format-icons": [
-            "󰃞",
-            "󰃟",
-            "󰃠"
-        ]
+        "format": "[{percent}% {icon}]",
+        "format-icons": ["󰃞 ", "󰃟 ", "󰃠 "]
     },
     "battery": {
         "states": {
             "warning": 50,
             "critical": 20
         },
-        "format": "{capacity}%{icon}",
-        "format-charging": "{capacity}%󰂄",
-        "format-icons": [
-            "󰁺",
-            "󰁻",
-            "󰁼",
-            "󰁽",
-            "󰁾",
-            "󰁿",
-            "󰂀",
-            "󰂁",
-            "󰂂",
-            ""
-        ]
+        "format": "[{capacity}% {icon}]",
+        "format-charging": "[{capacity}% 󰂄 ]",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", ""]
     },
     "network": {
-        "format-wifi": "󰤨",
-        "tooltip-format-wifi": "{signalStrength}% {essid} 󰤨",
-        "format-ethernet": "",
-        "tooltip-format-ethernet": "{ifname} ",
-        "format-disconnected": "󰣽",
-        "tooltip-format-disconnected": "Disconnected 󰣽",
-        "on-click": "alacritty -e sleep 1; nmtui"
-    },
-    "power-profiles-daemon": {
-        "format": "{icon}",
-        "tooltip-format": "{profile} | {driver}",
-        "tooltip": true,
-        "format-icons": {
-            "default": "󰜥",
-            "power-saver": "󰾆",
-            "balanced": "󰾅",
-            "performance": "󰓅"
-        }
+        "format-wifi": "󰤨 ",
+        "tooltip-format-wifi": "Connected to: {essid} ({signalStrength}%)",
+
+        "format-ethernet": " ",
+        "tooltip-format-ethernet": "Connected with: {ifname}",
+
+        "format-disconnected": "󰣽 ",
+        "tooltip-format-disconnected": "Disconnected",
+
+        "on-click": "alacritty -T floatty -e sh -c 'sleep 0.5; nmtui'"
     }
 }
