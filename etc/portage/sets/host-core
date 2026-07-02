@@ -32,7 +32,6 @@ app-editors/nano
 ## General media backend
 
 media-video/ffmpeg
-media-video/ffmpegthumbnailer
 app-arch/7zip
 app-misc/jq
 app-text/poppler
