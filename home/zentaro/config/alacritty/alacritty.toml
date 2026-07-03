@@ -9,7 +9,7 @@ opacity = 0.9
 
 [font]
 normal = { family = "GoMono Nerd Font" }
-size = 12
+size = 10
 
 [colors]
 transparent_background_colors = true
