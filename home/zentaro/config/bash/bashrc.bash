@@ -41,6 +41,7 @@ alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudoedit /var/lib/portage/world_sets"
 
 ## Control
+alias nm-start='sudo rc-service NetworkManager start'
 alias bright='brightnessctl set'
 
 ## Extra
