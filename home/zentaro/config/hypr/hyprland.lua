@@ -19,6 +19,9 @@ hl.config({
 		sensitivity = 0,
 		accel_profile = "flat",
 	},
+	misc = {
+		session_lock_xray = true,
+	},
 })
 
 -------------------------------
@@ -152,16 +155,17 @@ hl.bind(MOD .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(MOD .. " + CTRL + F", hl.dsp.window.cycle_next({ direction = "down" }))
 hl.bind(MOD .. " + SHIFT + F", hl.dsp.window.fullscreen(0))
 
-hl.bind(MOD .. " + ALT + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(MOD .. " + ALT + Q", hl.dsp.exec_cmd("hyprexit"))
-
 local terminal = "alacritty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
 
-local terminal_floating = terminal .. " -T floatty"
-hl.bind(MOD .. " + ALT + Return", hl.dsp.exec_cmd(terminal_floating))
+local terminal_floating_title = "floatty"
+local terminal_floating_cmd = terminal
+	.. " -T "
+	.. terminal_floating_title
+	.. " & "
+hl.bind(MOD .. " + ALT + Return", hl.dsp.exec_cmd(terminal_floating_cmd))
 hl.on("hyprland.start", function()
-	hl.exec_cmd(terminal_floating)
+	hl.exec_cmd(terminal_floating_cmd)
 end)
 
 local file_manger = "thunar"
@@ -174,6 +178,21 @@ local launcher = "fuzzel"
 hl.bind(MOD .. " + Space", hl.dsp.exec_cmd(launcher))
 
 hl.bind(MOD .. " + C", hl.dsp.exec_cmd("menu"))
+
+-- Lock screen
+hl.bind(MOD .. " + ALT + L", function()
+	hl.dispatch(hl.dsp.focus({ workspace = 1 }))
+	hl.dispatch(
+		hl.dsp.exec_cmd(
+			terminal_floating_cmd
+				.. "killall waybar; killall hyprpaper;"
+				.. "mpvpaper -sfo 'no-audio loop' eDP-1 ~/Videos/Wallpapers/exusiai_alter.mp4;"
+				.. "hyprlock;"
+				.. "killall mpvpaper; waybar & hyprpaper &"
+		)
+	)
+end)
+hl.bind(MOD .. " + ALT + Q", hl.dsp.exec_cmd("hyprexit"))
 
 -- Print screen
 local psf =
@@ -464,10 +483,10 @@ hl.window_rule({
 -- Start of my own config
 
 hl.window_rule({
-	match = { title = "floatty" },
+	match = { title = terminal_floating_title },
 	float = true,
-	size = "1280 720",
-	move = "540 260",
+	size = "640 360",
+	move = "64 128",
 })
 
 hl.window_rule({
