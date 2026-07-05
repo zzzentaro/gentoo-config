@@ -8,15 +8,15 @@
             "bottom": 1
         },
         "color": {
-            "1": "light_red",
+            "1": "red",
             "2": "white"
         }
     },
     "display": {
         "separator": " ",
         "color": {
-            "keys": "light_red",
-            "title": "light_red"
+            "keys": "red",
+            "title": "red"
         },
         "key": {
             "width": 3,
@@ -32,16 +32,17 @@
         "percent": {
             "type": 9,
             "color": {
-                "green": "light_red",
-                "yellow": "light_yellow",
-                "red": "light_magenta"
+                "green": "red",
+                "yellow": "yellow",
+                "red": "magenta"
             }
         }
     },
     "modules": [
+        "break",
         {
             "type": "os",
-            "format": "{2}",
+            "format": "{2} GNU/Linux",
             "key": " ",
             "outputColor": "bright_red"
         },
@@ -49,14 +50,17 @@
             "type": "kernel",
             "format": "{2}"
         },
-        {
-            "type": "",
-            "format": "{2}"
-        },
-        "packages",
         "uptime",
-        "wm",
+        "packages",
+        "shell",
         "terminal",
+        "terminalfont",
+        "de",
+        "wm",
+        "wmtheme",
+        "theme",
+        "icons",
+        "cursor",
         {
             "type": "cpu",
             "format": "{1}"
@@ -79,8 +83,13 @@
             "format": "{1} {3} {2}"
         },
         {
+            "type": "battery",
+            "format": "{4} {5} {6}"
+        },
+        {
             "type": "colors",
             "symbol": "square"
-        }
+        },
+        "break"
     ]
 }
