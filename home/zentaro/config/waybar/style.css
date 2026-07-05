@@ -35,7 +35,7 @@ window#waybar {
 }
 #workspaces button.active,
 #workspaces button.empty.active {
-    background: @secondary;
+    background: @primary;
     color: @background;
 }
 #workspaces button.urgent {
@@ -62,7 +62,7 @@ window#waybar {
     padding: 0 6px 0 6px;
     border-radius: 2px;
     font-weight: 700;
-    background: @secondary;
+    background: @primary;
     color: @background;
 }
 
@@ -84,7 +84,7 @@ window#waybar {
     padding: 0 4px 0 4px;
     border-radius: 2px;
     font-weight: 700;
-    color: @secondary;
+    color: @primary;
 }
 
 #network {
@@ -113,6 +113,6 @@ tooltip {
     padding: 2px 2px;
 }
 #tray menu *:hover {
-    color: @secondary;
+    color: @primary;
     font-weight: 700;
 }
