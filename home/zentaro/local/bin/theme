@@ -58,6 +58,10 @@ symlink_theme 'Hyprland' \
     "$_HYPR_DIR/theme-$_THEME.lua" \
     "$_HYPR_DIR/theme.lua"
 
+symlink_theme 'Hyprlock' \
+    "$_HYPR_DIR/theme-$_THEME.conf" \
+    "$_HYPR_DIR/theme.conf"
+
 readonly _WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 killall hyprpaper
 symlink_theme 'Hyprpaper' \
