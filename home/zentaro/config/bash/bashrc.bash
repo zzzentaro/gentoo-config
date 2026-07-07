@@ -41,7 +41,12 @@ alias sets='cat /var/lib/portage/world_sets'
 alias setsmod="sudoedit /var/lib/portage/world_sets"
 
 ## Control
-alias nm-start='sudo rc-service NetworkManager start'
+alias iwd-stop='sudo rc-service net.wlan0 stop'
+alias iwd-start='iwd-stop; sudo rc-service net.wlan0 start && iwctl adapter phy0 set-property Powered on'
+
+alias nm-stop='sudo rc-service NetworkManager stop'
+alias nm-start='nm-stop; sudo rc-service NetworkManager start'
+
 alias bright='brightnessctl set'
 
 ## Extra
