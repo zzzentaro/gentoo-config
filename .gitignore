@@ -1,4 +1,5 @@
 eselect-repo.conf~
+config.jsonc
 theme.toml
 theme.lua
 theme.ini
