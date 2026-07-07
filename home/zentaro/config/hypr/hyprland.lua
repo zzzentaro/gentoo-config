@@ -159,19 +159,16 @@ local terminal = "alacritty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
 
 local terminal_floating_title = "floatty"
-local terminal_floating_cmd = terminal
-	.. " -T "
-	.. terminal_floating_title
-	.. " & "
+local terminal_floating_cmd = terminal .. " -T " .. terminal_floating_title
 hl.bind(MOD .. " + ALT + Return", hl.dsp.exec_cmd(terminal_floating_cmd))
 hl.on("hyprland.start", function()
-	hl.exec_cmd(terminal_floating_cmd)
+	hl.exec_cmd(terminal_floating_cmd .. "_init")
 end)
 
 local file_manger = "thunar"
 hl.bind(MOD .. " + E", hl.dsp.exec_cmd(file_manger))
 
-local browser = "firefox"
+local browser = "firefox-bin"
 hl.bind(MOD .. " + B", hl.dsp.exec_cmd(browser))
 
 local launcher = "fuzzel"
@@ -182,13 +179,32 @@ hl.bind(MOD .. " + C", hl.dsp.exec_cmd("menu"))
 -- Lock screen
 hl.bind(MOD .. " + ALT + L", function()
 	hl.dispatch(hl.dsp.focus({ workspace = 1 }))
+	hl.dispatch(hl.dsp.exec_cmd("killall waybar; killall hyprpaper"))
+
+	-- spawn terminals
+	local terminal_lock_cmd = terminal
+		.. " --title "
+		.. terminal_floating_title
+		.. "_lock"
+	hl.dispatch(hl.dsp.exec_cmd(terminal_lock_cmd .. "_se --command btop"))
+	hl.dispatch(hl.dsp.exec_cmd(terminal_lock_cmd .. "_nw"))
+
+	-- background
 	hl.dispatch(
 		hl.dsp.exec_cmd(
-			terminal_floating_cmd
-				.. "killall waybar; killall hyprpaper;"
-				.. "mpvpaper -sfo 'no-audio loop' eDP-1 ~/Videos/Wallpapers/exusiai_alter.mp4;"
-				.. "hyprlock;"
-				.. "killall mpvpaper; waybar & hyprpaper &"
+			"mpvpaper -sfo 'no-audio loop' eDP-1 ~/Videos/Wallpapers/exusiai_alter.mp4"
+		)
+	)
+
+	-- lock and clean up
+	hl.dispatch(
+		hl.dsp.exec_cmd(
+			"hyprlock; "
+				.. "killall mpvpaper; "
+				.. "waybar & hyprpaper &"
+				.. "pkill --full "
+				.. terminal_floating_title
+				.. "_lock_.*; "
 		)
 	)
 end)
@@ -483,14 +499,21 @@ hl.window_rule({
 -- Start of my own config
 
 hl.window_rule({
-	match = { title = terminal_floating_title },
+	match = { title = terminal_floating_title .. ".*" },
+	float = true,
+	size = "750 470",
+	move = "1120 580",
+})
+
+hl.window_rule({
+	match = { title = terminal_floating_title .. "_lock_nw" },
 	float = true,
 	size = "640 360",
 	move = "64 128",
 })
 
 hl.window_rule({
-	match = { class = "firefox-esr" },
+	match = { class = "firefox" },
 	workspace = "2 silent",
 })
 
