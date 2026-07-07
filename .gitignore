@@ -1,7 +1,8 @@
+tmp
 eselect-repo.conf~
 config.jsonc
-theme.toml
-theme.lua
-theme.ini
+theme.conf
 theme.css
-tmp
+theme.ini
+theme.lua
+theme.toml
