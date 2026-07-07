@@ -3,5 +3,5 @@
 net-wireless/iwd
 net-misc/networkmanager
 
-www-client/firefox
+www-client/firefox-bin
 #net-im/discord
