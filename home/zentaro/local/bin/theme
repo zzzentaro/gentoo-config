@@ -38,10 +38,10 @@ symlink_theme() {
     fi
 }
 
-readonly _ALACRITTY_DIR="$_CONFIG/alacritty"
-symlink_theme 'Alacritty' \
-    "$_ALACRITTY_DIR/theme-$_THEME.toml" \
-    "$_ALACRITTY_DIR/theme.toml"
+readonly _KITTY_DIR="$_CONFIG/kitty"
+symlink_theme 'Kitty' \
+    "$_KITTY_DIR/theme-$_THEME.conf" \
+    "$_KITTY_DIR/theme.conf"
 
 readonly _FASTFETCH_DIR="$_CONFIG/fastfetch"
 symlink_theme 'Fastfetch' \
