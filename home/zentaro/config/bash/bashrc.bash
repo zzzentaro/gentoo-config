@@ -12,7 +12,8 @@ alias x="sync; clear; exec $SHELL"
 alias s=sudo
 
 ## Everything is a file
-alias l='eza -Ahl --group-directories-first --git'
+alias l='eza -Ahl --group-directories-first --icons --git'
+alias lm='l -s modified'
 alias c=cd
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -47,12 +48,17 @@ alias iwd-start='iwd-stop; sudo rc-service net.wlan0 start && iwctl adapter phy0
 alias nm-stop='sudo rc-service NetworkManager stop'
 alias nm-start='nm-stop; sudo rc-service NetworkManager start'
 
+alias warp-start='sudo rc-service warp-svc start; sleep 2; warp-cli connect'
+
 alias bright='brightnessctl set'
 
 ## Extra
-alias f=fastfetch
+alias f=yazi
+alias fetch=fastfetch
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
 alias osu-run='nvidia-offload osu &'
+alias gsr='gpu-screen-recorder'
+alias gsr-start='gpu-screen-recorder -w screen -a default_output -o'
 
 ### Waydroid
 alias wd-stop='sudo -- waydroid -- session stop && sudo -- rc-service -- waydroid stop'
