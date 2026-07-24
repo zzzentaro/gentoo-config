@@ -155,7 +155,7 @@ hl.bind(MOD .. " + F", hl.dsp.window.float({ action = "toggle" }))
 hl.bind(MOD .. " + CTRL + F", hl.dsp.window.cycle_next({ direction = "down" }))
 hl.bind(MOD .. " + SHIFT + F", hl.dsp.window.fullscreen(0))
 
-local terminal = "alacritty"
+local terminal = "kitty"
 hl.bind(MOD .. " + Return", hl.dsp.exec_cmd(terminal))
 
 local terminal_floating_title = "floatty"
@@ -186,7 +186,7 @@ hl.bind(MOD .. " + ALT + L", function()
 		.. " --title "
 		.. terminal_floating_title
 		.. "_lock"
-	hl.dispatch(hl.dsp.exec_cmd(terminal_lock_cmd .. "_se --command btop"))
+	hl.dispatch(hl.dsp.exec_cmd(terminal_lock_cmd .. "_se btop"))
 	hl.dispatch(hl.dsp.exec_cmd(terminal_lock_cmd .. "_nw"))
 
 	-- background
@@ -331,7 +331,7 @@ hl.curve("quick", { type = "bezier", points = { { 0.15, 0 }, { 0.1, 1 } } })
 -- Default springs
 hl.curve(
 	"easy",
-	{ type = "spring", mass = 1, stiffness = 71.2633, dampening = 15.8273644 }
+	{ type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 }
 )
 
 hl.animation({
