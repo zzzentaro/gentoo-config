@@ -54,7 +54,6 @@ alias bright='brightnessctl set'
 
 ## Extra
 alias f=yazi
-alias fetch=fastfetch
 alias nvidia-status='cat /sys/bus/pci/devices/0000\:01\:00.0/power/runtime_status'
 alias osu-run='nvidia-offload osu &'
 alias gsr='gpu-screen-recorder'
