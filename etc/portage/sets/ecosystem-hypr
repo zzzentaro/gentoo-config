@@ -22,7 +22,7 @@ gui-apps/mpvpaper
 
 ### Terminal emulator
 
-x11-terms/alacritty
+x11-terms/kitty
 
 ### All-purpose launcher
 
@@ -44,6 +44,7 @@ dev-qt/qtdeclarative
 
 ### File manager
 
+app-misc/yazi
 xfce-base/thunar
 xfce-base/tumbler
 media-video/ffmpegthumbnailer
