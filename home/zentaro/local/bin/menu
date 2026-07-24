@@ -6,10 +6,10 @@ menu_power() {
         fuzzel --dmenu -I -a top -l 4 -w 16 --prompt="󰦄 " --placeholder="Is it over?")
     case "$_POWER_OPTION" in
     *Retreat*)
-        loginctl poweroff
+        loginctl poweroff &
         ;;
     *Retry*)
-        loginctl reboot
+        loginctl reboot &
         ;;
     *Pause*) hyprexit ;;
     *) menu ;;
